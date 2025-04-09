@@ -1,0 +1,936 @@
+{
+    "regions": [
+        {
+            "region": "Andrast",
+            "id": "1",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Anfalas",
+            "id": "2",
+            "side": "0",
+            "nation": "3"
+        },
+        {
+            "region": "Angmar",
+            "id": "3",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Arnor",
+            "id": "4",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Ash Mountains",
+            "id": "5",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Barad Dur",
+            "id": "6",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Bree",
+            "id": "7",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "Buckland",
+            "id": "8",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "Cardolan",
+            "id": "9",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Carrock",
+            "id": "10",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "Dagorlad",
+            "id": "11",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Dale",
+            "id": "12",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "Dead Marshes",
+            "id": "13",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Dol Amroth",
+            "id": "14",
+            "side": "3",
+            "nation": "3"
+        },
+        {
+            "region": "Dol Guldur",
+            "id": "15",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Drimill Dale",
+            "id": "16",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Druadan Forest",
+            "id": "17",
+            "side": "0",
+            "nation": "3"
+        },
+        {
+            "region": "Druwaith Iaur",
+            "id": "18",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Eagles' Eyrie",
+            "id": "19",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Eastemnet",
+            "id": "20",
+            "side": "0",
+            "nation": "5"
+        },
+        {
+            "region": "Eastern Brown Lands",
+            "id": "21",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Eastern Emyn Muil",
+            "id": "22",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Eastern Mirkwood",
+            "id": "23",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "East Harondor",
+            "id": "24",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "East Rhun",
+            "id": "25",
+            "side": "0",
+            "nation": "8"
+        },
+        {
+            "region": "Edoras",
+            "id": "26",
+            "side": "0",
+            "nation": "5"
+        },
+        {
+            "region": "Enedwaith",
+            "id": "27",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Erebor",
+            "id": "28",
+            "side": "0",
+            "nation": "1"
+        },
+        {
+            "region": "Erech",
+            "id": "29",
+            "side": "0",
+            "nation": "3"
+        },
+        {
+            "region": "Ered Luin",
+            "id": "30",
+            "side": "0",
+            "nation": "1"
+        },
+        {
+            "region": "Ettenmoors",
+            "id": "31",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Evendim",
+            "id": "32",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Fangorn",
+            "id": "33",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Far Harad",
+            "id": "34",
+            "side": "0",
+            "nation": "8"
+        },
+        {
+            "region": "Folde",
+            "id": "35",
+            "side": "0",
+            "nation": "5"
+        },
+        {
+            "region": "Fords of Bruinen",
+            "id": "36",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Fords of Isen",
+            "id": "37",
+            "side": "0",
+            "nation": "5"
+        },
+        {
+            "region": "Forlindon",
+            "id": "38",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Gap of Rohan",
+            "id": "39",
+            "side": "0",
+            "nation": "6"
+        },
+        {
+            "region": "Gladden Fields",
+            "id": "40",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Goblin's Gate",
+            "id": "41",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Gorgoroth",
+            "id": "42",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Harlindon",
+            "id": "43",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Helm's Deep",
+            "id": "44",
+            "side": "0",
+            "nation": "5"
+        },
+        {
+            "region": "High Pass",
+            "id": "45",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Hollin",
+            "id": "46",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Iron Hills",
+            "id": "47",
+            "side": "0",
+            "nation": "1"
+        },
+        {
+            "region": "Khand",
+            "id": "48",
+            "side": "0",
+            "nation": "8"
+        },
+        {
+            "region": "Lamedon",
+            "id": "49",
+            "side": "0",
+            "nation": "3"
+        },
+        {
+            "region": "Lossarnach",
+            "id": "50",
+            "side": "0",
+            "nation": "3"
+        },
+        {
+            "region": "Lorien",
+            "id": "51",
+            "side": "0",
+            "nation": "2"
+        },
+        {
+            "region": "Minas Morgul",
+            "id": "52",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Minas Tirith",
+            "id": "53",
+            "side": "0",
+            "nation": "3"
+        },
+        {
+            "region": "Minhiriath",
+            "id": "54",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Morannon",
+            "id": "55",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Moria",
+            "id": "56",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Mount Gram",
+            "id": "57",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Mount Gundaband",
+            "id": "58",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Narrows of the Forest",
+            "id": "59",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Near Harad",
+            "id": "60",
+            "side": "0",
+            "nation": "8"
+        },
+        {
+            "region": "Noman-Lands",
+            "id": "61",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "North Downs",
+            "id": "62",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "North Dunland",
+            "id": "63",
+            "side": "0",
+            "nation": "6"
+        },
+        {
+            "region": "North Ered-Luin",
+            "id": "64",
+            "side": "0",
+            "nation": "1"
+        },
+        {
+            "region": "Northern Anduin Vale",
+            "id": "65",
+            "side": "0",
+            "nation": "0"
+        },
+        {
+            "region": "Northen Dorwinion",
+            "id": "66",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Northen Mirkwood",
+            "id": "67",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Northen Rhovanion",
+            "id": "68",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "North Ithilien",
+            "id": "70",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "North Rhun",
+            "id": "71",
+            "side": "0",
+            "nation": "8"
+        },
+        {
+            "region": "Nurn",
+            "id": "72",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Old Ford",
+            "id": "73",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Old Forest",
+            "id": "74",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Old Forest Road",
+            "id": "75",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "Orthanc",
+            "id": "76",
+            "side": "0",
+            "nation": "6"
+        },
+        {
+            "region": "Osgiliath",
+            "id": "77",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Parth Celebrant",
+            "id": "78",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Pelargir",
+            "id": "79",
+            "side": "0",
+            "nation": "3"
+        },
+        {
+            "region": "Rhosgobel",
+            "id": "80",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "Rivendell",
+            "id": "81",
+            "side": "0",
+            "nation": "2"
+        },
+        {
+            "region": "South Anduin Vale",
+            "id": "82",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "South Downs",
+            "id": "83",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "South Dunland",
+            "id": "84",
+            "side": "0",
+            "nation": "6"
+        },
+        {
+            "region": "South Ered-Luin",
+            "id": "85",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Southern Dorwinion",
+            "id": "86",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Southern Mirkwood",
+            "id": "87",
+            "side": "0",
+            "nation": "7"
+        },
+        {
+            "region": "Southern Rhovanion",
+            "id": "88",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "South Ithilien",
+            "id": "89",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "South Rhun",
+            "id": "90",
+            "side": "0",
+            "nation": "8"
+        },
+        {
+            "region": "Tharbad",
+            "id": "91",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Grey Havens",
+            "id": "92",
+            "side": "0",
+            "nation": "2"
+        },
+        {
+            "region": "The Shire",
+            "id": "93",
+            "side": "0",
+            "nation": "4"
+        },
+        {
+            "region": "Trollshaws",
+            "id": "94",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Umbar",
+            "id": "95",
+            "side": "0",
+            "nation": "8"
+        },
+        {
+            "region": "Vale of Carnen",
+            "id": "96",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Vale of Celdium",
+            "id": "97",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Weather Hills",
+            "id": "98",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Westemnet",
+            "id": "99",
+            "side": "0",
+            "nation": "5"
+        },
+        {
+            "region": "Western Brown Lands",
+            "id": "100",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Western Emyn Muil",
+            "id": "101",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Western Mirkwood",
+            "id": "102",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "West Harondor",
+            "id": "103",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Withered Heath",
+            "id": "104",
+            "side": "0",
+            "nation": ""
+        },
+        {
+            "region": "Woodland Realms",
+            "id": "105",
+            "side": "0",
+            "nation": "2"
+        }
+    ],
+    "connections": [
+        ["Andrast (1)", "Anfalas (2)"],
+        ["Andrast (1)", "Druwaith Iaur (18)"],
+        ["Anfalas (2)", "Andrast (1)"],
+        ["Anfalas (2)", "Dol Amroth (14)"],
+        ["Anfalas (2)", "Erech (29)"],
+        ["Angmar (3)", "Arnor (4)"],
+        ["Angmar (3)", "Ettenmoors (31)"],
+        ["Angmar (3)", "Mount Gram (57)"],
+        ["Arnor (4)", "Angmar (3)"],
+        ["Arnor (4)", "Ettenmoors (31)"],
+        ["Arnor (4)", "Evendim (32)"],
+        ["Arnor (4)", "North Downs (62)"],
+        ["Ash Mountains (5)", "Dagorlad (11)"],
+        ["Ash Mountains (5)", "Noman-Lands (61)"],
+        ["Ash Mountains (5)", "South Rhun (90)"],
+        ["Ash Mountains (5)", "Southern Dorwinion (86)"],
+        ["Barad Dur (6)", "Gorgoroth (42)"],
+        ["Bree (7)", "Buckland (8)"],
+        ["Bree (7)", "North Downs (62)"],
+        ["Bree (7)", "South Downs (83)"],
+        ["Bree (7)", "Weather Hills (98)"],
+        ["Buckland (8)", "Bree (7)"],
+        ["Buckland (8)", "Cardolan (9)"],
+        ["Buckland (8)", "Evendim (32)"],
+        ["Buckland (8)", "North Downs (62)"],
+        ["Buckland (8)", "Old Forest (74)"],
+        ["Buckland (8)", "South Downs (83)"],
+        ["Buckland (8)", "The Shire (93)"],
+        ["Cardolan (9)", "Buckland (8)"],
+        ["Cardolan (9)", "Minhiriath (54)"],
+        ["Cardolan (9)", "North Dunland (63)"],
+        ["Cardolan (9)", "Old Forest (74)"],
+        ["Cardolan (9)", "South Downs (83)"],
+        ["Cardolan (9)", "South Ered Luin (85)"],
+        ["Cardolan (9)", "Tharbad (91)"],
+        ["Carrock (10)", "Eagles' Eyrie (19)"],
+        ["Carrock (10)", "Northern Mirkwood (67)"],
+        ["Carrock (10)", "Old Ford (73)"],
+        ["Carrock (10)", "Old Forest Road (75)"],
+        ["Carrock (10)", "Rhosgobel (80)"],
+        ["Carrock (10)", "Western Mirkwood (102)"],
+        ["Dagorlad (11)", "Eastern Emyn Muil (22)"],
+        ["Dagorlad (11)", "Morannon (55)"],
+        ["Dagorlad (11)", "Noman-Lands (61)"],
+        ["Dagorlad (11)", "North Ithilien (70)"],
+        ["Dale (12)", "Erebor (28)"],
+        ["Dale (12)", "Iron Hills (47)"],
+        ["Dale (12)", "Northern Rhovanion (68)"],
+        ["Dale (12)", "Old Forest Road (75)"],
+        ["Dale (12)", "Vale of Carnen (96)"],
+        ["Dale (12)", "Withered Heath (104)"],
+        ["Dale (12)", "Woodland Realms (105)"],
+        ["Dead Marshes (13)", "Druadan Forest (17)"],
+        ["Dead Marshes (13)", "Eastern Emyn Muil (22)"],
+        ["Dead Marshes (13)", "North Ithilien (70)"],
+        ["Dead Marshes (13)", "Osgiliath (77)"],
+        ["Dead Marshes (13)", "Western Emyn Muil (101)"],
+        ["Dol Amroth (14)", "Anfalas (2)"],
+        ["Dol Amroth (14)", "Erech (29)"],
+        ["Dol Amroth (14)", "Lamedon (49)"],
+        ["Dol Guldur (15)", "Eastern Brown Lands (21)"],
+        ["Dol Guldur (15)", "Eastern Mirkwood (23)"],
+        ["Dol Guldur (15)", "Narrows of the Forest (59)"],
+        ["Dol Guldur (15)", "North Anduin Vale (64)"],
+        ["Dol Guldur (15)", "South Anduin Vale (82)"],
+        ["Dol Guldur (15)", "Southern Mirkwood (87)"],
+        ["Dol Guldur (15)", "Western Brown Lands (100)"],
+        ["Drimill Dale (16)", "Gladden Fields (40)"],
+        ["Drimill Dale (16)", "Lorien (51)"],
+        ["Drimill Dale (16)", "Moria (56)"],
+        ["Drimill Dale (16)", "North Anduin Vale (64)"],
+        ["Drimill Dale (16)", "Parth Celebrant (78)"],
+        ["Drimill Dale (16)", "South Anduin Vale (82)"],
+        ["Druadan Forest (17)", "Dead Marshes (13)"],
+        ["Druadan Forest (17)", "Eastemnet (20)"],
+        ["Druadan Forest (17)", "Folde (35)"],
+        ["Druadan Forest (17)", "Minas Tirith (53)"],
+        ["Druadan Forest (17)", "Osgiliath (77)"],
+        ["Druadan Forest (17)", "Western Emyn Muil (101)"],
+        ["Druwaith Iaur (18)", "Andrast (1)"],
+        ["Druwaith Iaur (18)", "Enedwaith (27)"],
+        ["Druwaith Iaur (18)", "Fords of Isen (37)"],
+        ["Druwaith Iaur (18)", "Gap of Rohan (39)"],
+        ["Eagles' Eyrie (19)", "Carrock (10)"],
+        ["Eagles' Eyrie (19)", "Mount Gundaband (58)"],
+        ["Eagles' Eyrie (19)", "Old Ford (73)"],
+        ["Edoras (26)", "Folde (35)"],
+        ["Edoras (26)", "Westemnet (99)"],
+        ["East Rhun (25)", "Iron Hills (47)"],
+        ["East Rhun (25)", "North Rhun (65)"],
+        ["East Rhun (25)", "South Rhun (90)"],
+        ["Eastern Brown Lands (21)", "Eastern Emyn Muil (22)"],
+        ["Eastern Brown Lands (21)", "Noman-Lands (61)"],
+        ["Eastern Brown Lands (21)", "Southern Mirkwood (87)"],
+        ["Eastern Brown Lands (21)", "Southern Rhovanion (88)"],
+        ["Eastern Brown Lands (21)", "Western Brown Lands (100)"],
+        ["Eastern Brown Lands (21)", "Western Emyn Muil (101)"],
+        ["Eastern Emyn Muil (22)", "Dagorlad (11)"],
+        ["Eastern Emyn Muil (22)", "Dead Marshes (13)"],
+        ["Eastern Emyn Muil (22)", "North Ithilien (70)"],
+        ["Eastern Emyn Muil (22)", "Noman-Lands (61)"],
+        ["Eastern Emyn Muil (22)", "Southern Rhovanion (88)"],
+        ["Eastern Emyn Muil (22)", "Western Emyn Muil (101)"],
+        ["Eastern Mirkwood (23)", "Dol Guldur (15)"],
+        ["Eastern Mirkwood (23)", "Narrows of the Forest (59)"],
+        ["Eastern Mirkwood (23)", "Southern Mirkwood (87)"],
+        ["Eastern Mirkwood (23)", "Woodland Realms (105)"],
+        ["Eastemnet (20)", "Druadan Forest (17)"],
+        ["Eastemnet (20)", "Fangorn (33)"],
+        ["Eastemnet (20)", "Folde (35)"],
+        ["Eastemnet (20)", "Parth Celebrant (78)"],
+        ["Eastemnet (20)", "Western Brown Lands (100)"],
+        ["Eastemnet (20)", "Western Emyn Muil (101)"],
+        ["Eastemnet (20)", "Westemnet (99)"],
+        ["Enedwaith (27)", "Druwaith Iaur (18)"],
+        ["Enedwaith (27)", "Gap of Rohan (39)"],
+        ["Enedwaith (27)", "Minhiriath (54)"],
+        ["Enedwaith (27)", "South Dunland (84)"],
+        ["Enedwaith (27)", "Tharbad (91)"],
+        ["Erebor (28)", "Dale (12)"],
+        ["Erebor (28)", "Iron Hills (47)"],
+        ["Erebor (28)", "Withered Heath (104)"],
+        ["Erech (29)", "Anfalas (2)"],
+        ["Erech (29)", "Dol Amroth (14)"],
+        ["Erech (29)", "Lamedon (49)"],
+        ["Ered Luin (30)", "Evendim (32)"],
+        ["Ered Luin (30)", "Grey Havens (92)"],
+        ["Ered Luin (30)", "North Ered-Luin (65)"],
+        ["Ered Luin (30)", "Tower Hills (93)"],
+        ["Ettenmoors (31)", "Angmar (3)"],
+        ["Ettenmoors (31)", "Arnor (4)"],
+        ["Ettenmoors (31)", "Mount Gram (57)"],
+        ["Ettenmoors (31)", "North Downs (62)"],
+        ["Ettenmoors (31)", "Trollshaws (94)"],
+        ["Ettenmoors (31)", "Weather Hills (98)"],
+        ["Evendim (32)", "Arnor (4)"],
+        ["Evendim (32)", "Ered Luin (30)"],
+        ["Evendim (32)", "North Ered-Luin (65)"],
+        ["Evendim (32)", "The Shire (93)"],
+        ["Evendim (32)", "Trollshaws (94)"],
+        ["Fangorn (33)", "Eastemnet (20)"],
+        ["Fangorn (33)", "Fords of Isen (37)"],
+        ["Fangorn (33)", "Parth Celebrant (78)"],
+        ["Fangorn (33)", "Westemnet (99)"],
+        ["Far Harad (34)", "Khand (48)"],
+        ["Far Harad (34)", "Near Harad (60)"],
+        ["Folde (35)", "Druadan Forest (17)"],
+        ["Folde (35)", "Eastemnet (20)"],
+        ["Folde (35)", "Edoras (26)"],
+        ["Folde (35)", "Westemnet (99)"],
+        ["Fords of Bruinen (36)", "High Pass (45)"],
+        ["Fords of Bruinen (36)", "Hollin (46)"],
+        ["Fords of Bruinen (36)", "Rivendell (81)"],
+        ["Fords of Bruinen (36)", "Trollshaws (94)"],
+        ["Fords of Isen (37)", "Druwaith Iaur (18)"],
+        ["Fords of Isen (37)", "Fangorn (33)"],
+        ["Fords of Isen (37)", "Gap of Rohan (39)"],
+        ["Fords of Isen (37)", "Helm's Deep (44)"],
+        ["Fords of Isen (37)", "Orthanc (76)"],
+        ["Fords of Isen (37)", "Westemnet (99)"],
+        ["Forlindon (38)", "Grey Havens (92)"],
+        ["Gap of Rohan (39)", "Druwaith Iaur (18)"],
+        ["Gap of Rohan (39)", "Enedwaith (27)"],
+        ["Gap of Rohan (39)", "Fords of Isen (37)"],
+        ["Gap of Rohan (39)", "Orthanc (76)"],
+        ["Gap of Rohan (39)", "South Dunland (84)"],
+        ["Gladden Fields (40)", "Drimill Dale (16)"],
+        ["Gladden Fields (40)", "North Anduin Vale (64)"],
+        ["Gladden Fields (40)", "Old Ford (73)"],
+        ["Gladden Fields (40)", "Rhosgobel (80)"],
+        ["Goblin's Gate (41)", "High Pass (45)"],
+        ["Goblin's Gate (41)", "Old Ford (73)"],
+        ["Gorgoroth (42)", "Barad Dur (6)"],
+        ["Gorgoroth (42)", "Minas Morgul (52)"],
+        ["Gorgoroth (42)", "Morannon (55)"],
+        ["Gorgoroth (42)", "Nurn (72)"],
+        ["Grey Havens (92)", "Ered Luin (30)"],
+        ["Grey Havens (92)", "Forlindon (38)"],
+        ["Grey Havens (92)", "Harlindon (43)"],
+        ["Grey Havens (92)", "The Shire (93)"],
+        ["Grey Havens (92)", "Tower Hills (93)"],
+        ["Harlindon (43)", "Grey Havens (92)"],
+        ["Harlindon (43)", "South Ered Luin (85)"],
+        ["Helm's Deep (44)", "Fords of Isen (37)"],
+        ["Helm's Deep (44)", "Gap of Rohan (39)"],
+        ["Helm's Deep (44)", "Westemnet (99)"],
+        ["High Pass (45)", "Fords of Bruinen (36)"],
+        ["High Pass (45)", "Goblin's Gate (41)"],
+        ["Hollin (46)", "Fords of Bruinen (36)"],
+        ["Hollin (46)", "Moria (56)"],
+        ["Hollin (46)", "North Downs (62)"],
+        ["Hollin (46)", "South Downs (83)"],
+        ["Iron Hills (47)", "Dale (12)"],
+        ["Iron Hills (47)", "East Rhun (25)"],
+        ["Iron Hills (47)", "Erebor (28)"],
+        ["Iron Hills (47)", "North Ered-Luin (65)"],
+        ["Iron Hills (47)", "Vale of Carnen (96)"],
+        ["Lamedon (49)", "Dol Amroth (14)"],
+        ["Lamedon (49)", "Erech (29)"],
+        ["Lamedon (49)", "Pelargir (79)"],
+        ["Lossarnach (50)", "Minas Tirith (53)"],
+        ["Lossarnach (50)", "Osgiliath (77)"],
+        ["Lossarnach (50)", "Pelargir (79)"],
+        ["Lorien (51)", "Drimill Dale (16)"],
+        ["Lorien (51)", "Parth Celebrant (78)"],
+        ["Minas Morgul (52)", "Gorgoroth (42)"],
+        ["Minas Morgul (52)", "North Ithilien (70)"],
+        ["Minas Morgul (52)", "South Ithilien (89)"],
+        ["Minas Tirith (53)", "Druadan Forest (17)"],
+        ["Minas Tirith (53)", "Lossarnach (50)"],
+        ["Minas Tirith (53)", "Osgiliath (77)"],
+        ["Minhiriath (54)", "Cardolan (9)"],
+        ["Minhiriath (54)", "Enedwaith (27)"],
+        ["Minhiriath (54)", "South Ered Luin (85)"],
+        ["Minhiriath (54)", "Tharbad (91)"],
+        ["Moria (56)", "Drimill Dale (16)"],
+        ["Moria (56)", "Hollin (46)"],
+        ["Moria (56)", "North Dunland (63)"],
+        ["Mount Gram (57)", "Angmar (3)"],
+        ["Mount Gram (57)", "Ettenmoors (31)"],
+        ["Mount Gram (57)", "Mount Gundaband (58)"],
+        ["Narrows of the Forest (59)", "Dol Guldur (15)"],
+        ["Narrows of the Forest (59)", "North Anduin Vale (64)"],
+        ["Narrows of the Forest (59)", "Old Forest Road (75)"],
+        ["Narrows of the Forest (59)", "Rhosgobel (80)"],
+        ["Near Harad (60)", "Far Harad (34)"],
+        ["Near Harad (60)", "Khand (48)"],
+        ["Near Harad (60)", "Umbar (95)"],
+        ["Near Harad (60)", "West Harondor (103)"],
+        ["Northern Mirkwood (67)", "Carrock (10)"],
+        ["Northern Mirkwood (67)", "Western Mirkwood (102)"],
+        ["Northern Mirkwood (67)", "Withered Heath (104)"],
+        ["Northern Mirkwood (67)", "Woodland Realms (105)"],
+        ["Northern Rhovanion (68)", "Dale (12)"],
+        ["Northern Rhovanion (68)", "Old Forest Road (75)"],
+        ["Northern Rhovanion (68)", "Southern Dorwinion (87)"],
+        ["Northern Rhovanion (68)", "Southern Mirkwood (87)"],
+        ["Northern Rhovanion (68)", "Vale of Carnen (96)"],
+        ["Northern Rhovanion (68)", "Vale of Celdium (97)"],
+        ["Northern Dorwinion (66)", "North Rhun (65)"],
+        ["Northern Dorwinion (66)", "Southern Dorwinion (87)"],
+        ["Northern Dorwinion (66)", "Southern Rhovanion (88)"],
+        ["Northern Dorwinion (66)", "Vale of Celdium (97)"],
+        ["North Ered-Luin (65)", "Ered Luin (30)"],
+        ["North Ered-Luin (65)", "Evendim (32)"],
+        ["North Ered-Luin (65)", "Iron Hills (47)"],
+        ["North Ered-Luin (65)", "Northern Dorwinion (66)"],
+        ["Old Forest (74)", "Buckland (8)"],
+        ["Old Forest (74)", "Cardolan (9)"],
+        ["Old Forest (74)", "South Ered Luin (85)"],
+        ["Old Forest (74)", "The Shire (93)"],
+        ["Old Forest Road (75)", "Carrock (10)"],
+        ["Old Forest Road (75)", "Dale (12)"],
+        ["Old Forest Road (75)", "Narrows of the Forest (59)"],
+        ["Old Forest Road (75)", "Rhosgobel (80)"],
+        ["Old Forest Road (75)", "Western Mirkwood (102)"],
+        ["Old Forest Road (75)", "Woodland Realms (105)"],
+        ["Osgiliath (77)", "Dead Marshes (13)"],
+        ["Osgiliath (77)", "Druadan Forest (17)"],
+        ["Osgiliath (77)", "Lossarnach (50)"],
+        ["Osgiliath (77)", "Minas Tirith (53)"],
+        ["Osgiliath (77)", "Pelargir (79)"],
+        ["Osgiliath (77)", "South Ithilien (89)"],
+        ["Osgiliath (77)", "West Harondor (103)"],
+        ["Parth Celebrant (78)", "Drimill Dale (16)"],
+        ["Parth Celebrant (78)", "Eastemnet (20)"],
+        ["Parth Celebrant (78)", "Lorien (51)"],
+        ["Parth Celebrant (78)", "South Anduin Vale (82)"],
+        ["Parth Celebrant (78)", "Western Brown Lands (100)"],
+        ["Pelargir (79)", "Lamedon (49)"],
+        ["Pelargir (79)", "Lossarnach (50)"],
+        ["Pelargir (79)", "Osgiliath (77)"],
+        ["Pelargir (79)", "West Harondor (103)"],
+        ["Rivendell (81)", "Fords of Bruinen (36)"],
+        ["Rivendell (81)", "Trollshaws (94)"],
+        ["South Anduin Vale (82)", "Dol Guldur (15)"],
+        ["South Anduin Vale (82)", "Drimill Dale (16)"],
+        ["South Anduin Vale (82)", "Parth Celebrant (78)"],
+        ["South Anduin Vale (82)", "Western Brown Lands (100)"],
+        ["Southern Mirkwood (87)", "Dol Guldur (15)"],
+        ["Southern Mirkwood (87)", "Eastern Mirkwood (23)"],
+        ["Southern Mirkwood (87)", "Southern Rhovanion (88)"],
+        ["Trollshaws (94)", "Ettenmoors (31)"],
+        ["Trollshaws (94)", "Evendim (32)"],
+        ["Trollshaws (94)", "Fords of Bruinen (36)"],
+        ["Trollshaws (94)", "Rivendell (81)"],
+        ["Trollshaws (94)", "Weather Hills (98)"],
+        ["Western Brown Lands (100)", "Eastern Brown Lands (21)"],
+        ["Western Brown Lands (100)", "Eastern Emyn Muil (22)"],
+        ["Western Brown Lands (100)", "Parth Celebrant (78)"],
+        ["Western Brown Lands (100)", "South Anduin Vale (82)"],
+        ["Western Brown Lands (100)", "Western Emyn Muil (101)"],
+        ["Western Emyn Muil (101)", "Dead Marshes (13)"],
+        ["Western Emyn Muil (101)", "Druadan Forest (17)"],
+        ["Western Emyn Muil (101)", "Eastern Brown Lands (21)"],
+        ["Western Emyn Muil (101)", "Eastern Emyn Muil (22)"],
+        ["Western Emyn Muil (101)", "Western Brown Lands (100)"],
+        ["Withered Heath (104)", "Dale (12)"],
+        ["Withered Heath (104)", "Erebor (28)"],
+        ["Withered Heath (104)", "Northern Mirkwood (67)"],
+        ["Withered Heath (104)", "Woodland Realms (105)"],
+        ["Woodland Realms (105)", "Dale (12)"],
+        ["Woodland Realms (105)", "Eastern Mirkwood (23)"],
+        ["Woodland Realms (105)", "Northern Mirkwood (67)"],
+        ["Woodland Realms (105)", "Old Forest Road (75)"],
+        ["Woodland Realms (105)", "Withered Heath (104)"]
+    ]
+}

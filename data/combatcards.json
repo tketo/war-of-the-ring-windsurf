@@ -1,0 +1,632 @@
+[
+  {
+    "combatId": "a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5",
+    "title": "It is a Gift",
+    "effectText": "Add 1 to all dice on your Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is in the same region as the Fellowship",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "b2c3d4e5-f6g7-4h8i-9j0k-l1m2n3o4p5q",
+    "title": "Blade of Westernesse",
+    "effectText": "Use one hit during the Leader re-roll to eliminate one Minion of your choice that is participating in the battle.",
+    "initiative": 6,
+    "conditions": "Play if a Hobbit is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "c3d4e5f6-g7h8-4i9j-0k1l-m2n3o4p5q6r",
+    "title": "Mighty Attack",
+    "effectText": "Before rolling the dice for your Leader re-roll, forfeit the Leadership of one Companion participating in the battle to automatically change one missed die roll to a hit.",
+    "initiative": 4,
+    "conditions": "Play if a Companion is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "d4e5f6g7-h8i9-4j0k-1l2m-n3o4p5q6r7s",
+    "title": "Servant of the Secret Fire",
+    "effectText": "Add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if Gandalf is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "e5f6g7h8-i9j0-4k1l-2m3n-o4p5q6r7s8t",
+    "title": "Andúril",
+    "effectText": "Before rolling the dice for your Leader re-roll, forfeit Strider's Leadership to automatically change one missed die roll to a hit, or forfeit Aragorn's Leadership to automatically change up to two missed die rolls to hits.",
+    "initiative": 4,
+    "conditions": "Play if Strider/Aragorn is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "f6g7h8i9-j0k1-4l2m-3n4o-p5q6r7s8t9u",
+    "title": "Heroic Death",
+    "effectText": "Before you remove casualties inflicted by your opponent's Combat roll and Leader re-roll, you may eliminate one of your Leaders to cancel one hit, or eliminate one Companion to cancel a number of hits equal to or less than the Companion's Level.",
+    "initiative": 6,
+    "conditions": "Play if a Free Peoples Leader or a Companion is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "g7h8i9j0-k1l2-4m3n-4o5p-q6r7s8t9u0v",
+    "title": "Daring Defiance",
+    "effectText": "Forfeit the Leadership of all the Companions participating in the battle to cancel the Combat card played by the Shadow player.",
+    "initiative": 0,
+    "conditions": "Play if a Companion is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "h8i9j0k1-l2m3-4n4o-5p6q-r7s8t9u0v1w",
+    "title": "Fateful Strike",
+    "effectText": "If your Leader re-roll scores one hit, additionally eliminate a Nazgûl (if in the battle). If the re-roll scores two or more hits, you can eliminate a Minion (if in the battle) instead of a Nazgûl.",
+    "initiative": 6,
+    "conditions": "Play if a Free Peoples Leader or a Companion is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "i9j0k1l2-m3n4-4o5p-6q7r-s8t9u0v1w2x",
+    "title": "Sudden Strike",
+    "effectText": "Before the Combat roll, roll an additional attack using a number of dice equal to your Leadership (up to a maximum of 5) and apply the result immediately.",
+    "initiative": 2,
+    "conditions": "Play if a Free Peoples Leader or a Companion is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "j0k1l2m3-n4o5-4p6q-7r8s-t9u0v1w2x3y",
+    "title": "Brave Stand",
+    "effectText": "The Shadow player rolls one die less in his Combat roll for each Companion in the battle (to a minimum of one).",
+    "initiative": 3,
+    "conditions": "Play if a Companion is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "k1l2m3n4-o5p6-4q7r-8s9t-u0v1w2x3y4z",
+    "title": "Ents' Rage",
+    "effectText": "Add 2 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is in a Rohan region, Fangorn or Orthanc",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "l2m3n4o5-p6q7-4r8s-9t0u-v1w2x3y4z5a",
+    "title": "Huorn-dark",
+    "effectText": "The Shadow player rolls a maximum of two dice in his Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is in a Rohan region, Fangorn or Orthanc",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "m3n4o5p6-q7r8-4s9t-0u1v-w2x3y4z5a6b",
+    "title": "Nameless Wood",
+    "effectText": "If your Combat roll or Leader reroll score at least one hit, score two additional hits.",
+    "initiative": 5,
+    "conditions": "Play if the defending Army is in a Rohan region, Fangorn or Orthanc",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s1-one-for-the-dark-lord",
+    "title": "One for the Dark Lord",
+    "effectText": "Add 1 to all dice on your Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is in the same region as the Fellowship",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s5-cruel-as-death",
+    "title": "Cruel as Death",
+    "effectText": "Forfeit two points of Nazgûl Leadership to add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if the total Nazgûl Leadership is 2 or more",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s7-they-are-terrible",
+    "title": "They are Terrible",
+    "effectText": "Forfeit one point of Nazgûl Leadership to add 1 to all dice on your Leader re-roll.",
+    "initiative": 4,
+    "conditions": "Play if the total Nazgûl Leadership is 1 or more",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s8-dread-and-despair",
+    "title": "Dread and Despair",
+    "effectText": "Before the Combat roll, forfeit one or more points of Nazgûl Leadership. During his Combat roll, the Free Peoples player rolls one Combat die less (to a minimum of one) for every point you have chosen to forfeit.",
+    "initiative": 3,
+    "conditions": "Play if the total Nazgûl Leadership is 1 or more",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s9-foul-stench",
+    "title": "Foul Stench",
+    "effectText": "If the Nazgûl Leadership equals or exceeds the total Free Peoples Leadership, the Free Peoples Leader re-roll is cancelled.",
+    "initiative": 3,
+    "conditions": "Play if the total Nazgûl Leadership is 1 or more",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s11-black-breath",
+    "title": "Black Breath",
+    "effectText": "If your Leader re-roll scores at least one hit, you may additionally eliminate one Free Peoples Leader participating in the battle. Alternatively, you can choose to eliminate a Companion in the battle, if the number of hits equals or exceeds the Companion's Level.",
+    "initiative": 6,
+    "conditions": "Play if a Nazgûl is in the battle",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s15-words-of-power",
+    "title": "Words of Power",
+    "effectText": "Choose a Companion. That Companion's Leadership and special abilities are cancelled for this Combat round.",
+    "initiative": 1,
+    "conditions": "Play if a Nazgûl is in the battle",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s17-durins-bane",
+    "title": "Durin's Bane",
+    "effectText": "Before the Combat Roll, roll an additional attack using three Combat dice; score hits on 4+ and apply the result immediately.",
+    "initiative": 2,
+    "conditions": "Play if the defending Army is within two regions of Moria",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "s19-devilry-of-orthanc",
+    "title": "Devilry of Orthanc",
+    "effectText": "Add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if an Isengard Army unit is in the battle and the defending Army is in a Stronghold",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp1-daylight",
+    "title": "Daylight",
+    "effectText": "The Shadow player rolls a maximum of three dice in his Combat roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s1-deadly-strife",
+    "title": "Deadly Strife",
+    "effectText": "Both Armies add 2 to all dice on their Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp2-no-quarter",
+    "title": "No Quarter",
+    "effectText": "If your Combat roll or Leader re-roll scores at least one hit, score one additional hit.",
+    "initiative": 5,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s2-onslaught",
+    "title": "Onslaught",
+    "effectText": "After removing casualties from the Combat roll and Leader re-roll, you may inflict and apply up to four additional hits against your units. Roll one die for each hit you inflicted to your units and score one hit against the enemy on each result of 4+.",
+    "initiative": 7,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp3-advantageous-position",
+    "title": "Advantageous Position",
+    "effectText": "Play if the defending Army is inside the borders of a Free Peoples Nation. Subtract 1 from all dice on the Combat roll of the Shadow player (an unmodified '6' is still considered a hit for him).",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is inside the borders of a Free Peoples Nation",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s3-devilry-of-orthanc",
+    "title": "Devilry of Orthanc",
+    "effectText": "Add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if an Isengard Army unit is in the battle and the defending Army is in a Stronghold",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp4-advantageous-position",
+    "title": "Advantageous Position",
+    "effectText": "Play if the defending Army is inside the borders of a Free Peoples Nation. Subtract 1 from all dice on the Combat roll of the Shadow player (an unmodified '6' is still considered a hit for him).",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is inside the borders of a Free Peoples Nation",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s4-relentless-assault",
+    "title": "Relentless Assault",
+    "effectText": "Before the Combat roll, you may inflict and apply up to two hits against your units. Add 1 to all dice on your Combat roll for each hit you inflicted.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp5-scouts",
+    "title": "Scouts",
+    "effectText": "Play if the Free Peoples Army is defending in a field battle. Before the Combat roll, retreat your Army to an adjacent free region or withdraw into a siege.",
+    "initiative": 1,
+    "conditions": "Play if the Free Peoples Army is defending in a field battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s5-devilry-of-orthanc",
+    "title": "Devilry of Orthanc",
+    "effectText": "Add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if an Isengard Army unit is in the battle and the defending Army is in a Stronghold",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp6-shield-wall",
+    "title": "Shield-wall",
+    "effectText": "Before you remove casualties inflicted by your opponent's Combat roll and Leader re-roll, if your opponent scored two or more hits, cancel one hit.",
+    "initiative": 6,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s6-great-host",
+    "title": "Great Host",
+    "effectText": "If, after removing casualties from the Combat roll and Leader re-roll your Army units are at least twice as many as the enemy Army units, score one automatic hit.",
+    "initiative": 7,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp7-shield-wall",
+    "title": "Shield-wall",
+    "effectText": "Before you remove casualties inflicted by your opponent's Combat roll and Leader re-roll, if your opponent scored two or more hits, cancel one hit.",
+    "initiative": 6,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s7-mumakil",
+    "title": "Mûmakil",
+    "effectText": "Play if a Southrons & Easterlings Elite unit is in the battle. Add 1 to all dice on your Combat roll. If, after the Leader re-roll, you scored more total hits than your opponent (including hits from any Free Peoples pre-Combat attack from a Combat card), score one additional hit.",
+    "initiative": 3,
+    "conditions": "Play if a Southrons & Easterlings Elite unit is in the battle",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp8-confusion",
+    "title": "Confusion",
+    "effectText": "Every unmodified die result of '1' in the Shadow player's Combat roll scores one hit against the Shadow Army. Any such result cannot be rolled again during the Shadow player's Leader re-roll.",
+    "initiative": 4,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s8-mumakil",
+    "title": "Mûmakil",
+    "effectText": "Play if a Southrons & Easterlings Elite unit is in the battle. Add 1 to all dice on your Combat roll. If, after the Leader re-roll, you scored more total hits than your opponent (including hits from any Free Peoples pre-Combat attack from a Combat card), score one additional hit.",
+    "initiative": 3,
+    "conditions": "Play if a Southrons & Easterlings Elite unit is in the battle",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp9-scouts",
+    "title": "Scouts",
+    "effectText": "Play if the Free Peoples Army is defending in a field battle. Before the Combat roll, retreat your Army to an adjacent free region or withdraw into a siege.",
+    "initiative": 1,
+    "conditions": "Play if the Free Peoples Army is defending in a field battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s9-swarm-of-bats",
+    "title": "Swarm of Bats",
+    "effectText": "Cancel the effects of the Combat card played by the Free Peoples player. If the Free Peoples player did not play a card, add 1 to all dice on your Leader re-roll.",
+    "initiative": 0,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp10-no-quarter",
+    "title": "No Quarter",
+    "effectText": "If your Combat roll or Leader re-roll scores at least one hit, score one additional hit.",
+    "initiative": 5,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s10-deadly-strife",
+    "title": "Deadly Strife",
+    "effectText": "Both Armies add 2 to all dice on their Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp11-sudden-strike",
+    "title": "Sudden Strike",
+    "effectText": "Play if a Free Peoples Leader or a Companion is in the battle. Before the Combat roll, roll an additional attack using a number of dice equal to your Leadership (up to a maximum of 5) and apply the result immediately.",
+    "initiative": 2,
+    "conditions": "Play if a Free Peoples Leader or a Companion is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s11-relentless-assault",
+    "title": "Relentless Assault",
+    "effectText": "Before the Combat roll, you may inflict and apply up to two hits against your units. Add 1 to all dice on your Combat roll for each hit you inflicted.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp12-confusion",
+    "title": "Confusion",
+    "effectText": "Every unmodified die result of '1' in the Shadow player's Combat roll scores one hit against the Shadow Army. Any such result cannot be rolled again during the Shadow player's Leader re-roll.",
+    "initiative": 4,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s12-swarm-of-bats",
+    "title": "Swarm of Bats",
+    "effectText": "Cancel the effects of the Combat card played by the Free Peoples player. If the Free Peoples player did not play a card, add 1 to all dice on your Leader re-roll.",
+    "initiative": 0,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp13-charge",
+    "title": "Charge",
+    "effectText": "Play if a Free Peoples Elite unit is in the battle. Before the Combat roll, roll an additional attack using only the Free Peoples Elite units (up to a maximum of 5) and apply the result immediately.",
+    "initiative": 2,
+    "conditions": "Play if a Free Peoples Elite unit is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s13-we-come-to-kill",
+    "title": "We Come to Kill",
+    "effectText": "Play if a Shadow Elite unit is in the battle. After removing casualties from the Combat roll and Leader re-roll, roll an additional attack using only the Shadow Elite units (up to a maximum of five) and score one hit for each result of 5+.",
+    "initiative": 7,
+    "conditions": "Play if a Shadow Elite unit is in the battle",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp14-charge",
+    "title": "Charge",
+    "effectText": "Play if a Free Peoples Elite unit is in the battle. Before the Combat roll, roll an additional attack using only the Free Peoples Elite units (up to a maximum of 5) and apply the result immediately.",
+    "initiative": 2,
+    "conditions": "Play if a Free Peoples Elite unit is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s14-we-come-to-kill",
+    "title": "We Come to Kill",
+    "effectText": "Play if a Shadow Elite unit is in the battle. After removing casualties from the Combat roll and Leader re-roll, roll an additional attack using only the Shadow Elite units (up to a maximum of five) and score one hit for each result of 5+.",
+    "initiative": 7,
+    "conditions": "Play if a Shadow Elite unit is in the battle",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp15-daylight",
+    "title": "Daylight",
+    "effectText": "The Shadow player rolls a maximum of three dice in his Combat roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s15-we-come-to-kill",
+    "title": "We Come to Kill",
+    "effectText": "Play if a Shadow Elite unit is in the battle. After removing casualties from the Combat roll and Leader re-roll, roll an additional attack using only the Shadow Elite units (up to a maximum of five) and score one hit for each result of 5+.",
+    "initiative": 7,
+    "conditions": "Play if a Shadow Elite unit is in the battle",
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp16-daylight",
+    "title": "Daylight",
+    "effectText": "The Shadow player rolls a maximum of three dice in his Combat roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s16-great-host",
+    "title": "Great Host",
+    "effectText": "If, after removing casualties from the Combat roll and Leader re-roll your Army units are at least twice as many as the enemy Army units, score one automatic hit.",
+    "initiative": 7,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp17-scouts",
+    "title": "Scouts",
+    "effectText": "Play if the Free Peoples Army is defending in a field battle. Before the Combat roll, retreat your Army to an adjacent free region or withdraw into a siege.",
+    "initiative": 1,
+    "conditions": "Play if the Free Peoples Army is defending in a field battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s17-great-host",
+    "title": "Great Host",
+    "effectText": "If, after removing casualties from the Combat roll and Leader re-roll your Army units are at least twice as many as the enemy Army units, score one automatic hit.",
+    "initiative": 7,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp18-shield-wall",
+    "title": "Shield-wall",
+    "effectText": "Before you remove casualties inflicted by your opponent's Combat roll and Leader re-roll, if your opponent scored two or more hits, cancel one hit.",
+    "initiative": 6,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s18-relentless-assault",
+    "title": "Relentless Assault",
+    "effectText": "Before the Combat roll, you may inflict and apply up to two hits against your units. Add 1 to all dice on your Combat roll for each hit you inflicted.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp19-shield-wall",
+    "title": "Shield-wall",
+    "effectText": "Before you remove casualties inflicted by your opponent's Combat roll and Leader re-roll, if your opponent scored two or more hits, cancel one hit.",
+    "initiative": 6,
+    "conditions": null,
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s19-onslaught",
+    "title": "Onslaught",
+    "effectText": "After removing casualties from the Combat roll and Leader re-roll, you may inflict and apply up to four additional hits against your units. Roll one die for each hit you inflicted to your units and score one hit against the enemy on each result of 4+.",
+    "initiative": 7,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp20-advantageous-position",
+    "title": "Advantageous Position",
+    "effectText": "Play if the defending Army is inside the borders of a Free Peoples Nation. Subtract 1 from all dice on the Combat roll of the Shadow player (an unmodified '6' is still considered a hit for him).",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is inside the borders of a Free Peoples Nation",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s20-onslaught",
+    "title": "Onslaught",
+    "effectText": "After removing casualties from the Combat roll and Leader re-roll, you may inflict and apply up to four additional hits against your units. Roll one die for each hit you inflicted to your units and score one hit against the enemy on each result of 4+.",
+    "initiative": 7,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp21-advantageous-position",
+    "title": "Advantageous Position",
+    "effectText": "Play if the defending Army is inside the borders of a Free Peoples Nation. Subtract 1 from all dice on the Combat roll of the Shadow player (an unmodified '6' is still considered a hit for him).",
+    "initiative": 3,
+    "conditions": "Play if the defending Army is inside the borders of a Free Peoples Nation",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s21-deadly-strife",
+    "title": "Deadly Strife",
+    "effectText": "Both Armies add 2 to all dice on their Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp22-valour",
+    "title": "Valour",
+    "effectText": "Play if a Free Peoples Elite unit is in the battle. Add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if a Free Peoples Elite unit is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s22-desperate-battle",
+    "title": "Desperate Battle",
+    "effectText": "Both Armies add 1 to all dice on their Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp23-valour",
+    "title": "Valour",
+    "effectText": "Play if a Free Peoples Elite unit is in the battle. Add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if a Free Peoples Elite unit is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s23-desperate-battle",
+    "title": "Desperate Battle",
+    "effectText": "Both Armies add 1 to all dice on their Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  },
+  {
+    "combatId": "fp24-valour",
+    "title": "Valour",
+    "effectText": "Play if a Free Peoples Elite unit is in the battle. Add 1 to all dice on your Combat roll.",
+    "initiative": 3,
+    "conditions": "Play if a Free Peoples Elite unit is in the battle",
+    "side": "freePeoples",
+    "type": "combat"
+  },
+  {
+    "combatId": "s24-desperate-battle",
+    "title": "Desperate Battle",
+    "effectText": "Both Armies add 1 to all dice on their Combat roll and Leader re-roll.",
+    "initiative": 3,
+    "conditions": null,
+    "side": "shadow",
+    "type": "combat"
+  }
+]

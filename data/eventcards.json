@@ -1,0 +1,1333 @@
+[
+  {
+    "cardNumber": "1/24",
+    "event": {
+      "title": "Elven Cloaks",
+      "effectText": "The \"Elven Cloaks\" special Hunt tile [0] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "It is a Gift",
+    "combatId": "a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "2/24",
+    "event": {
+      "title": "Elven Rope",
+      "effectText": "The \"Elven Rope\" special Hunt tile [0] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "It is a Gift",
+    "combatId": "a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "3/24",
+    "event": {
+      "title": "Phial of Galadriel",
+      "effectText": "The \"Phial of Galadriel\" special Hunt tile [-2] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "It is a Gift",
+    "combatId": "a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "4/24",
+    "event": {
+      "title": "Sméagol Helps Nice Master",
+      "effectText": "The \"Sméagol Helps Nice Master\" special Hunt tile [-1] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "It is a Gift",
+    "combatId": "a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "5/24",
+    "event": {
+      "title": "Mithril Coat and Sting",
+      "effectText": "After the Shadow player draws a Hunt tile, you may discard \"Mithril Coat and Sting\" to draw a second tile. Apply the effects of the second tile instead of the first one, then return the first tile to the Hunt Pool.",
+      "initiative": null,
+      "conditions": "Play on the table"
+    },
+    "combatTitle": "Blade of Westernesse",
+    "combatId": "b2c3d4e5-f6g7-4h8i-9j0k-l1m2n3o4p5q",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "6/24",
+    "event": {
+      "title": "Axe and Bow",
+      "effectText": "After the Shadow player draws a Hunt tile, you may discard \"Axe and Bow\" to reduce the Hunt damage by one (to a minimum of zero). Any remaining Hunt damage must be confronted normally. You must immediately discard this card from the table if both Gimli and Legolas leave the Fellowship.",
+      "initiative": null,
+      "conditions": "Play on the table if Gimli or Legolas are in the Fellowship"
+    },
+    "combatTitle": "Mighty Attack",
+    "combatId": "c3d4e5f6-g7h8-4i9j-0k1l-m2n3o4p5q6r",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "7/24",
+    "event": {
+      "title": "Horn of Gondor",
+      "effectText": "After the Shadow player draws a Hunt tile, you may discard \"Horn of Gondor\" to reduce the Hunt damage by one (to a minimum of zero). Any remaining Hunt damage must be confronted normally. You must immediately discard this card from the table if Boromir leaves the Fellowship.",
+      "initiative": null,
+      "conditions": "Play on the table if Boromir is in the Fellowship"
+    },
+    "combatTitle": "Mighty Attack",
+    "combatId": "c3d4e5f6-g7h8-4i9j-0k1l-m2n3o4p5q6r",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "8/24",
+    "event": {
+      "title": "Wizard's Staff",
+      "effectText": "You may discard \"Wizard's Staff\" to prevent the Shadow player from drawing a Hunt tile. You must discard this card from the table immediately if Gandalf the Grey leaves the Fellowship.",
+      "initiative": null,
+      "conditions": "Play on the table if Gandalf the Grey is in the Fellowship"
+    },
+    "combatTitle": "Servant of the Secret Fire",
+    "combatId": "d4e5f6g7-h8i9-4j0k-1l2m-n3o4p5q6r7s",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "9/24",
+    "event": {
+      "title": "Athelas",
+      "effectText": "Roll three dice and heal one Corruption point for each die result of 5+. If Strider is the Guide, heal one Corruption point for each die result of 3+ instead.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Andúril",
+    "combatId": "e5f6g7h8-i9j0-4k1l-2m3n-o4p5q6r7s8t",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "10/24",
+    "event": {
+      "title": "There is Another Way",
+      "effectText": "Heal one Corruption point. Then, if Gollum is the Guide, you may also hide or move the Fellowship (following the normal movement rules).",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Heroic Death",
+    "combatId": "f6g7h8i9-j0k1-4l2m-3n4o-p5q6r7s8t9u",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "11/24",
+    "event": {
+      "title": "I Will Go Alone",
+      "effectText": "Separate one Companion or one group of Companions from the Fellowship. You may move the Companions one extra region. Then, heal one Corruption point.",
+      "initiative": null,
+      "conditions": "Play if at least one Companion is in the Fellowship"
+    },
+    "combatTitle": "Daring Defiance",
+    "combatId": "g7h8i9j0-k1l2-4m3n-4o5p-q6r7s8t9u0v",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "12/24",
+    "event": {
+      "title": "Bilbo's Song",
+      "effectText": "Heal one Corruption point. If Gollum is the Guide, heal two Corruption points instead.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Fateful Strike",
+    "combatId": "h8i9j0k1-l2m3-4n4o-5p6q-r7s8t9u0v1w",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "13/24",
+    "event": {
+      "title": "Mirror of Galadriel",
+      "effectText": "Change any one unused Free Peoples Character Action die result into a Will of the West die result. If the Fellowship is in Lórien, and Lórien is unconquered, also heal one Corruption point.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Heroic Death",
+    "combatId": "f6g7h8i9-j0k1-4l2m-3n4o-p5q6r7s8t9u",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "14/24",
+    "event": {
+      "title": "Challenge of the King",
+      "effectText": "Draw three Hunt tiles. If all three drawn tiles show Eyes, put them back in the Hunt Pool and eliminate Strider/Aragorn. Otherwise, discard permanently the drawn tiles bearing an Eye for the remainder of the game. All drawn tiles not bearing an Eye are put back in the Hunt Pool without effect.",
+      "initiative": null,
+      "conditions": "Play if Strider/Aragorn is with a Free Peoples Army in a Gondor or Rohan region"
+    },
+    "combatTitle": "Sudden Strike",
+    "combatId": "i9j0k1l2-m3n4-4o5p-6q7r-s8t9u0v1w2x",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "15/24",
+    "event": {
+      "title": "Gwaihir the Windlord",
+      "effectText": "Separate from the Fellowship, or move, one Companion or one group of Companions as if their Level were 4. This movement of these Companions is allowed to end in a Stronghold under siege.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Daring Defiance",
+    "combatId": "g7h8i9j0-k1l2-4m3n-4o5p-q6r7s8t9u0v",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "16/24",
+    "event": {
+      "title": "We Prove the Swifter",
+      "effectText": "Separate from the Fellowship, or move, one Companion or one group of Companions. You may move them two extra regions. The movement of these Companions is allowed to end in a Stronghold under siege.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Daring Defiance",
+    "combatId": "g7h8i9j0-k1l2-4m3n-4o5p-q6r7s8t9u0v",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "17/24",
+    "event": {
+      "title": "There and Back Again",
+      "effectText": "Separate from the Fellowship one Companion or group of Companions. You may move them one extra region. Then, if Gimli or Legolas are in Dale, Erebor or the Woodland Realm, activate the Dwarven and the North Nations and advance the Dwarven, the Elven and the North Nations one step each on the Political Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Brave Stand",
+    "combatId": "j0k1l2m3-n4o5-4p6q-7r8s-t9u0v1w2x3y",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "18/24",
+    "event": {
+      "title": "The Eagles are Coming!",
+      "effectText": "Roll a die for each Nazgûl present (up to a maximum of five dice) and eliminate a Nazgûl for each roll of 5+. All surviving Nazgûl must immediately be moved to any one unconquered Sauron Stronghold. The Witch-king is not considered a Nazgûl for the purposes of this card.",
+      "initiative": null,
+      "conditions": "Play if a Free Peoples Army containing a Companion is adjacent to, or is in the same region as, a Shadow Army containing Nazgûl"
+    },
+    "combatTitle": "Heroic Death",
+    "combatId": "f6g7h8i9-j0k1-4l2m-3n4o-p5q6r7s8t9u",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "19/24",
+    "event": {
+      "title": "The Ents Awake: Treebeard",
+      "effectText": "Roll three dice; for each result of 4+, score one hit against a Shadow Army in Orthanc. If the Army is destroyed, so are any Nazgûl and Minions along with it. If Saruman is in Orthanc without a Shadow Army, eliminate him. If Gandalf the White is in Fangorn or a Rohan region, you may immediately play another Character Event card from your hand without using an Action die.",
+      "initiative": null,
+      "conditions": "Play if Gandalf the White is in play and a Companion is in Fangorn"
+    },
+    "combatTitle": "Ents' Rage",
+    "combatId": "k1l2m3n4-o5p6-4q7r-8s9t-u0v1w2x3y4z",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "20/24",
+    "event": {
+      "title": "The Ents Awake: Huorns",
+      "effectText": "Roll three dice; for each result of 4+, score one hit against a Shadow Army in Orthanc. If the Army is destroyed, so are any Nazgûl and Minions along with it. If Saruman is in Orthanc without a Shadow Army, eliminate him. If Gandalf the White is in Fangorn or a Rohan region, you may immediately play another Character Event card from your hand without using an Action die.",
+      "initiative": null,
+      "conditions": "Play if Gandalf the White is in play and a Companion is in Fangorn"
+    },
+    "combatTitle": "Huorn-dark",
+    "combatId": "l2m3n4o5-p6q7-4r8s-9t0u-v1w2x3y4z5a",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "21/24",
+    "event": {
+      "title": "The Ents Awake: Entmoot",
+      "effectText": "Roll three dice; for each result of 4+, score one hit against a Shadow Army in Orthanc. If the Army is destroyed, so are any Nazgûl and Minions along with it. If Saruman is in Orthanc without a Shadow Army, eliminate him. If Gandalf the White is in Fangorn or a Rohan region, you may immediately play another Character Event card from your hand without using an Action die.",
+      "initiative": null,
+      "conditions": "Play if Gandalf the White is in play and a Companion is in Fangorn"
+    },
+    "combatTitle": "Nameless Wood",
+    "combatId": "m3n4o5p6-q7r8-4s9t-0u1v-w2x3y4z5a6b",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "22/24",
+    "event": {
+      "title": "Dead Men of Dunharrow",
+      "effectText": "Move Strider/Aragorn (and any number of Companions in the same region) to Erech, Lamedon or Pelargir. If there is a Shadow Army in that region, roll a die. That Army takes a number of hits equal to the die result and must then retreat. If the Army cannot retreat, it is destroyed. If the Army is destroyed, so are any Nazgûl and Minions along with it. You may then recruit up to three Gondor Regular units in that region, taking control if necessary.",
+      "initiative": null,
+      "conditions": "Play if Strider/Aragorn is in a Rohan region (including a Stronghold under siege)"
+    },
+    "combatTitle": "Sudden Strike",
+    "combatId": "i9j0k1l2-m3n4-4o5p-6q7r-s8t9u0v1w2x",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "23/24",
+    "event": {
+      "title": "House of the Stewards",
+      "effectText": "Recruit one Gondor unit (Regular or Elite) in the region with Boromir. Then, draw two Strategy Event cards.",
+      "initiative": null,
+      "conditions": "Play if Boromir is in a Gondor region"
+    },
+    "combatTitle": "Brave Stand",
+    "combatId": "j0k1l2m3-n4o5-4p6q-7r8s-t9u0v1w2x3y",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "24/24",
+    "event": {
+      "title": "The Grey Company",
+      "effectText": "Eliminate one Regular unit to recruit one Elite unit of the same Nation, in the Army with Strider/Aragorn. Then, draw two Strategy Event cards.",
+      "initiative": null,
+      "conditions": "Play if Strider/Aragorn is with a Free Peoples Army"
+    },
+    "combatTitle": "Brave Stand",
+    "combatId": "j0k1l2m3-n4o5-4p6q-7r8s-t9u0v1w2x3y",
+    "side": "freePeoples",
+    "type": "character"
+  },
+  {
+    "cardNumber": "1/24",
+    "event": {
+      "title": "Shelob's Lair",
+      "effectText": "The \"Shelob's Lair\" special Hunt tile [die icon, stop] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "One for the Dark Lord",
+    "combatId": "s1-one-for-the-dark-lord",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "2/24",
+    "event": {
+      "title": "The Ring is Mine!",
+      "effectText": "The \"The Ring is Mine!\" special Hunt tile [eye, reveal, stop] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "One for the Dark Lord",
+    "combatId": "s2-one-for-the-dark-lord",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "3/24",
+    "event": {
+      "title": "On, On They Went",
+      "effectText": "The \"On, On They Went\" special Hunt tile [3, stop] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "One for the Dark Lord",
+    "combatId": "s3-one-for-the-dark-lord",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "4/24",
+    "event": {
+      "title": "Give it to Uss!",
+      "effectText": "The \"Give it to Uss!\" special Hunt tile [1, reveal, stop] is now in play. Add the tile to the Hunt Pool when the Fellowship is on the Mordor Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "One for the Dark Lord",
+    "combatId": "s4-one-for-the-dark-lord",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "5/24",
+    "event": {
+      "title": "Orc Patrol",
+      "effectText": "Play if the Fellowship is not in a region containing a Free Peoples Settlement. Draw a Hunt tile. If the tile shows an Eye or is a Fellowship Special tile, discard it without effect. Otherwise, follow the rules for a successful Hunt.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "location": {
+            "notInSettlement": true
+          }
+        }
+      }
+    },
+    "combatTitle": "Cruel as Death",
+    "combatId": "s5-cruel-as-death",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "6/24",
+    "event": {
+      "title": "Isildur's Bane",
+      "effectText": "Play if the Fellowship is not in a region containing a Free Peoples Settlement. Draw a Hunt tile. If the tile shows an Eye or is a Fellowship special tile, discard it without effect. Otherwise, follow the rules for a successful Hunt, except that Hunt Damage may not be reduced in any way before using the Ring.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "location": {
+            "notInSettlement": true
+          }
+        }
+      }
+    },
+    "combatTitle": "Cruel as Death",
+    "combatId": "s6-cruel-as-death",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "7/24",
+    "event": {
+      "title": "Foul Thing from the Deep",
+      "effectText": "Play if the Fellowship is not in a region containing a Free Peoples Settlement. Draw a Hunt tile. If the tile shows an Eye or is a Fellowship special tile, discard it without effect. Otherwise, follow the rules for a successful Hunt, except that the Free Peoples player must reduce Hunt Damage (if any) by eliminating a random Companion (unless there are no Companions in the Fellowship) before using the Ring.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "location": {
+            "notInSettlement": true
+          }
+        }
+      }
+    },
+    "combatTitle": "They are Terrible",
+    "combatId": "s7-they-are-terrible",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "8/24",
+    "event": {
+      "title": "Candles of Corpses",
+      "effectText": "Play if the Fellowship is not in a region containing a Free Peoples Settlement. Roll three dice and add one Corruption point on each result of 4+. If Gollum is the Guide, add one Corruption point on each result of '6' instead.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "location": {
+            "notInSettlement": true
+          }
+        }
+      }
+    },
+    "combatTitle": "Dread and Despair",
+    "combatId": "s8-dread-and-despair",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "9/24",
+    "event": {
+      "title": "Nazgûl Search",
+      "effectText": "Play if the Fellowship is on step 1 or higher on the Fellowship Track. Move any or all of the Nazgûl. Then, if at least one Nazgûl is in the region with the Fellowship, the Fellowship is revealed.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "step": {
+            "min": 1
+          }
+        }
+      }
+    },
+    "combatTitle": "Foul Stench",
+    "combatId": "s9-foul-stench",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "10/24",
+    "event": {
+      "title": "Cruel Weather",
+      "effectText": "Play if the Fellowship is on step 1 or higher on the Fellowship Track. Move the Fellowship to an adjacent region.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "step": {
+            "min": 1
+          }
+        }
+      }
+    },
+    "combatTitle": "Cruel as Death",
+    "combatId": "s10-cruel-as-death",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "11/24",
+    "event": {
+      "title": "The Nazgûl Strike!",
+      "effectText": "Play if the Fellowship is on step 1 or higher on the Fellowship Track. Move any or all of the Nazgûl. Then, if at least one Nazgûl is in the region with the Fellowship, you may either discard one Free Peoples Character Event card from the table or roll for the Hunt (as if the Free Peoples player had moved the Fellowship).",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "step": {
+            "min": 1
+          }
+        }
+      }
+    },
+    "combatTitle": "Black Breath",
+    "combatId": "s11-black-breath",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "12/24",
+    "event": {
+      "title": "Morgul Wound",
+      "effectText": "Play if the Fellowship is revealed. If the Fellowship's current Corruption is three or less, add two Corruption points, otherwise add one Corruption point.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "revealed": true
+        }
+      }
+    },
+    "combatTitle": "Black Breath",
+    "combatId": "s12-black-breath",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "13/24",
+    "event": {
+      "title": "Lure of the Ring",
+      "effectText": "Play if the Fellowship is revealed. Randomly select one Companion in the Fellowship by drawing a Companion counter. The Free Peoples player must choose either to add Corruption equal to the Companion's Level, or to eliminate him. If Gollum is the Guide, add one Corruption point instead.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "revealed": true
+        }
+      }
+    },
+    "combatTitle": "They are Terrible",
+    "combatId": "s13-they-are-terrible",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "14/24",
+    "event": {
+      "title": "The Breaking of the Fellowship",
+      "effectText": "Play if the Fellowship is revealed. Draw a Hunt tile. If the tile shows an Eye or is a Fellowship Special tile, discard it without effect. Otherwise, the Free Peoples player must separate a number of Companions equal to the number on the tile (if possible), placing them in the same region as the Fellowship. Ignore any \"Reveal\" or \"Stop\" icons on the tile. If Gollum is the Guide, add one Corruption point instead.",
+      "initiative": null,
+      "conditions": {
+        "fellowship": {
+          "revealed": true
+        }
+      }
+    },
+    "combatTitle": "Dread and Despair",
+    "combatId": "s14-dread-and-despair",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "15/24",
+    "event": {
+      "title": "Worn with Sorrow and Toil",
+      "effectText": "Play on the table. When \"Worn with Sorrow and Toil\" is in play, if a Companion in the Fellowship is taken as a casualty you may also discard one of the Free Peoples player's Character Event cards from his hand (choosing it randomly) or from the table. You must discard this card from the table immediately if the Fellowship is declared in an unconquered Free Peoples City or Stronghold.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Words of Power",
+    "combatId": "s15-words-of-power",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "16/24",
+    "event": {
+      "title": "Flocks of Crebain",
+      "effectText": "Play on the table. Before you make a Hunt roll, you may discard \"Flocks of Crebain\" to add 1 to all dice on that Hunt roll (including re-rolls). You must discard this card from the table immediately if the Fellowship is declared in an unconquered Free Peoples City or Stronghold.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "They are Terrible",
+    "combatId": "s16-they-are-terrible",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "17/24",
+    "event": {
+      "title": "Balrog of Moria",
+      "effectText": "Play on the table. You may discard \"Balrog of Moria\" to draw an additional Hunt tile if the Fellowship moves into, out of, or through Moria while being declared or revealed. If the tile shows an Eye, discard it without effect, otherwise follow the rules for a successful Hunt. Ignore any \"Reveal\" icon on the drawn tile if the Fellowship has been declared in a Free Peoples City or Stronghold. Or, you may discard \"Balrog of Moria\" to use its Combat card effect as if you were playing the card from your hand.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Durin's Bane",
+    "combatId": "s17-durins-bane",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "18/24",
+    "event": {
+      "title": "The Lidless Eye",
+      "effectText": "Change up to three unused Shadow Action dice results into \"Eye\" results. Place these dice in the Hunt Box immediately.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Words of Power",
+    "combatId": "s18-words-of-power",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "19/24",
+    "event": {
+      "title": "Dreadful Spells",
+      "effectText": "Play if a Shadow Army contianing Nazgûl is adjacent to, or is in the same region as, a Free Peoples Army. Roll a number of dice equal to the number of Nazgûl (up to a maximum of 5) and score one hit for every result of 5+.",
+      "initiative": null,
+      "conditions": {
+        "army": {
+          "hasNazgul": true,
+          "adjacentToFreePeoples": true
+        }
+      }
+    },
+    "combatTitle": "Devilry of Orthanc",
+    "combatId": "s19-devilry-of-orthanc",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "20/24",
+    "event": {
+      "title": "Grond, Hammer of the Underworld",
+      "effectText": "Play if the Witch-king is in play and is with a Shadow Army besieging a Stronghold. Attack that Stronghold. The siege lasts for three Combat rounds instead of one. During the first round, the Free Peoples player cannot use a Combat card unless a Companion is in the battle.",
+      "initiative": null,
+      "conditions": {
+        "companion": {
+          "character": "Witch-king",
+          "status": "active"
+        },
+        "army": {
+          "besiegingStronghold": true
+        }
+      }
+    },
+    "combatTitle": "Dread and Despair",
+    "combatId": "s20-dread-and-despair",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "21/24",
+    "event": {
+      "title": "The Palantír of Orthanc",
+      "effectText": "Play on the table if Saruman is in play. When \"The Palantír of Orthanc\" is in play, after you use an Event Action die result to play an Event card, immediately draw another card from either one of your decks. The Free Peoples player can force \"The Palantír of Orthanc\" to be discarded by either using a Will of the West Action die result, or using any Action die result and one Elven Ring. You must discard this card if Saruman is eliminated.",
+      "initiative": null,
+      "conditions": {
+        "companion": {
+          "character": "Saruman",
+          "status": "active"
+        }
+      }
+    },
+    "combatTitle": "Cruel as Death",
+    "combatId": "s21-cruel-as-death",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "22/24",
+    "event": {
+      "title": "Wormtongue",
+      "effectText": "Play on the table if Saruman is in play. When \"Wormtongue\" is in play, Rohan cannot be activated except by an appropriate Companion, or by the Fellowship being declared in Edoras or Helm's Deep, or by an attack on Edoras or Helm's Deep. You must discard this card from the table as soon as Rohan is activated, or if Saruman is eliminated.",
+      "initiative": null,
+      "conditions": {
+        "companion": {
+          "character": "Saruman",
+          "status": "active"
+        }
+      }
+    },
+    "combatTitle": "Foul Stench",
+    "combatId": "s22-foul-stench",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "23/24",
+    "event": {
+      "title": "The Ringwraiths Are Abroad",
+      "effectText": "Move any or all of the Nazgûl. Then, you may either move two Armies each containing a Nazgûl, or attack with one Army containing a Nazgûl.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Words of Power",
+    "combatId": "s23-words-of-power",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "24/24",
+    "event": {
+      "title": "The Black Captain Commands",
+      "effectText": "Play if the Witch-king is in play. You may either recruit two Nazgûl in the region containing the Witch-king, or move any or all of the Nazgûl. Then, you may move or attack with an Army containing the Witch-king.",
+      "initiative": null,
+      "conditions": {
+        "companion": {
+          "character": "Witch-king",
+          "status": "active"
+        }
+      }
+    },
+    "combatTitle": "Foul Stench",
+    "combatId": "s24-foul-stench",
+    "side": "shadow",
+    "type": "character"
+  },
+  {
+    "cardNumber": "1/24",
+    "event": {
+      "title": "The Last Battle",
+      "effectText": "Play on the table if Aragorn is with a Free Peoples Army in a region outside of a Free Peoples Nation. While this card is in play, Action dice used to move the Fellowship are not added to the Hunt Box. You must discard this card from the table as soon as the Fellowship is declared or revealed.",
+      "initiative": null,
+      "conditions": "Play on the table if Aragorn is with a Free Peoples Army in a region outside of a Free Peoples Nation"
+    },
+    "combatTitle": "Daylight",
+    "combatId": "fp1-daylight",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "1/24",
+    "event": {
+      "title": "Return to Valinor",
+      "effectText": "Play if you control at least one Elven Stronghold. For each region with an Elven Stronghold which is not under siege, roll a number of dice equal to the number of Elven Army units in that region (up to a maximum of 5) and score one hit against that army for each result of '6.'",
+      "initiative": null,
+      "conditions": "Play if you control at least one Elven Stronghold"
+    },
+    "combatTitle": "Deadly Strife",
+    "combatId": "s1-deadly-strife",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "2/24",
+    "event": {
+      "title": "A Power too Great",
+      "effectText": "Play on the table. Advance the Elven Nation one step on the Political Track. While this card is in play, the Shadow player cannot move an Army into or attack (either in a field battle or in a siege) Lórien, Rivendell or The Grey Havens. The Shadow player can force \"A Power too Great\" to be discarded by using any one Action die result and discarding one Army Event card and one Character Event card from his hand.",
+      "initiative": null,
+      "conditions": "Play on the table"
+    },
+    "combatTitle": "No Quarter",
+    "combatId": "fp2-no-quarter",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "2/24",
+    "event": {
+      "title": "The Fighting Uruk-hai",
+      "effectText": "Play if Saruman is in play, and if an Army containing an Isengard unit is besieging a Stronghold. Attack that Stronghold. The siege lasts for three Combat rounds instead of one. During the first round, the Free Peoples player cannot use a Combat card unless a Companion is in the battle.",
+      "initiative": null,
+      "conditions": "Play if Saruman is in play, and if an Army containing an Isengard unit is besieging a Stronghold"
+    },
+    "combatTitle": "Onslaught",
+    "combatId": "s2-onslaught",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "3/24",
+    "event": {
+      "title": "The Power of Tom Bombadil",
+      "effectText": "Play on the table. Advance the North Nation one step on the Political Track. While this card is in play, the Shadow player cannot move an Army into or attack The Old Forest, The Shire or Buckland. The Shadow player can force 'The Power of Tom Bombadil' to be discarded by using any one Action die result and discarding one Army Event card and one Character Event card from his hand.",
+      "initiative": null,
+      "conditions": "Play on the table"
+    },
+    "combatTitle": "Advantageous Position",
+    "combatId": "fp3-advantageous-position",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "3/24",
+    "event": {
+      "title": "Denethor's Folly",
+      "effectText": "Play on the table if Minas Tirith is under siege by a Shadow Army. When you play this card, immediately eliminate one Free Peoples Leader in Minas Tirith. When \"Denethor's Folly\" is in play, the Free Peoples player cannot use Combat cards for battles fought in Minas Tirith. The free Peoples player can force \"Denethor's Folly\" to be discarded using a Will of the West Action die result, or any Action die result if Gandalf or Aragorn is in Minas Tirith.",
+      "initiative": null,
+      "conditions": "Play on the table if Minas Tirith is under siege by a Shadow Army"
+    },
+    "combatTitle": "Devilry of Orthanc",
+    "combatId": "s3-devilry-of-orthanc",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "4/24",
+    "event": {
+      "title": "Book of Mazarbul",
+      "effectText": "Move any or all Companions who are not in the Fellowship. Then, if a Companion is in Erebor or Ered Luin, activate the Dwarven Nation and move it directly to the \"At War\" step.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Advantageous Position",
+    "combatId": "fp4-advantageous-position",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "4/24",
+    "event": {
+      "title": "The Day Without Dawn",
+      "effectText": "Play if all Shadow Nations are \"At War.\" Discard all unused Free Peoples Action dice that show a Will of the West result.",
+      "initiative": null,
+      "conditions": "Play if all Shadow Nations are \"At War\""
+    },
+    "combatTitle": "Relentless Assault",
+    "combatId": "s4-relentless-assault",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "5/24",
+    "event": {
+      "title": "The Spirit of Mordor",
+      "effectText": "Choose a Shadow Army anywhere on the board that is composed of Army units from at least two different Shadow Nations. Roll five dice and score one hit against this Army for each result of 5+.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Scouts",
+    "combatId": "fp5-scouts",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "5/24",
+    "event": {
+      "title": "Threats and Promises",
+      "effectText": "Play on the table. When \"Threats and Promises\" is in play, the Free Peoples player cannot advance a passive Nation on the Political Track using a Muster action die result. You must discard this card from the table as soon as a Free Peoples Nation advances on the Political Track either due to an attack or due to a Companion's special ability.",
+      "initiative": null,
+      "conditions": "Play on the table"
+    },
+    "combatTitle": "Devilry of Orthanc",
+    "combatId": "s5-devilry-of-orthanc",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "6/24",
+    "event": {
+      "title": "Faramir's Rangers",
+      "effectText": "Choose a Shadow Army in Osgiliath or South Ithilien or North Ithilien. Roll three dice and score one hit against this Army for each result of 5+. Then, if there is a Free Peoples Army in Osgiliath, recruit one Gondor unit (Regular or Elite) and one Gondor Leader there.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Shield-wall",
+    "combatId": "fp6-shield-wall",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "6/24",
+    "event": {
+      "title": "Stormcrow",
+      "effectText": "Play if either the Fellowship or a Companion is inside the borders of a Free Peoples Nation not \"At War.\" Move that Nation's Political Counter back one step on the Political Track. Then, the Free Peoples player must eliminate one Leader or Army unit of that Nation (Regular or Elite).",
+      "initiative": null,
+      "conditions": "Play if either the Fellowship or a Companion is inside the borders of a Free Peoples Nation not \"At War\""
+    },
+    "combatTitle": "Great Host",
+    "combatId": "s6-great-host",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "7/24",
+    "event": {
+      "title": "Fear! Fire! Foes!",
+      "effectText": "Move any or all Companions who are not in the Fellowship. Then, if a Companion is in The Shire or Bree, activate the North Nation and move it directly to the \"At War\" step.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Shield-wall",
+    "combatId": "fp7-shield-wall",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "7/24",
+    "event": {
+      "title": "Shadows Gather",
+      "effectText": "Move one Shadow Army up to three regions: the movement must end in a region already occupied by another Shadow Army (that must not be under siege). The traversed regions must be free for the purposes of Army movement, and no Shadow units may be picked up or dropped off along the way (other than, possibly, splitting the Army initially).",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Mûmakil",
+    "combatId": "s7-mumakil",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "8/24",
+    "event": {
+      "title": "Wisdom of Elrond",
+      "effectText": "Activate one Free Peoples Nation of your choice and advance that Nation one step on the Political Track.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Confusion",
+    "combatId": "fp8-confusion",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "8/24",
+    "event": {
+      "title": "The Shadow Lengthens",
+      "effectText": "Move two Shadow Armies up to two regions: each movement must end in a region already occupied by another Shadow Army (that must not be under siege). The traversed regions must be free for the purposes of Army movement, and no Shadow units may be picked up or dropped off along the way (other than, possibly, splitting the Army initially).",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Mûmakil",
+    "combatId": "s8-mumakil",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "9/24",
+    "event": {
+      "title": "The Red Arrow",
+      "effectText": "Play if the Gondor Nation is active. Advance the Rohan Nation one step on the Political Track. Then, recruit one Rohan unit (Regular or Elite) and one Rohan Leader in Edoras.",
+      "initiative": null,
+      "conditions": "Play if the Gondor Nation is active"
+    },
+    "combatTitle": "Scouts",
+    "combatId": "fp9-scouts",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "9/24",
+    "event": {
+      "title": "The Shadow is Moving",
+      "effectText": "Play if all Shadow Nations are \"At War.\" Move up to four different Shadow Armies one region each.",
+      "initiative": null,
+      "conditions": "Play if all Shadow Nations are \"At War\""
+    },
+    "combatTitle": "Swarm of Bats",
+    "combatId": "s9-swarm-of-bats",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "10/24",
+    "event": {
+      "title": "Help Unlooked For",
+      "effectText": "Attack a Shadow Army besieging a Stronghold with a Free Peoples Army in an adjacent region. For this entire battle, the Shadow player rolls one die less during the Combat roll for each Free Peoples unit in the besieged Stronghold (to a minimum of one).",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "No Quarter",
+    "combatId": "fp10-no-quarter",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "10/24",
+    "event": {
+      "title": "Corsairs of Umbar",
+      "effectText": "Play if the Southrons & Easterlings are \"At War.\" Move one Shadow Army from Umbar to a Gondar coastal region (check the stacking limit immediately if it is merging with another Army). If there is a Free Peoples Army in the region, a battle starts. The attacking Shadow Army cannot cease the attack, unless the Free Peoples Army was already under siege.",
+      "initiative": null,
+      "conditions": "Play if the Southrons & Easterlings are \"At War\""
+    },
+    "combatTitle": "Deadly Strife",
+    "combatId": "s10-deadly-strife",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "11/24",
+    "event": {
+      "title": "Paths of the Woses",
+      "effectText": "Play if the Rohan Nation is \"At War.\" Move a Free Peoples Army from any one Rohan region (including a Stronghold under siege) directly to Minas Tirith. If the Shadow player controls or is besieging Minas Tirith, move the Army to a region adjacent to Minas Tirith instead. The destination region must be free for the purposes of army movement.",
+      "initiative": null,
+      "conditions": "Play if the Rohan Nation is \"At War\""
+    },
+    "combatTitle": "Sudden Strike",
+    "combatId": "fp11-sudden-strike",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "11/24",
+    "event": {
+      "title": "Rage Of The Dunlendings",
+      "effectText": "Play if Isengard is \"At War.\" Recruit two Isengard Regular units in a free region adjacent to North or South Dunland. You may also move to this region up to four Isengard units (Regular or Elite) from North Dunland and/or South Dunland.",
+      "initiative": null,
+      "conditions": "Play if Isengard is \"At War\""
+    },
+    "combatTitle": "Relentless Assault",
+    "combatId": "s11-relentless-assault",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "12/24",
+    "event": {
+      "title": "Through a Day and a Night",
+      "effectText": "Play on a Free Peoples Army containing a Companion. Move the Army containing the Companion(s) up to two regions. The regions must be free for the purposes of Army movement, and no Free Peoples units may be picked up or dropped off along the way (other than, possibly, splitting the Army initially).",
+      "initiative": null,
+      "conditions": "Play on a Free Peoples Army containing a Companion"
+    },
+    "combatTitle": "Confusion",
+    "combatId": "fp12-confusion",
+    "side": "freePeoples",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "12/24",
+    "event": {
+      "title": "Return of the Witch-king",
+      "effectText": "Play if the Witch-king is in play. Move the Witch-king to Angmar, then recruit two Sauron Regular units and one Sauron Elite unit there.",
+      "initiative": null,
+      "conditions": "Play if the Witch-king is in play"
+    },
+    "combatTitle": "Swarm of Bats",
+    "combatId": "s12-swarm-of-bats",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "13/24",
+    "event": {
+      "title": "Cirdan's Ships",
+      "effectText": "Play if the Elves are \"At War.\" Recruit two Elven units (Regular or Elite) in a coastal region containing a Free Peoples Army.",
+      "initiative": null,
+      "conditions": "Play if the Elves are \"At War\""
+    },
+    "combatTitle": "Charge",
+    "combatId": "fp13-charge",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "13/24",
+    "event": {
+      "title": "Half-orcs and Goblin-men",
+      "effectText": "Play if Isengard is \"At War.\" Recruit one Isengard unit (Regular or Elite) in a region where a Shadow Army is present.",
+      "initiative": null,
+      "conditions": "Play if Isengard is \"At War\""
+    },
+    "combatTitle": "We Come to Kill",
+    "combatId": "s13-we-come-to-kill",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "14/24",
+    "event": {
+      "title": "Guards of the Citadel",
+      "effectText": "Recruit one Gondor unit (Regular or Elite) and one Gondor Leader in Minas Tirith.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Charge",
+    "combatId": "fp14-charge",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "14/24",
+    "event": {
+      "title": "Olog-hai",
+      "effectText": "Play if Sauron is \"At War.\" Recruit one Sauron unit (Regular or Elite) in a region where a Shadow Army is present.",
+      "initiative": null,
+      "conditions": "Play if Sauron is \"At War\""
+    },
+    "combatTitle": "We Come to Kill",
+    "combatId": "s14-we-come-to-kill",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "15/24",
+    "event": {
+      "title": "Celeborn's Galadhrim",
+      "effectText": "Recruit one Elven unit (Regular or Elite) in Lórien. Then, draw one Strategy Event card.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Daylight",
+    "combatId": "fp15-daylight",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "15/24",
+    "event": {
+      "title": "Hill-trolls",
+      "effectText": "Play if Sauron is \"At War.\" Replace two Sauron Regular units anywhere on the game board with two Sauron Elite units.",
+      "initiative": null,
+      "conditions": "Play if Sauron is \"At War\""
+    },
+    "combatTitle": "We Come to Kill",
+    "combatId": "s15-we-come-to-kill",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "16/24",
+    "event": {
+      "title": "Riders of Théoden",
+      "effectText": "Recruit one Rohan unit (Regular or Elite) and one Rohan Leader either in Edoras or in a Rohan region containing a Companion.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Daylight",
+    "combatId": "fp16-daylight",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "16/24",
+    "event": {
+      "title": "A New Power is Rising",
+      "effectText": "Play if Saruman is in play. Recruit two Isengard Regular units in each of North and South Dunland and two Isengard units (Regular or Elite) in Orthanc.",
+      "initiative": null,
+      "conditions": "Play if Saruman is in play"
+    },
+    "combatTitle": "Great Host",
+    "combatId": "s16-great-host",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "17/24",
+    "event": {
+      "title": "Grimbeorn the Old, Son of Beorn",
+      "effectText": "Recruit one North unit (Regular or Elite) and one North Leader in Carrock.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Scouts",
+    "combatId": "fp17-scouts",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "17/24",
+    "event": {
+      "title": "Many Kings to the Service of Mordor",
+      "effectText": "Recruit two Southron & Easterling Regular units in each of three different Southron & Easterlings Settlements.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Great Host",
+    "combatId": "s17-great-host",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "18/24",
+    "event": {
+      "title": "Imrahil of Dol Amroth",
+      "effectText": "Recruit one Gondor unit (Regular or Elite) and one Gondor Leader in Dol Amroth.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Shield-wall",
+    "combatId": "fp18-shield-wall",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "18/24",
+    "event": {
+      "title": "The King is Revealed",
+      "effectText": "Play if Aragorn is in play. Recruit five Sauron Regular units and a Nazgûl in Minas Morgul.",
+      "initiative": null,
+      "conditions": "Play if Aragorn is in play"
+    },
+    "combatTitle": "Relentless Assault",
+    "combatId": "s18-relentless-assault",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "19/24",
+    "event": {
+      "title": "King Brand's Men",
+      "effectText": "Recruit two North Regular units in Dale. Then, draw one Strategy Event card.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Shield-wall",
+    "combatId": "fp19-shield-wall",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "19/24",
+    "event": {
+      "title": "Shadows on the Misty Mountains",
+      "effectText": "Recruit two Sauron units (Regular or Elite) and one Nazgûl either in Mount Gram or Moria.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Onslaught",
+    "combatId": "s19-onslaught",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "20/24",
+    "event": {
+      "title": "Swords of Eriador",
+      "effectText": "Recruit one North unit (Regular or Elite) in The Shire and one Dwarven unit (Regular or Elite) in Ered Luin. Then, draw one Strategy Event card.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Advantageous Position",
+    "combatId": "fp20-advantageous-position",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "20/24",
+    "event": {
+      "title": "Orcs Multiplying Again",
+      "effectText": "Recruit three Sauron Regular units in Dol Guldur and three Sauron Regular units in Mount Gundabad.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Onslaught",
+    "combatId": "s20-onslaught",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "21/24",
+    "event": {
+      "title": "Kindred of Glorfindel",
+      "effectText": "Recruit one Elven unit (Regular or Elite) in Rivendell. Then, draw one Strategy Event card.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Advantageous Position",
+    "combatId": "fp21-advantageous-position",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "21/24",
+    "event": {
+      "title": "Horde From the East",
+      "effectText": "Play if the Southron & Easterling are \"At War.\" Recruit five Southron & Easterling Regular units in a free region inside the Southron and Easterling Nation. This region must be adjacent to the eastern edge of the map.",
+      "initiative": null,
+      "conditions": "Play if the Southron & Easterling are \"At War\""
+    },
+    "combatTitle": "Deadly Strife",
+    "combatId": "s21-deadly-strife",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "22/24",
+    "event": {
+      "title": "Dain Ironfoot's Guard",
+      "effectText": "Recruit one Dwarven unit (Regular or Elite) and one Dwarven Leader in Erebor.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Valour",
+    "combatId": "fp22-valour",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "22/24",
+    "event": {
+      "title": "Monsters Roused",
+      "effectText": "Recruit one Sauron Regular unit in each of Angmar, Ettenmoors and Weather Hills, and one Sauron Elite unit in Trollshaws.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Desperate Battle",
+    "combatId": "s22-desperate-battle",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "23/24",
+    "event": {
+      "title": "Éomer, Son of Éomund",
+      "effectText": "Recruit one Rohan unit (Regular or Elite) and one Rohan Leader in a free Rohan region containing a Settlement.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Valour",
+    "combatId": "fp23-valour",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "23/24",
+    "event": {
+      "title": "Musterings of Long-planned War",
+      "effectText": "Play if all Shadow Nations are \"At War.\" Recruit five Southron & Easterling Regular units in Gorgoroth and five Sauron Regular units in Nurn.",
+      "initiative": null,
+      "conditions": "Play if all Shadow Nations are \"At War\""
+    },
+    "combatTitle": "Desperate Battle",
+    "combatId": "s23-desperate-battle",
+    "side": "shadow",
+    "type": "muster"
+  },
+  {
+    "cardNumber": "24/24",
+    "event": {
+      "title": "Thranduil's Archers",
+      "effectText": "Recruit one Elven unit (Regular or Elite) in Woodland Realm. Then, draw one Strategy Event card.",
+      "initiative": null,
+      "conditions": null
+    },
+    "combatTitle": "Valour",
+    "combatId": "fp24-valour",
+    "side": "freePeoples",
+    "type": "army"
+  },
+  {
+    "cardNumber": "24/24",
+    "event": {
+      "title": "Pits of Mordor",
+      "effectText": "Play if Sauron is \"At War.\" Recruit two Sauron Regular units in each of three different Sauron Strongholds.",
+      "initiative": null,
+      "conditions": "Play if Sauron is \"At War\""
+    },
+    "combatTitle": "Desperate Battle",
+    "combatId": "s24-desperate-battle",
+    "side": "shadow",
+    "type": "muster"
+  }
+]
+

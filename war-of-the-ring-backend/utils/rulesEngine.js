@@ -39,14 +39,28 @@ function validateMove(gameState, move) {
         return validateCardPlay(gameState, move);
       case 'moveUnits':
         return validateUnitMovement(gameState, move);
+      case 'moveArmy':
+        return validateUnitMovement(gameState, move);
       case 'combat':
         return validateCombat(gameState, move);
       case 'useActionDie':
         return validateActionDie(gameState, move);
       case 'characterAction':
         return validateCharacterAction(gameState, move);
+      case 'moveCharacter':
+        return validateCharacterAction(gameState, move);
       case 'endPhase':
         return validateEndPhase(gameState, move);
+      case 'hunt':
+        return validateHunt(gameState, move);
+      case 'fellowshipMovement':
+        return validateFellowshipMovement(gameState, move);
+      case 'politicalAction':
+        return validatePoliticalAction(gameState, move);
+      case 'muster':
+        return validateMuster(gameState, move);
+      case 'pass':
+        return { isValid: true };
       default:
         return {
           isValid: false,
@@ -72,7 +86,9 @@ function validateCardPlay(gameState, move) {
   const { player, cardId } = move;
   
   // Check if player has the card
-  const playerHand = gameState.cards.playerHands.get(player) || [];
+  const playerHand = gameState.cards && gameState.cards.playerHands && gameState.cards.playerHands.get ? 
+    gameState.cards.playerHands.get(player) || [] : [];
+    
   if (!playerHand.includes(cardId)) {
     return {
       isValid: false,
@@ -155,17 +171,23 @@ function validateCombat(gameState, move) {
  * @returns {Object} - Validation result
  */
 function validateActionDie(gameState, move) {
-  const { player, dieValue } = move;
+  const { faction, dieType, action } = move;
   
-  // Check if player has the die
-  const playerDice = player === 'freePeoples' 
-    ? gameState.actionDice.freePeoples 
-    : gameState.actionDice.shadow;
-  
-  if (!playerDice.includes(dieValue)) {
+  // Check if the faction has the die
+  const factionDice = gameState.actionDice && gameState.actionDice[faction];
+  if (!factionDice || !factionDice.includes(dieType)) {
     return {
       isValid: false,
-      error: 'Action die not available'
+      error: `No ${dieType} die available`
+    };
+  }
+  
+  // Check if the action is valid for the die type
+  const validActions = getValidActionsForDie(dieType, faction, gameState);
+  if (!validActions.includes(action)) {
+    return {
+      isValid: false,
+      error: `Cannot use ${dieType} die for ${action} action`
     };
   }
   
@@ -181,16 +203,17 @@ function validateActionDie(gameState, move) {
 function validateCharacterAction(gameState, move) {
   const { characterId, action } = move;
   
-  // Check if character exists and is active
+  // Check if character exists
   const character = gameState.characters.find(c => c.characterId === characterId);
-  if (!character || character.status !== 'active') {
+  if (!character) {
     return {
       isValid: false,
-      error: 'Character not available for actions'
+      error: 'Character not found'
     };
   }
   
-  // Character-specific action validation would go here
+  // Check if character can perform the action
+  // This would depend on character type, status, etc.
   
   return { isValid: true };
 }
@@ -202,8 +225,167 @@ function validateCharacterAction(gameState, move) {
  * @returns {Object} - Validation result
  */
 function validateEndPhase(gameState, move) {
-  // Check if phase can be ended (e.g., required actions completed)
-  // This would depend on game-specific rules
+  // Check if the phase can be ended
+  // This might depend on required actions, etc.
+  
+  return { isValid: true };
+}
+
+/**
+ * Validates the hunt action
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Hunt move
+ * @returns {Object} - Validation result
+ */
+function validateHunt(gameState, move) {
+  // Check if the Fellowship is on the board
+  const fellowship = gameState.characters.find(c => c.characterId === 'fellowship');
+  
+  if (!fellowship) {
+    return {
+      isValid: false,
+      error: 'Fellowship not found'
+    };
+  }
+  
+  // Check if the Fellowship is in a valid location for hunting
+  if (fellowship.status !== 'hidden') {
+    return {
+      isValid: false,
+      error: 'Cannot hunt a revealed Fellowship'
+    };
+  }
+  
+  // Check if there are dice in the hunt box
+  if (!gameState.huntBox || gameState.huntBox.length === 0) {
+    return {
+      isValid: false,
+      error: 'No dice in hunt box'
+    };
+  }
+  
+  return { isValid: true };
+}
+
+/**
+ * Validates Fellowship movement
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Fellowship movement move
+ * @returns {Object} - Validation result
+ */
+function validateFellowshipMovement(gameState, move) {
+  const { steps } = move;
+  
+  // Check if the Fellowship exists
+  const fellowship = gameState.characters.find(c => c.characterId === 'fellowship');
+  if (!fellowship) {
+    return {
+      isValid: false,
+      error: 'Fellowship not found'
+    };
+  }
+  
+  // Check if steps is valid (usually 1 or 2)
+  if (steps < 1 || steps > 2) {
+    return {
+      isValid: false,
+      error: 'Invalid number of steps'
+    };
+  }
+  
+  // If moving 2 steps, check if the Fellowship has the required companions
+  if (steps === 2) {
+    const activeCompanions = gameState.characters.filter(c => 
+      c.type === 'companion' && c.status === 'active' && c.location === fellowship.location
+    );
+    
+    if (activeCompanions.length < 1) {
+      return {
+        isValid: false,
+        error: 'Need at least one active companion to move 2 steps'
+      };
+    }
+  }
+  
+  return { isValid: true };
+}
+
+/**
+ * Validates political action
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Political action move
+ * @returns {Object} - Validation result
+ */
+function validatePoliticalAction(gameState, move) {
+  const { nation, direction } = move;
+  
+  // Check if nation exists
+  if (!gameState.nations || !gameState.nations[nation]) {
+    return {
+      isValid: false,
+      error: 'Invalid nation'
+    };
+  }
+  
+  // Check if direction is valid
+  if (direction !== 'advance' && direction !== 'retreat') {
+    return {
+      isValid: false,
+      error: 'Invalid direction'
+    };
+  }
+  
+  const nationStatus = gameState.nations[nation].status;
+  
+  // Check if the political change is valid
+  if (direction === 'advance' && nationStatus >= 2) {
+    return {
+      isValid: false,
+      error: 'Nation already at maximum political status'
+    };
+  }
+  
+  if (direction === 'retreat' && nationStatus <= -2) {
+    return {
+      isValid: false,
+      error: 'Nation already at minimum political status'
+    };
+  }
+  
+  return { isValid: true };
+}
+
+/**
+ * Validates mustering units
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Muster move
+ * @returns {Object} - Validation result
+ */
+function validateMuster(gameState, move) {
+  const { region, unitType, count, faction } = move;
+  
+  // Check if region exists
+  const targetRegion = gameState.regions.find(r => r.regionId === region);
+  if (!targetRegion) {
+    return {
+      isValid: false,
+      error: 'Invalid region'
+    };
+  }
+  
+  // Check if unit type is valid
+  // This would depend on the game's unit types
+  
+  // Check if count is valid
+  if (count <= 0) {
+    return {
+      isValid: false,
+      error: 'Invalid unit count'
+    };
+  }
+  
+  // Check if faction can muster units in this region
+  // This would depend on the game's rules for mustering
   
   return { isValid: true };
 }
@@ -219,30 +401,13 @@ function applyMove(gameState, move, commit = false) {
   // Clone the game state to avoid direct mutations
   const newState = JSON.parse(JSON.stringify(gameState));
   
-  // Apply the move based on type
-  switch (move.type) {
-    case 'playCard':
-      applyCardPlay(newState, move);
-      break;
-    case 'moveUnits':
-      applyUnitMovement(newState, move);
-      break;
-    case 'combat':
-      applyCombat(newState, move);
-      break;
-    case 'useActionDie':
-      applyActionDie(newState, move);
-      break;
-    case 'characterAction':
-      applyCharacterAction(newState, move);
-      break;
-    case 'endPhase':
-      applyEndPhase(newState, move);
-      break;
-  }
-  
-  // Add move to history
-  if (newState.history) {
+  // Add move to history first to ensure it's always called
+  // Handle both function and direct property access
+  if (typeof newState.addToHistory === 'function') {
+    // Call the function directly
+    newState.addToHistory(move, commit);
+  } else if (newState.history) {
+    // Add to history array directly
     newState.history.push({
       state: JSON.parse(JSON.stringify(newState)),
       action: move,
@@ -252,32 +417,556 @@ function applyMove(gameState, move, commit = false) {
     });
   }
   
+  // Apply the move based on type
+  switch (move.type) {
+    case 'playCard':
+      applyCardPlay(newState, move);
+      break;
+    case 'moveUnits':
+    case 'moveArmy':
+      applyUnitMovement(newState, move);
+      break;
+    case 'combat':
+      applyCombat(newState, move);
+      break;
+    case 'useActionDie':
+      applyActionDie(newState, move);
+      break;
+    case 'characterAction':
+    case 'moveCharacter':
+      applyCharacterAction(newState, move);
+      break;
+    case 'endPhase':
+      applyEndPhase(newState, move);
+      break;
+    case 'hunt':
+      applyHunt(newState, move);
+      break;
+    case 'fellowshipMovement':
+      applyFellowshipMovement(newState, move);
+      break;
+    case 'politicalAction':
+      applyPoliticalAction(newState, move);
+      break;
+    case 'muster':
+      applyMuster(newState, move);
+      break;
+    case 'pass':
+      // Pass moves don't change the game state except for being recorded in history
+      break;
+    default:
+      console.warn(`Unknown move type: ${move.type}`);
+  }
+  
   return newState;
 }
 
-// Implementation of move application functions would go here
+/**
+ * Applies playing a card
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Card play move
+ * @returns {Object} - Updated game state
+ */
 function applyCardPlay(gameState, move) {
-  // Implementation details
+  const { player, cardId } = move;
+  
+  // Remove card from player's hand
+  if (gameState.cards && gameState.cards.playerHands && gameState.cards.playerHands.get) {
+    const playerHand = gameState.cards.playerHands.get(player) || [];
+    const cardIndex = playerHand.indexOf(cardId);
+    
+    if (cardIndex !== -1) {
+      playerHand.splice(cardIndex, 1);
+      gameState.cards.playerHands.set(player, playerHand);
+    }
+    
+    // Add card to discard pile
+    if (gameState.cards.discardPile) {
+      gameState.cards.discardPile.push(cardId);
+    }
+  }
+  
+  // Apply card effects
+  // This would depend on the specific card
+  
+  return gameState;
 }
 
+/**
+ * Applies unit movement
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Unit movement move
+ * @returns {Object} - Updated game state
+ */
 function applyUnitMovement(gameState, move) {
-  // Implementation details
+  const { fromRegion, toRegion, units } = move;
+  
+  // Find the regions
+  const fromRegionData = gameState.regions.find(r => r.regionId === fromRegion);
+  const toRegionData = gameState.regions.find(r => r.regionId === toRegion);
+  
+  if (!fromRegionData || !toRegionData) {
+    return gameState;
+  }
+  
+  // Move units from source to destination
+  units.forEach(unitToMove => {
+    // Find matching units in source region
+    const sourceUnitIndex = fromRegionData.units.findIndex(u => 
+      u.type === unitToMove.type && 
+      u.faction === unitToMove.faction && 
+      u.nation === unitToMove.nation
+    );
+    
+    if (sourceUnitIndex !== -1) {
+      const sourceUnit = fromRegionData.units[sourceUnitIndex];
+      
+      // Check if moving all units or just some
+      if (sourceUnit.count <= unitToMove.count) {
+        // Moving all units - remove from source
+        fromRegionData.units.splice(sourceUnitIndex, 1);
+      } else {
+        // Moving some units - reduce count in source
+        sourceUnit.count -= unitToMove.count;
+      }
+      
+      // Add units to destination
+      const destUnitIndex = toRegionData.units.findIndex(u => 
+        u.type === unitToMove.type && 
+        u.faction === unitToMove.faction && 
+        u.nation === unitToMove.nation
+      );
+      
+      if (destUnitIndex !== -1) {
+        // Add to existing units
+        toRegionData.units[destUnitIndex].count += unitToMove.count;
+      } else {
+        // Add new unit entry
+        toRegionData.units.push({
+          type: unitToMove.type,
+          count: unitToMove.count,
+          faction: unitToMove.faction,
+          nation: unitToMove.nation,
+          active: true
+        });
+      }
+    }
+  });
+  
+  // Update region control
+  updateRegionControl(fromRegionData);
+  updateRegionControl(toRegionData);
+  
+  return gameState;
 }
 
+/**
+ * Applies combat actions
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Combat move
+ * @returns {Object} - Updated game state
+ */
 function applyCombat(gameState, move) {
-  // Implementation details
+  const { region, attacker, attackerDice, defenderDice, attackerCasualties, defenderCasualties } = move;
+  
+  // Find the region
+  const regionData = gameState.regions.find(r => r.regionId === region);
+  if (!regionData) {
+    return gameState;
+  }
+  
+  // Apply casualties
+  const attackerUnits = regionData.units.filter(u => u.faction === attacker);
+  const defenderUnits = regionData.units.filter(u => u.faction !== attacker);
+  
+  if (attackerCasualties) {
+    applyUnitCasualties(attackerUnits, attackerCasualties);
+  }
+  
+  if (defenderCasualties) {
+    applyUnitCasualties(defenderUnits, defenderCasualties);
+  }
+  
+  // Remove units with zero count
+  regionData.units = regionData.units.filter(u => u.count > 0);
+  
+  // Update region control
+  updateRegionControl(regionData);
+  
+  // Update combat state
+  // This would track ongoing combats, rounds, etc.
+  
+  return gameState;
 }
 
+/**
+ * Applies using an action die
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Action die move
+ * @returns {Object} - Updated game state
+ */
 function applyActionDie(gameState, move) {
-  // Implementation details
+  const { faction, dieType } = move;
+  
+  // Remove the die from available dice
+  if (gameState.actionDice && gameState.actionDice[faction]) {
+    const diceArray = gameState.actionDice[faction];
+    const dieIndex = diceArray.indexOf(dieType);
+    
+    if (dieIndex !== -1) {
+      diceArray.splice(dieIndex, 1);
+    }
+    
+    // If it's an eye die and used for hunt, add to hunt box
+    if (dieType === 'eye' && move.action === 'hunt') {
+      if (gameState.huntBox) {
+        gameState.huntBox.push('eye');
+      }
+    }
+  }
+  
+  return gameState;
 }
 
+/**
+ * Applies character actions
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Character action move
+ * @returns {Object} - Updated game state
+ */
 function applyCharacterAction(gameState, move) {
-  // Implementation details
+  const { characterId, action } = move;
+  
+  // Find the character
+  const character = gameState.characters.find(c => c.characterId === characterId);
+  if (!character) {
+    return gameState;
+  }
+  
+  // Apply action effects
+  switch (action) {
+    case 'hide':
+      character.status = 'hidden';
+      break;
+    case 'reveal':
+      character.status = 'revealed';
+      break;
+    case 'heal':
+      if (character.wounds) {
+        character.wounds = Math.max(0, character.wounds - 1);
+      }
+      break;
+    // Other character actions
+  }
+  
+  return gameState;
 }
 
+/**
+ * Applies ending the current phase
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - End phase move
+ * @returns {Object} - Updated game state
+ */
 function applyEndPhase(gameState, move) {
-  // Implementation details
+  const currentPhase = gameState.currentPhase;
+  
+  // Determine next phase
+  let nextPhase;
+  switch (currentPhase) {
+    case 'setup':
+      nextPhase = 'hunt';
+      break;
+    case 'hunt':
+      nextPhase = 'action';
+      break;
+    case 'action':
+      nextPhase = 'combat';
+      break;
+    case 'combat':
+      nextPhase = 'end';
+      break;
+    default:
+      nextPhase = 'hunt'; // Start new round
+  }
+  
+  gameState.currentPhase = nextPhase;
+  
+  return gameState;
+}
+
+/**
+ * Applies the hunt action
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Hunt move
+ * @returns {Object} - Updated game state
+ */
+function applyHunt(gameState, move) {
+  // Remove a die from the hunt box
+  if (gameState.huntBox && gameState.huntBox.length > 0) {
+    gameState.huntBox.pop();
+  }
+  
+  // Draw a hunt tile (in a real implementation, this would be random)
+  const huntTile = drawHuntTile(gameState);
+  
+  // Apply hunt tile effects
+  if (huntTile) {
+    // Update corruption based on tile value
+    const fellowship = gameState.characters.find(c => c.characterId === 'fellowship');
+    if (fellowship) {
+      fellowship.corruption = (fellowship.corruption || 0) + huntTile.value;
+    }
+    
+    // Apply special effects based on tile type
+    if (huntTile.type === 'reveal') {
+      if (fellowship) {
+        fellowship.status = 'revealed';
+      }
+    }
+    
+    // Add tile to hunt history
+    if (!gameState.huntHistory) {
+      gameState.huntHistory = [];
+    }
+    gameState.huntHistory.push(huntTile);
+  }
+  
+  return gameState;
+}
+
+/**
+ * Applies Fellowship movement
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Fellowship movement move
+ * @returns {Object} - Updated game state
+ */
+function applyFellowshipMovement(gameState, move) {
+  const { steps } = move;
+  
+  // Find the Fellowship
+  const fellowship = gameState.characters.find(c => c.characterId === 'fellowship');
+  
+  if (fellowship) {
+    // Update Fellowship position on the track
+    fellowship.position = (fellowship.position || 0) + steps;
+    
+    // If the Fellowship was hidden, trigger a hunt
+    if (fellowship.status === 'hidden') {
+      // For each step, check for hunt damage
+      for (let i = 0; i < steps; i++) {
+        // In a real implementation, this would involve drawing tiles
+        // For now, we'll just simulate it
+        const huntCheck = Math.random() < 0.5; // 50% chance of hunt
+        
+        if (huntCheck) {
+          applyHunt(gameState, { type: 'hunt' });
+        }
+      }
+    }
+    
+    // After movement, the Fellowship becomes hidden again
+    fellowship.status = 'hidden';
+  }
+  
+  return gameState;
+}
+
+/**
+ * Applies political action
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Political action move
+ * @returns {Object} - Updated game state
+ */
+function applyPoliticalAction(gameState, move) {
+  const { nation, direction } = move;
+  
+  // Update nation's political status
+  if (gameState.nations && gameState.nations[nation]) {
+    const currentStatus = gameState.nations[nation].status;
+    
+    if (direction === 'advance') {
+      gameState.nations[nation].status = Math.min(2, currentStatus + 1);
+    } else if (direction === 'retreat') {
+      gameState.nations[nation].status = Math.max(-2, currentStatus - 1);
+    }
+    
+    // Check if the nation becomes active
+    if (Math.abs(gameState.nations[nation].status) === 2) {
+      // Activate nation's units
+      gameState.nations[nation].active = true;
+      activateNationUnits(gameState, nation);
+    }
+  }
+  
+  return gameState;
+}
+
+/**
+ * Applies mustering units
+ * @param {Object} gameState - Current game state
+ * @param {Object} move - Muster move
+ * @returns {Object} - Updated game state
+ */
+function applyMuster(gameState, move) {
+  const { region, unitType, count, faction } = move;
+  
+  // Find the region
+  const targetRegion = gameState.regions.find(r => r.regionId === region);
+  
+  if (targetRegion) {
+    // Find or create the unit entry
+    let unitEntry = targetRegion.units.find(u => u.type === unitType && u.faction === faction);
+    
+    if (unitEntry) {
+      // Update existing unit count
+      unitEntry.count += count;
+    } else {
+      // Add new unit entry
+      targetRegion.units.push({
+        type: unitType,
+        count: count,
+        faction: faction,
+        active: true
+      });
+    }
+  }
+  
+  return gameState;
+}
+
+// Helper functions for move application
+function updateRegionControl(region) {
+  if (!region || !region.units) {
+    return;
+  }
+  
+  // Count units by faction
+  const factionUnits = {};
+  region.units.forEach(unit => {
+    const faction = unit.faction;
+    factionUnits[faction] = (factionUnits[faction] || 0) + unit.count;
+  });
+  
+  // Determine controlling faction
+  let controllingFaction = null;
+  let maxUnits = 0;
+  
+  for (const [faction, count] of Object.entries(factionUnits)) {
+    if (count > maxUnits) {
+      maxUnits = count;
+      controllingFaction = faction;
+    }
+  }
+  
+  region.controlledBy = controllingFaction;
+}
+
+function applyUnitCasualties(units, casualties) {
+  // Apply casualties to units, starting with the weakest
+  let remainingCasualties = casualties;
+  
+  // Sort units by "value" (this would be based on game rules)
+  // For now, we'll just use a simple approach
+  units.sort((a, b) => {
+    // Sort order: regular units first, then elite units
+    const unitValue = { 'regular': 1, 'elite': 2, 'leader': 3 };
+    return unitValue[a.type] - unitValue[b.type];
+  });
+  
+  // Apply casualties
+  for (let i = 0; i < units.length && remainingCasualties > 0; i++) {
+    const unit = units[i];
+    const unitLosses = Math.min(unit.count, remainingCasualties);
+    
+    unit.count -= unitLosses;
+    remainingCasualties -= unitLosses;
+  }
+}
+
+function drawHuntTile(gameState) {
+  // In a real implementation, this would draw from the available hunt tiles
+  // For now, we'll return a mock tile
+  return {
+    type: 'regular',
+    value: 1
+  };
+}
+
+function activateNationUnits(gameState, nation) {
+  // Find all regions with units of this nation
+  if (gameState.regions) {
+    gameState.regions.forEach(region => {
+      if (region.units) {
+        region.units.forEach(unit => {
+          if (unit.nation === nation) {
+            unit.active = true;
+          }
+        });
+      }
+    });
+  }
+  
+  return gameState;
+}
+
+/**
+ * Gets valid actions for a given die type
+ * @param {String} dieType - Type of die (character, army, muster, event, will, eye)
+ * @param {String} faction - Player faction ('freePeoples' or 'shadow')
+ * @param {Object} gameState - Current game state
+ * @returns {Array} - List of valid actions
+ */
+function getValidActionsForDie(dieType, faction, gameState) {
+  // Default to empty array if invalid die type
+  if (!dieType) {
+    return [];
+  }
+  
+  const isFreePlayer = faction === 'freePeoples';
+  const validActions = [];
+  
+  switch (dieType) {
+    case 'character':
+      validActions.push('moveCharacter');
+      
+      // Free Peoples can hide/reveal the Fellowship
+      if (isFreePlayer) {
+        validActions.push('hideFellowship', 'revealFellowship');
+      }
+      
+      // Shadow can hunt the Fellowship
+      if (!isFreePlayer) {
+        validActions.push('hunt');
+      }
+      break;
+      
+    case 'army':
+      validActions.push('moveArmy', 'attack');
+      break;
+      
+    case 'muster':
+      validActions.push('recruitUnits', 'playPoliticalCard');
+      break;
+      
+    case 'event':
+      validActions.push('playEventCard');
+      break;
+      
+    case 'will': // Will of the West (Free Peoples only)
+      if (isFreePlayer) {
+        validActions.push('moveCharacter', 'moveArmy', 'attack', 'recruitUnits', 'playPoliticalCard', 'playEventCard', 'hideFellowship', 'revealFellowship');
+      }
+      break;
+      
+    case 'eye': // Eye of Sauron (Shadow only)
+      if (!isFreePlayer) {
+        validActions.push('hunt');
+      }
+      break;
+  }
+  
+  return validActions;
 }
 
 /**
@@ -305,7 +994,32 @@ function updateCardState(gameState, cardId, cardState) {
 
 module.exports = {
   validateMove,
+  validateCardPlay,
+  validateUnitMovement,
+  validateCombat,
+  validateActionDie,
+  validateCharacterAction,
+  validateEndPhase,
+  validateHunt,
+  validateFellowshipMovement,
+  validatePoliticalAction,
+  validateMuster,
   applyMove,
+  applyCardPlay,
+  applyUnitMovement,
+  applyCombat,
+  applyActionDie,
+  applyCharacterAction,
+  applyEndPhase,
+  applyHunt,
+  applyFellowshipMovement,
+  applyPoliticalAction,
+  applyMuster,
+  updateRegionControl,
+  applyUnitCasualties,
   getCardState,
-  updateCardState
+  updateCardState,
+  getValidActionsForDie,
+  drawHuntTile,
+  activateNationUnits
 };

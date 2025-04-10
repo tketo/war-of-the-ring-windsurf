@@ -59,7 +59,15 @@ const gameStateSchema = new mongoose.Schema({
     characterId: String,
     location: String,
     status: String,
-    modifiers: [String]
+    modifiers: [String],
+    corruption: {
+      type: Number,
+      default: 0
+    },
+    position: {
+      type: Number,
+      default: 0
+    }
   }],
   regions: [{
     regionId: String,
@@ -67,9 +75,120 @@ const gameStateSchema = new mongoose.Schema({
     units: [{
       type: String,
       count: Number,
-      faction: String
+      faction: String,
+      nation: String,
+      active: {
+        type: Boolean,
+        default: false
+      }
     }]
   }],
+  nations: {
+    north: {
+      status: {
+        type: Number,
+        default: 0,
+        min: -2,
+        max: 2
+      },
+      active: {
+        type: Boolean,
+        default: false
+      }
+    },
+    rohan: {
+      status: {
+        type: Number,
+        default: 0,
+        min: -2,
+        max: 2
+      },
+      active: {
+        type: Boolean,
+        default: false
+      }
+    },
+    gondor: {
+      status: {
+        type: Number,
+        default: 0,
+        min: -2,
+        max: 2
+      },
+      active: {
+        type: Boolean,
+        default: false
+      }
+    },
+    elves: {
+      status: {
+        type: Number,
+        default: 2, // Elves start active for Free Peoples
+        min: -2,
+        max: 2
+      },
+      active: {
+        type: Boolean,
+        default: true
+      }
+    },
+    dwarves: {
+      status: {
+        type: Number,
+        default: 0,
+        min: -2,
+        max: 2
+      },
+      active: {
+        type: Boolean,
+        default: false
+      }
+    },
+    southEast: {
+      status: {
+        type: Number,
+        default: -2, // South/East starts active for Shadow
+        min: -2,
+        max: 2
+      },
+      active: {
+        type: Boolean,
+        default: true
+      }
+    }
+  },
+  huntBox: [String], // Dice allocated to the hunt box
+  huntPool: {
+    regular: {
+      type: Number,
+      default: 12
+    },
+    eye: {
+      type: Number,
+      default: 0
+    }
+  },
+  huntHistory: [{
+    type: {
+      type: String,
+      enum: ['regular', 'reveal', 'eye', 'character']
+    },
+    value: Number,
+    drawnAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
+  victoryPoints: {
+    freePeoples: {
+      type: Number,
+      default: 0
+    },
+    shadow: {
+      type: Number,
+      default: 0
+    }
+  },
   cards: {
     eventDeck: [String],
     eventDiscard: [String],

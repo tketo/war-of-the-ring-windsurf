@@ -1,0 +1,106 @@
+{
+  "companion": {
+    "title": "War of the Ring Companion",
+    "subtitle": "Physical Game Assistant",
+    "controlPanel": "Control Panel",
+    "reset": "Reset",
+    "save": "Save",
+    "add": "Add",
+    "remove": "Remove",
+    "none": "None",
+    "confirmReset": "Are you sure you want to reset all trackers? This cannot be undone.",
+    "footer": "War of the Ring Companion App © 2025",
+    
+    "diceTracker": "Action Dice Tracker",
+    "huntPool": "Hunt Pool",
+    "politicalTrack": "Political Track",
+    "victoryPoints": "Victory Points",
+    "corruptionTracker": "Corruption Tracker",
+    "fellowshipTracker": "Fellowship Tracker",
+    "validActions": "Valid Actions",
+    
+    "freePeoples": "Free Peoples",
+    "shadow": "Shadow",
+    "currentDice": "Current Dice",
+    "rollDice": "Roll Dice",
+    
+    "diceTypes": {
+      "character": "Character",
+      "army": "Army",
+      "muster": "Muster",
+      "event": "Event",
+      "will": "Will of the West",
+      "eye": "Eye of Sauron",
+      "unused": "Unused"
+    },
+    
+    "regularTiles": "Regular Tiles",
+    "eyeTiles": "Eye Tiles",
+    "addTile": "Add Hunt Tile",
+    "tileType": "Tile Type",
+    "tileValue": "Value",
+    "tileHistory": "Hunt Tile History",
+    "noTilesDrawn": "No tiles have been drawn yet",
+    "drawRandom": "Draw Random",
+    
+    "tileTypes": {
+      "regular": "Regular",
+      "reveal": "Reveal",
+      "eye": "Eye",
+      "character": "Character"
+    },
+    
+    "political": {
+      "activeShadow": "Active (Shadow)",
+      "atWarShadow": "At War (Shadow)",
+      "neutral": "Neutral",
+      "atWarFreePeoples": "At War (Free)",
+      "activeFreePeoples": "Active (Free)"
+    },
+    
+    "nations": {
+      "north": "North (Dúnedain, Woodland Realm)",
+      "rohan": "Rohan",
+      "gondor": "Gondor",
+      "elves": "Elves",
+      "dwarves": "Dwarves",
+      "southEast": "South & East"
+    },
+    
+    "victoryTracker": {
+      "freePeoples": "Free Peoples Victory Points",
+      "shadow": "Shadow Victory Points",
+      "militaryVictory": "Military Victory",
+      "ringVictory": "Ring Victory",
+      "winner": "Winner"
+    },
+    
+    "corruptionStatus": {
+      "current": "Current Corruption",
+      "max": "Maximum Corruption",
+      "status": "Fellowship Status"
+    },
+    
+    "fellowshipStatus": {
+      "location": "Fellowship Location",
+      "hidden": "Hidden",
+      "revealed": "Revealed",
+      "companions": "Companions",
+      "ringBearers": "Ring Bearers",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    
+    "actions": {
+      "title": "Valid Actions",
+      "freePeoples": "Free Peoples Actions",
+      "shadow": "Shadow Actions",
+      "phase": {
+        "fellowship": "Fellowship Phase",
+        "hunt": "Hunt Phase",
+        "action": "Action Phase",
+        "combat": "Combat Phase"
+      }
+    }
+  }
+}

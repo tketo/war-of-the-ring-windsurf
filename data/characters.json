@@ -1,247 +1,260 @@
 {
-  "characters": [
-    {
-      "id": "gimli",
-      "name": "Gimli",
-      "title": "Son of Gloin",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 2,
-      "leadership": 1,
-      "abilities": [
-        {
-          "name": "Captain of the West",
-          "description": "If Gimli is in a battle, add one to the Combat Strength of the Free Peoples Army (maximum 5 Combat dice)"
-        },
-        {
-          "name": "Dwarf of Erebor",
-          "description": "If Gimli is in Erebor and Erebor is unconquered, use any Action die to advance Dwarven Nation on Political Track"
-        }
-      ]
-    },
-    {
-      "id": "saruman",
-      "name": "Saruman",
-      "title": "Corrupted Wizard",
-      "faction": "Shadow",
-      "type": "minion",
-      "level": 0,
-      "leadership": 1,
-      "actionDieBonus": 1,
-      "abilities": [
-        {
-          "name": "Voice of Saruman",
-          "description": "If Isengard is 'At War' and Orthanc unconquered, use Muster die to place Saruman in Orthanc (cannot leave)"
-        },
-        {
-          "name": "Servants of the White Hand",
-          "description": "Isengard Elite units count as both Leaders and Army units"
-        }
-      ]
-    },
-    {
-      "id": "boromir",
-      "name": "Boromir",
-      "title": "Son of Denethor",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 2,
-      "leadership": 1,
-      "abilities": [
-        {
-          "name": "Captain of the West",
-          "description": "If Boromir is in a battle, add one to Combat Strength (maximum 5 dice)"
-        },
-        {
-          "name": "High Warden of the White Tower",
-          "description": "In unconquered Gondor City/Stronghold, use any Action die to advance Gondor on Political Track"
-        }
-      ]
-    },
-    {
-      "id": "mouth_of_sauron",
-      "name": "Mouth of Sauron",
-      "title": "Lieutenant of Barad-dûr",
-      "faction": "Shadow",
-      "type": "minion",
-      "level": 3,
-      "leadership": 2,
-      "actionDieBonus": 1,
-      "abilities": [
-        {
-          "name": "Messenger of the Dark Tower",
-          "description": "Once per turn, use Muster Action die as Army Action die"
-        }
-      ]
-    },
-    {
-      "id": "legolas",
-      "name": "Legolas",
-      "title": "Son of Thranduil",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 2,
-      "leadership": 1,
-      "abilities": [
-        {
-          "name": "Captain of the West",
-          "description": "If Legolas is in a battle, add one to Combat Strength (maximum 5 dice)"
-        },
-        {
-          "name": "Prince of Mirkwood",
-          "description": "In unconquered Elven Stronghold, use any Action die to advance Elven Nation on Political Track"
-        }
-      ]
-    },
-    {
-      "id": "witch_king",
-      "name": "Witch-king",
-      "title": "The Black Captain",
-      "faction": "Shadow",
-      "type": "minion",
-      "level": "∞",
-      "leadership": 2,
-      "actionDieBonus": 1,
-      "abilities": [
-        {
-          "name": "Sorcerer",
-          "description": "If using Combat card in battle, draw matching Event card after"
-        }
-      ]
-    },
-    {
-      "id": "gandalf_grey",
-      "name": "Gandalf the Grey",
-      "title": "The Grey Wanderer",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 3,
-      "leadership": 1,
-      "canGuide": true,
-      "abilities": [
-        {
-          "name": "Guide",
-          "description": "After playing an Event card, draw matching Event card"
-        },
-        {
-          "name": "Captain of the West",
-          "description": "If Gandalf is in a battle, add one to Combat Strength (maximum 5 dice)"
-        },
-        {
-          "name": "Emissary from the West",
-          "description": "Can be replaced by Gandalf the White"
-        }
-      ]
-    },
-    {
-      "id": "strider",
-      "name": "Strider",
-      "title": "Ranger of the North",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 3,
-      "leadership": 1,
-      "canGuide": true,
-      "abilities": [
-        {
-          "name": "Guide",
-          "description": "Use Action die to hide revealed Fellowship"
-        },
-        {
-          "name": "Heir to Isildur",
-          "description": "Can be replaced by Aragorn"
-        }
-      ]
-    },
-    {
-      "id": "peregrin",
-      "name": "Peregrin Took",
-      "title": "Hobbit Companion",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 1,
-      "leadership": 1,
-      "canGuide": true,
-      "abilities": [
-        {
-          "name": "Guide",
-          "description": "Separate from Fellowship to reduce Hunt damage by 1"
-        },
-        {
-          "name": "Take Them Alive!",
-          "description": "If eliminated in Fellowship, returns (except on Mordor Track)"
-        }
-      ]
-    },
-    {
-      "id": "meriadoc",
-      "name": "Meriadoc Brandybuck",
-      "title": "Hobbit Companion",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 1,
-      "leadership": 1,
-      "canGuide": true,
-      "abilities": [
-        {
-          "name": "Guide",
-          "description": "Separate from Fellowship to reduce Hunt damage by 1"
-        },
-        {
-          "name": "Take Them Alive!",
-          "description": "If eliminated in Fellowship, returns (except on Mordor Track)"
-        }
-      ]
-    },
-    {
-      "id": "gandalf_white",
-      "name": "Gandalf the White",
-      "title": "Emissary from the West",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 3,
-      "leadership": 1,
-      "actionDieBonus": 1,
-      "abilities": [
-        {
-          "name": "Shadowfax",
-          "description": "When moving alone/with one Hobbit, Level 4 for movement"
-        },
-        {
-          "name": "The White Rider",
-          "description": "Can forfeit Leadership to negate all Nazgul Leadership in battle"
-        }
-      ]
-    },
-    {
-      "id": "aragorn",
-      "name": "Aragorn",
-      "title": "Heir to Isildur",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "level": 3,
-      "leadership": 2,
-      "actionDieBonus": 1,
-      "abilities": [
-        {
-          "name": "Captain of the West",
-          "description": "If Aragorn is in a battle, add one to Combat Strength (maximum 5 dice)"
-        }
-      ]
-    },
-    {
-      "id": "gollum",
-      "name": "Gollum",
-      "title": "Slave of the Ring",
-      "faction": "Free Peoples",
-      "type": "companion",
-      "canGuide": true,
-      "abilities": [
-        {
-          "name": "Guide",
-          "description": "May choose to reveal Fellowship to reduce Hunt damage by 1"
-        }
-      ]
-    }
-  ]
+	"characters": [
+		{
+			"id": "gimli",
+			"name": "Gimli",
+			"title": "Son of Gloin",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 2,
+			"leadership": 1,
+			"abilities": [
+				{
+					"name": "Captain of the West",
+					"description": "If Gimli is in a battle, add one to the Combat Strength of the Free Peoples Army (maximum 5 Combat dice)"
+				},
+				{
+					"name": "Dwarf of Erebor",
+					"description": "If Gimli is in Erebor and Erebor is unconquered, use any Action die to advance Dwarven Nation on Political Track"
+				}
+			],
+			"playableBy": "Dwarves"
+		},
+		{
+			"id": "saruman",
+			"name": "Saruman",
+			"title": "Corrupted Wizard",
+			"faction": "Shadow",
+			"type": "minion",
+			"level": 0,
+			"leadership": 1,
+			"actionDieBonus": 1,
+			"abilities": [
+				{
+					"name": "Voice of Saruman",
+					"description": "If Isengard is 'At War' and Orthanc unconquered, use Muster die to place Saruman in Orthanc (cannot leave)"
+				},
+				{
+					"name": "Servants of the White Hand",
+					"description": "Isengard Elite units count as both Leaders and Army units"
+				}
+			],
+			"playableBy": "Isengard"
+		},
+		{
+			"id": "boromir",
+			"name": "Boromir",
+			"title": "Son of Denethor",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 2,
+			"leadership": 1,
+			"abilities": [
+				{
+					"name": "Captain of the West",
+					"description": "If Boromir is in a battle, add one to Combat Strength (maximum 5 dice)"
+				},
+				{
+					"name": "High Warden of the White Tower",
+					"description": "In unconquered Gondor City/Stronghold, use any Action die to advance Gondor on Political Track"
+				}
+			],
+			"playableBy": "Gondor"
+		},
+		{
+			"id": "mouth_of_sauron",
+			"name": "Mouth of Sauron",
+			"title": "Lieutenant of Barad-dûr",
+			"faction": "Shadow",
+			"type": "minion",
+			"level": 3,
+			"leadership": 2,
+			"actionDieBonus": 1,
+			"abilities": [
+				{
+					"name": "Messenger of the Dark Tower",
+					"description": "Once per turn, use Muster Action die as Army Action die"
+				}
+			],
+			"playableBy": "Sauron"
+		},
+		{
+			"id": "legolas",
+			"name": "Legolas",
+			"title": "Son of Thranduil",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 2,
+			"leadership": 1,
+			"abilities": [
+				{
+					"name": "Captain of the West",
+					"description": "If Legolas is in a battle, add one to Combat Strength (maximum 5 dice)"
+				},
+				{
+					"name": "Prince of Mirkwood",
+					"description": "In unconquered Elven Stronghold, use any Action die to advance Elven Nation on Political Track"
+				}
+			],
+			"playableBy": "Elves"
+		},
+		{
+			"id": "witch_king",
+			"name": "Witch-king",
+			"title": "The Black Captain",
+			"faction": "Shadow",
+			"type": "minion",
+			"level": "∞",
+			"leadership": 2,
+			"actionDieBonus": 1,
+			"abilities": [
+				{
+					"name": "Sorcerer",
+					"description": "If using Combat card in battle, draw matching Event card after"
+				}
+			],
+			"playableBy": "Sauron"
+		},
+		{
+			"id": "gandalf_grey",
+			"name": "Gandalf the Grey",
+			"title": "The Grey Wanderer",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 3,
+			"leadership": 1,
+			"canGuide": true,
+			"abilities": [
+				{
+					"name": "Guide",
+					"description": "After playing an Event card, draw matching Event card"
+				},
+				{
+					"name": "Captain of the West",
+					"description": "If Gandalf is in a battle, add one to Combat Strength (maximum 5 dice)"
+				},
+				{
+					"name": "Emissary from the West",
+					"description": "Can be replaced by Gandalf the White"
+				}
+			],
+			"playableBy": "Free Peoples"
+		},
+		{
+			"id": "strider",
+			"name": "Strider",
+			"title": "Ranger of the North",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 3,
+			"leadership": 1,
+			"canGuide": true,
+			"abilities": [
+				{
+					"name": "Guide",
+					"description": "Use Action die to hide revealed Fellowship"
+				},
+				{
+					"name": "Heir to Isildur",
+					"description": "Can be replaced by Aragorn"
+				}
+			],
+			"playableBy": "The North"
+		},
+		{
+			"id": "peregrin",
+			"name": "Peregrin Took",
+			"title": "Hobbit Companion",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 1,
+			"leadership": 1,
+			"canGuide": true,
+			"abilities": [
+				{
+					"name": "Guide",
+					"description": "Separate from Fellowship to reduce Hunt damage by 1"
+				},
+				{
+					"name": "Take Them Alive!",
+					"description": "If eliminated in Fellowship, returns (except on Mordor Track)"
+				}
+			],
+			"playableBy": "Free Peoples"
+		},
+		{
+			"id": "meriadoc",
+			"name": "Meriadoc Brandybuck",
+			"title": "Hobbit Companion",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 1,
+			"leadership": 1,
+			"canGuide": true,
+			"abilities": [
+				{
+					"name": "Guide",
+					"description": "Separate from Fellowship to reduce Hunt damage by 1"
+				},
+				{
+					"name": "Take Them Alive!",
+					"description": "If eliminated in Fellowship, returns (except on Mordor Track)"
+				}
+			],
+			"playableBy": "Free Peoples"
+		},
+		{
+			"id": "gandalf_white",
+			"name": "Gandalf the White",
+			"title": "Emissary from the West",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 3,
+			"leadership": 1,
+			"actionDieBonus": 1,
+			"abilities": [
+				{
+					"name": "Shadowfax",
+					"description": "When moving alone/with one Hobbit, Level 4 for movement"
+				},
+				{
+					"name": "The White Rider",
+					"description": "Can forfeit Leadership to negate all Nazgul Leadership in battle"
+				}
+			],
+			"playableBy": "Free Peoples"
+		},
+		{
+			"id": "aragorn",
+			"name": "Aragorn",
+			"title": "Heir to Isildur",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"level": 3,
+			"leadership": 2,
+			"actionDieBonus": 1,
+			"abilities": [
+				{
+					"name": "Captain of the West",
+					"description": "If Aragorn is in a battle, add one to Combat Strength (maximum 5 dice)"
+				}
+			],
+			"playableBy": "Free Peoples"
+		},
+		{
+			"id": "gollum",
+			"name": "Gollum",
+			"title": "Slave of the Ring",
+			"faction": "Free Peoples",
+			"type": "companion",
+			"canGuide": true,
+			"abilities": [
+				{
+					"name": "Guide",
+					"description": "May choose to reveal Fellowship to reduce Hunt damage by 1"
+				}
+			],
+			"playableBy": "Any"
+		}
+	]
 }

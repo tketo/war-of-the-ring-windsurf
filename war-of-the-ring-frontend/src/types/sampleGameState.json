@@ -1,0 +1,123 @@
+{
+  "gameId": "sample-game-123",
+  "players": [
+    {
+      "playerId": "player1",
+      "faction": "freePeoples",
+      "role": "gondor",
+      "isActive": true
+    },
+    {
+      "playerId": "player2",
+      "faction": "shadow",
+      "role": "mordor",
+      "isActive": true
+    }
+  ],
+  "currentPhase": "setup",
+  "currentTurn": 1,
+  "currentPlayer": "player1",
+  "actionDice": {
+    "freePeoples": [
+      "character",
+      "army",
+      "muster"
+    ],
+    "shadow": [
+      "character",
+      "army",
+      "muster",
+      "event"
+    ]
+  },
+  "characters": [
+    {
+      "characterId": "frodo",
+      "location": "shire",
+      "status": "active",
+      "modifiers": []
+    },
+    {
+      "characterId": "gandalf",
+      "location": "rivendell",
+      "status": "active",
+      "modifiers": [
+        "leader"
+      ]
+    }
+  ],
+  "regions": [
+    {
+      "regionId": "gondor",
+      "controlledBy": "freePeoples",
+      "units": [
+        {
+          "type": "regular",
+          "count": 3,
+          "faction": "freePeoples"
+        },
+        {
+          "type": "elite",
+          "count": 1,
+          "faction": "freePeoples"
+        }
+      ]
+    },
+    {
+      "regionId": "mordor",
+      "controlledBy": "shadow",
+      "units": [
+        {
+          "type": "regular",
+          "count": 5,
+          "faction": "shadow"
+        },
+        {
+          "type": "elite",
+          "count": 2,
+          "faction": "shadow"
+        }
+      ]
+    }
+  ],
+  "cards": {
+    "eventDeck": [
+      "card1",
+      "card2",
+      "card3"
+    ],
+    "eventDiscard": [],
+    "combatDeck": [
+      "combat1",
+      "combat2"
+    ],
+    "combatDiscard": [],
+    "playerHands": {
+      "player1": [
+        "hand1",
+        "hand2"
+      ],
+      "player2": [
+        "hand3",
+        "hand4"
+      ]
+    }
+  },
+  "history": [
+    {
+      "state": {},
+      "action": {
+        "type": "setup",
+        "player": "player1"
+      },
+      "player": "player1",
+      "committed": true,
+      "timestamp": 1744168533751
+    }
+  ],
+  "settings": {
+    "mode": "full",
+    "expansions": [],
+    "scenario": "standard"
+  }
+}

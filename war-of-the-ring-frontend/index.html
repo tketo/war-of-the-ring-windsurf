@@ -6,29 +6,280 @@
   <title>War of the Ring</title>
   
   <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   
   <!-- React and React DOM -->
-  <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   
   <!-- Babel for JSX -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  
-  <!-- Redux Toolkit -->
-  <script src="https://cdn.jsdelivr.net/npm/@reduxjs/toolkit@1.9.5/dist/redux-toolkit.umd.min.js"></script>
-  
-  <!-- React Redux -->
-  <script src="https://cdn.jsdelivr.net/npm/react-redux@8.1.2/dist/react-redux.min.js"></script>
-  
-  <!-- i18next for internationalization -->
-  <script src="https://cdn.jsdelivr.net/npm/i18next@23.4.4/i18next.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-i18next@13.1.2/react-i18next.min.js"></script>
 </head>
 <body class="bg-gray-100">
-  <div id="root"></div>
+  <div id="root">
+    <div class="container mx-auto p-4 text-center">
+      <h1 class="text-3xl font-bold mb-4">War of the Ring</h1>
+      <p class="text-gray-600 mb-4">Loading application...</p>
+    </div>
+  </div>
   
-  <!-- Main App Script -->
-  <script type="text/babel" src="./src/App.js"></script>
+  <script type="text/babel">
+    // React hooks
+    const { useState, useEffect } = React;
+    
+    // Game state
+    const initialGameState = {
+      isLoading: false,
+      error: null,
+      data: null
+    };
+    
+    // App Component
+    const App = () => {
+      const [gameState, setGameState] = useState(initialGameState);
+      const [connected, setConnected] = useState(true);
+      
+      // Game Controls Component
+      const GameControls = () => {
+        const [newGameSettings, setNewGameSettings] = useState({
+          mode: 'full',
+          scenario: 'standard'
+        });
+        
+        // Handle starting a new game
+        const handleStartGame = (e) => {
+          e.preventDefault();
+          
+          setGameState({
+            ...gameState,
+            isLoading: true
+          });
+          
+          // Simulate API call
+          setTimeout(() => {
+            const gameData = {
+              gameId: `game-${Date.now()}`,
+              players: [
+                { playerId: 'player1', faction: 'freePeoples', role: 'gondor', isActive: true },
+                { playerId: 'player2', faction: 'shadow', role: 'mordor', isActive: true }
+              ],
+              regions: [
+                {
+                  regionId: 'gondor',
+                  controlledBy: 'freePeoples',
+                  units: [
+                    { type: 'regular', count: 3, faction: 'freePeoples' }
+                  ]
+                },
+                {
+                  regionId: 'mordor',
+                  controlledBy: 'shadow',
+                  units: [
+                    { type: 'regular', count: 5, faction: 'shadow' }
+                  ]
+                }
+              ],
+              settings: newGameSettings
+            };
+            
+            setGameState({
+              isLoading: false,
+              error: null,
+              data: gameData
+            });
+          }, 1000);
+        };
+        
+        return (
+          <div className="mb-6">
+            {/* Game Status */}
+            <div className="mb-4 p-3 bg-white rounded-lg shadow-sm">
+              <h3 className="font-bold mb-2">Game Status</h3>
+              {gameState.data ? (
+                <div className="text-sm">
+                  <p>Game ID: <span className="font-mono">{gameState.data.gameId}</span></p>
+                  <p>Mode: {gameState.data.settings?.mode || 'N/A'}</p>
+                </div>
+              ) : (
+                <p className="text-sm text-gray-600">No active game</p>
+              )}
+            </div>
+            
+            {/* Game Controls */}
+            <div className="p-3 bg-white rounded-lg shadow-sm">
+              <h3 className="font-bold mb-2">New Game</h3>
+              <form onSubmit={handleStartGame}>
+                <div className="mb-2">
+                  <label className="block text-sm font-medium mb-1">Game Mode</label>
+                  <select 
+                    className="w-full p-2 border rounded text-sm"
+                    value={newGameSettings.mode}
+                    onChange={(e) => setNewGameSettings({
+                      ...newGameSettings,
+                      mode: e.target.value
+                    })}
+                  >
+                    <option value="full">Full (Rules Enforced)</option>
+                    <option value="unrestricted">Unrestricted</option>
+                    <option value="companion">Companion</option>
+                  </select>
+                </div>
+                
+                <div className="mb-2">
+                  <label className="block text-sm font-medium mb-1">Scenario</label>
+                  <select 
+                    className="w-full p-2 border rounded text-sm"
+                    value={newGameSettings.scenario}
+                    onChange={(e) => setNewGameSettings({
+                      ...newGameSettings,
+                      scenario: e.target.value
+                    })}
+                  >
+                    <option value="standard">Standard</option>
+                    <option value="quick">Quick Game</option>
+                  </select>
+                </div>
+                
+                <button 
+                  type="submit" 
+                  className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:bg-blue-300"
+                  disabled={gameState.isLoading}
+                >
+                  {gameState.isLoading ? 'Starting...' : 'Start New Game'}
+                </button>
+              </form>
+            </div>
+            
+            {/* Game Actions */}
+            {gameState.data && (
+              <div className="mt-4 p-3 bg-white rounded-lg shadow-sm">
+                <h3 className="font-bold mb-2">Game Actions</h3>
+                <div className="flex flex-wrap gap-2">
+                  <button 
+                    className="bg-red-100 text-red-800 px-3 py-1 rounded hover:bg-red-200 text-sm"
+                    onClick={() => setGameState(initialGameState)}
+                  >
+                    End Game
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      };
+      
+      // Game Board Component
+      const GameBoard = () => {
+        if (!gameState.data) {
+          return (
+            <div className="border-2 border-gray-200 rounded-lg p-8 mb-6 bg-amber-50 text-center">
+              <h2 className="text-2xl font-bold mb-4">Game Board</h2>
+              <p className="text-gray-600">No active game. Start or join a game to begin.</p>
+            </div>
+          );
+        }
+        
+        return (
+          <div className="border-2 border-gray-200 rounded-lg p-4 mb-6 bg-amber-50">
+            <h2 className="text-2xl font-bold text-center mb-4">Game Board</h2>
+            
+            {/* Map Placeholder */}
+            <div className="relative w-full h-96 bg-blue-100 rounded-lg mb-4 overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <p className="text-gray-600">Interactive map will be implemented here</p>
+              </div>
+              
+              {/* Example regions */}
+              {gameState.data.regions && gameState.data.regions.map(region => (
+                <div 
+                  key={region.regionId}
+                  className="absolute p-2 rounded-lg cursor-pointer hover:bg-blue-200"
+                  style={{
+                    top: `${Math.random() * 80}%`,
+                    left: `${Math.random() * 80}%`,
+                    minWidth: '60px',
+                    minHeight: '40px'
+                  }}
+                >
+                  <div className="text-xs font-bold">{region.regionId}</div>
+                  {region.controlledBy && (
+                    <div className={`text-xs ${
+                      region.controlledBy === 'freePeoples' ? 'text-blue-700' : 'text-red-700'
+                    }`}>
+                      {region.controlledBy}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      };
+      
+      // Player Info Component
+      const PlayerInfo = () => {
+        if (!gameState.data) {
+          return (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="border border-gray-200 rounded p-4">
+                <h3 className="font-bold mb-2">Free Peoples</h3>
+                <p className="text-sm text-gray-600">No active game</p>
+              </div>
+              <div className="border border-gray-200 rounded p-4">
+                <h3 className="font-bold mb-2">Shadow</h3>
+                <p className="text-sm text-gray-600">No active game</p>
+              </div>
+            </div>
+          );
+        }
+        
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="border border-gray-200 rounded p-4 bg-blue-50">
+              <h3 className="font-bold mb-2 text-blue-800">Free Peoples</h3>
+              <p className="text-sm">Player and character information will appear here</p>
+            </div>
+            <div className="border border-gray-200 rounded p-4 bg-red-50">
+              <h3 className="font-bold mb-2 text-red-800">Shadow</h3>
+              <p className="text-sm">Player and character information will appear here</p>
+            </div>
+          </div>
+        );
+      };
+      
+      return (
+        <div className="container mx-auto p-4 max-w-6xl">
+          <header className="bg-blue-800 text-white p-4 rounded-t-lg">
+            <h1 className="text-3xl font-bold text-center">War of the Ring</h1>
+            <p className="text-center text-sm mt-2">Digital Adaptation</p>
+            
+            <div className="flex justify-center mt-3">
+              <div className="inline-block bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">
+                {connected ? 'Connected to Server' : 'Disconnected'}
+              </div>
+            </div>
+          </header>
+
+          <main className="bg-white p-6 rounded-b-lg shadow-md mb-4">
+            {/* Game Controls */}
+            <GameControls />
+            
+            {/* Game Board */}
+            <GameBoard />
+            
+            {/* Player Information */}
+            <PlayerInfo />
+          </main>
+
+          <footer className="text-center text-gray-500 text-sm">
+            <p>War of the Ring Digital Adaptation &copy; 2025</p>
+          </footer>
+        </div>
+      );
+    };
+    
+    // Render the App
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
 </body>
 </html>

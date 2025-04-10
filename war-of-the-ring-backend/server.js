@@ -15,6 +15,7 @@ const gameRoutes = require('./routes/game');
 const playerRoutes = require('./routes/player');
 const lobbyRoutes = require('./routes/lobby');
 const cardRoutes = require('./routes/card');
+const aiRoutes = require('./routes/ai');
 
 // Import WebSocket handler
 const setupSocketHandlers = require('./websockets/socketHandler');
@@ -97,6 +98,7 @@ app.use('/game', gameRoutes);
 app.use('/player', playerRoutes);
 app.use('/lobby', lobbyRoutes);
 app.use('/card', cardRoutes);
+app.use('/ai', aiRoutes);
 
 // 404 handler
 app.use(notFound);

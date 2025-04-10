@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>War of the Ring Companion</title>
+  
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <!-- React and React DOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  
+  <!-- Redux and React-Redux -->
+  <script src="https://unpkg.com/redux@4.2.0/dist/redux.min.js"></script>
+  <script src="https://unpkg.com/react-redux@8.0.2/dist/react-redux.min.js"></script>
+  
+  <!-- i18next for internationalization -->
+  <script src="https://unpkg.com/i18next@21.8.10/i18next.min.js"></script>
+  <script src="https://unpkg.com/react-i18next@11.17.3/react-i18next.min.js"></script>
+  
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-100">
+  <div id="root">
+    <div class="container mx-auto p-4 text-center">
+      <h1 class="text-3xl font-bold mb-4">War of the Ring Companion</h1>
+      <p class="text-gray-600 mb-4">Loading application...</p>
+    </div>
+  </div>
+  
+  <script type="text/babel">
+    // Import React hooks
+    const { useState, useEffect } = React;
+    const { Provider, useSelector, useDispatch } = ReactRedux;
+    const { useTranslation, Trans } = ReactI18next;
+    
+    // Initialize i18next
+    i18next
+      .init({
+        lng: 'en',
+        resources: {
+          en: {
+            translation: {
+              companion: {
+                title: "War of the Ring Companion",
+                subtitle: "Physical Game Assistant",
+                controlPanel: "Control Panel",
+                reset: "Reset",
+                save: "Save",
+                add: "Add",
+                remove: "Remove",
+                none: "None",
+                confirmReset: "Are you sure you want to reset all trackers? This cannot be undone.",
+                footer: "War of the Ring Companion App © 2025",
+                
+                diceTracker: "Action Dice Tracker",
+                huntPool: "Hunt Pool",
+                politicalTrack: "Political Track",
+                victoryPoints: "Victory Points",
+                corruptionTracker: "Corruption Tracker",
+                fellowshipTracker: "Fellowship Tracker",
+                validActions: "Valid Actions",
+                
+                freePeoples: "Free Peoples",
+                shadow: "Shadow",
+                currentDice: "Current Dice",
+                rollDice: "Roll Dice",
+                
+                diceTypes: {
+                  character: "Character",
+                  army: "Army",
+                  muster: "Muster",
+                  event: "Event",
+                  will: "Will of the West",
+                  eye: "Eye of Sauron",
+                  unused: "Unused"
+                }
+              }
+            }
+          }
+        }
+      });
+    
+    // Redux initial state
+    const initialState = {
+      dice: {
+        freePeoples: {
+          character: 0,
+          army: 0,
+          muster: 0,
+          event: 0,
+          will: 0,
+          unused: 0
+        },
+        shadow: {
+          character: 0,
+          army: 0,
+          muster: 0,
+          event: 0,
+          eye: 0,
+          unused: 0
+        }
+      },
+      hunt: {
+        regular: 12,
+        eye: 0,
+        tileHistory: []
+      },
+      political: {
+        north: 0,
+        rohan: 0,
+        gondor: 0,
+        elves: 2,
+        dwarves: 0,
+        southEast: -2
+      },
+      settings: {
+        language: 'en',
+        theme: 'light'
+      }
+    };
+    
+    // Redux reducer
+    const rootReducer = (state = initialState, action) => {
+      switch (action.type) {
+        case 'UPDATE_DICE':
+          return {
+            ...state,
+            dice: {
+              ...state.dice,
+              ...action.payload
+            }
+          };
+        case 'UPDATE_HUNT':
+          return {
+            ...state,
+            hunt: {
+              ...state.hunt,
+              ...action.payload
+            }
+          };
+        case 'UPDATE_POLITICAL':
+          return {
+            ...state,
+            political: {
+              ...state.political,
+              ...action.payload
+            }
+          };
+        case 'UPDATE_SETTINGS':
+          return {
+            ...state,
+            settings: {
+              ...state.settings,
+              ...action.payload
+            }
+          };
+        case 'RESET_STATE':
+          return initialState;
+        default:
+          return state;
+      }
+    };
+    
+    // Create Redux store
+    const store = Redux.createStore(rootReducer);
+    
+    // DiceTracker Component
+    const DiceTracker = () => {
+      const { t } = useTranslation();
+      const dispatch = useDispatch();
+      const diceState = useSelector(state => state.dice);
+      
+      const [freePeoplesDice, setFreePeoplesDice] = useState({
+        character: 0,
+        army: 0,
+        muster: 0,
+        event: 0,
+        will: 0,
+        unused: 0
+      });
+      
+      const [shadowDice, setShadowDice] = useState({
+        character: 0,
+        army: 0,
+        muster: 0,
+        event: 0,
+        eye: 0,
+        unused: 0
+      });
+      
+      // Handle dice count change
+      const handleDiceChange = (faction, diceType, value) => {
+        const numValue = Math.max(0, Math.min(10, parseInt(value) || 0));
+        
+        if (faction === 'freePeoples') {
+          setFreePeoplesDice({
+            ...freePeoplesDice,
+            [diceType]: numValue
+          });
+        } else {
+          setShadowDice({
+            ...shadowDice,
+            [diceType]: numValue
+          });
+        }
+      };
+      
+      // Save dice counts
+      const saveDiceCounts = () => {
+        dispatch({
+          type: 'UPDATE_DICE',
+          payload: {
+            freePeoples: freePeoplesDice,
+            shadow: shadowDice
+          }
+        });
+      };
+      
+      // Reset dice counts
+      const resetDiceCounts = () => {
+        setFreePeoplesDice({
+          character: 0,
+          army: 0,
+          muster: 0,
+          event: 0,
+          will: 0,
+          unused: 0
+        });
+        
+        setShadowDice({
+          character: 0,
+          army: 0,
+          muster: 0,
+          event: 0,
+          eye: 0,
+          unused: 0
+        });
+      };
+      
+      // Render dice input for a faction
+      const renderDiceInputs = (faction, diceState, specialDie) => {
+        const diceTypes = ['character', 'army', 'muster', 'event', specialDie, 'unused'];
+        
+        return (
+          <div className="p-3">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="font-semibold">
+                {faction === 'freePeoples' ? t('companion.freePeoples') : t('companion.shadow')}
+              </h3>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-2">
+              {diceTypes.map(diceType => (
+                <div key={`${faction}-${diceType}`} className="flex flex-col items-center">
+                  <label className="text-xs mb-1">
+                    {t(`companion.diceTypes.${diceType}`)}
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="10"
+                    value={faction === 'freePeoples' ? freePeoplesDice[diceType] : shadowDice[diceType]}
+                    onChange={(e) => handleDiceChange(faction, diceType, e.target.value)}
+                    className="w-12 h-8 text-center border rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      };
+      
+      return (
+        <div className="p-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Free Peoples Dice */}
+            <div className="border rounded bg-blue-50">
+              {renderDiceInputs('freePeoples', freePeoplesDice, 'will')}
+            </div>
+            
+            {/* Shadow Dice */}
+            <div className="border rounded bg-red-50">
+              {renderDiceInputs('shadow', shadowDice, 'eye')}
+            </div>
+          </div>
+          
+          {/* Action Buttons */}
+          <div className="flex justify-end space-x-2 mt-3">
+            <button 
+              className="px-3 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300"
+              onClick={resetDiceCounts}
+            >
+              {t('companion.reset')}
+            </button>
+            <button 
+              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+              onClick={saveDiceCounts}
+            >
+              {t('companion.save')}
+            </button>
+          </div>
+        </div>
+      );
+    };
+    
+    // Main Companion App
+    const CompanionApp = () => {
+      const { t } = useTranslation();
+      const dispatch = useDispatch();
+      
+      // Local state for toggles
+      const [showDice, setShowDice] = useState(true);
+      
+      // Handle section toggle
+      const toggleSection = (section, currentState) => {
+        if (section === 'dice') {
+          setShowDice(!currentState);
+        }
+      };
+      
+      // Handle reset of all trackers
+      const handleReset = () => {
+        if (window.confirm(t('companion.confirmReset'))) {
+          dispatch({ type: 'RESET_STATE' });
+        }
+      };
+      
+      return (
+        <div className="container mx-auto p-4 max-w-6xl">
+          <header className="bg-blue-800 text-white p-4 rounded-t-lg">
+            <h1 className="text-2xl font-bold text-center">{t('companion.title')}</h1>
+            <p className="text-center text-sm mt-2">{t('companion.subtitle')}</p>
+          </header>
+          
+          <main className="bg-white p-4 rounded-b-lg shadow-md mb-4">
+            {/* Control Panel */}
+            <div className="flex flex-wrap justify-between items-center mb-4 p-2 bg-gray-100 rounded">
+              <div className="text-lg font-bold">{t('companion.controlPanel')}</div>
+              <div className="flex space-x-2">
+                <button 
+                  className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+                  onClick={handleReset}
+                >
+                  {t('companion.reset')}
+                </button>
+              </div>
+            </div>
+            
+            {/* Dice Tracker */}
+            <div className="border border-gray-200 rounded overflow-hidden mb-4">
+              <div 
+                className="flex justify-between items-center p-2 bg-blue-100 cursor-pointer"
+                onClick={() => toggleSection('dice', showDice)}
+              >
+                <h2 className="font-bold">{t('companion.diceTracker')}</h2>
+                <span>{showDice ? '▼' : '►'}</span>
+              </div>
+              {showDice && <DiceTracker />}
+            </div>
+          </main>
+          
+          <footer className="text-center text-gray-500 text-sm">
+            <p>{t('companion.footer')}</p>
+          </footer>
+        </div>
+      );
+    };
+    
+    // Render the App
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <Provider store={store}>
+        <CompanionApp />
+      </Provider>
+    );
+  </script>
+</body>
+</html>

@@ -1,49 +1,105 @@
-# Project Overview
+# War of the Ring Game
 
-This project is a game or simulation that utilizes event cards, combat cards, characters, and regions. The core data and documentation are organized into two main folders: `data` and `docs`. This README provides a guide to the project structure and key files.
+A digital implementation of the War of the Ring board game, featuring a Node.js backend and React frontend.
 
 ## Project Structure
 
+The project is organized into two main components:
+
+- **war-of-the-ring-backend**: Node.js/Express.js server providing game logic and API endpoints
+- **war-of-the-ring-frontend**: React.js client application for the user interface
+
+## Tech Stack
+
+### Backend
+- Node.js with Express.js
+- MongoDB with Mongoose ODM
+- Socket.io for real-time communication
+- JWT authentication
+- Winston for logging
+
+### Frontend
+- React.js
+- Socket.io client for real-time updates
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v14+)
+- MongoDB
+
+### Installation
+
+1. Clone the repository:
 ```
-project_folder/
-├── data/                # Contains JSON data files
-│   ├── eventcards.json  # Definitions for event cards
-│   ├── combatcards.json # Definitions for combat cards associated with events
-│   ├── characters.json  # Definitions for characters
-│   └── regions.json     # Definitions for regions
-├── docs/                # Contains documentation files
-│   ├── Product Requirements Document (PRD).md          # Product Requirements Document
-│   ├── War of the Ring Rules Guide.md                  # Game rules and mechanics
-│   ├── War of the Ring Implementation TODO.md          # List of tasks and pending work
-│   └── War of the Ring Implementation Guide.md         # Implementation details and notes
-└── README.md            # This file
+git clone <repository-url>
+cd war-of-the-ring
 ```
 
-## Folder Details
+2. Install backend dependencies:
+```
+cd war-of-the-ring-backend
+npm install
+```
 
-### `data/`
-This folder contains the JSON files that define the game’s core elements:
-- **`eventcards.json`**: Defines the event cards, including their properties and any links to combat cards. Refer to this file for event-related data structures.
-- **`combatcards.json`**: Defines the combat cards, which are associated with events. Use this file to understand combat mechanics tied to events.
-- **`characters.json`**: Contains character definitions, such as attributes, roles, or stats. Check this for character-specific data.
-- **`regions.json`**: Defines the regions in the game, including their properties or relationships. Use this for spatial or regional logic.
+3. Install frontend dependencies:
+```
+cd ../war-of-the-ring-frontend
+npm install
+```
 
-### `docs/`
-This folder contains markdown files with essential documentation:
-- **`Product Requirements Document (PRD).md`**: The Product Requirements Document outlines the project’s goals, features, and requirements. Refer to this for high-level guidance.
-- **`War of the Ring Rules Guide.md`**: Details the game rules and mechanics. Consult this for how events, combat, characters, and regions interact.
-- **`War of the Ring Implementation TODO.md`**: Lists tasks and pending work. Check this for what still needs to be implemented or refined.
-- **`War of the Ring Implementation Guide.md`**: Provides technical notes on how the project is being built. Look here for coding details or existing implementation decisions.
+### Configuration
 
-## Usage
-To generate code or work on this project:
-1. Start with `docs/Product Requirements Document (PRD).md` to understand the project’s purpose and requirements.
-2. Review `docs/War of the Ring Rules Guide.md` for the game mechanics and how the data files are intended to be used.
-3. Load data from the `data/` folder (e.g., `eventcards.json`, `combatcards.json`, etc.) as needed.
-4. Check `docs/War of the Ring Implementation Guide.md` for existing technical details or patterns.
-5. Refer to `docs/War of the Ring Implementation TODO.md` to prioritize tasks or identify gaps.
+1. Create a `.env` file in the backend directory with the following variables:
+```
+PORT=3001
+MONGODB_URI=mongodb://localhost:27017/war-of-the-ring
+FRONTEND_URL=http://localhost:3000
+```
 
-## Notes for AI Code Generation
-- Use the JSON files in `data/` as the source of truth for event cards, combat cards, characters, and regions.
-- Cross-reference `docs/War of the Ring Rules Guide.md` to ensure generated code aligns with game mechanics.
-- If specific implementation details are needed, consult `docs/War of the Ring Implementation Guide.md` first.
+### Running the Application
+
+1. Start the backend server:
+```
+cd war-of-the-ring-backend
+npm run dev
+```
+
+2. Start the frontend application:
+```
+cd war-of-the-ring-frontend
+npm start
+```
+
+## Testing
+
+### Backend Tests
+```
+cd war-of-the-ring-backend
+npm test
+```
+
+## API Documentation
+
+The backend provides the following main API endpoints:
+
+- `POST /game/start`: Initialize a new game
+- `POST /game/move`: Process game moves
+- `GET /game/state`: Retrieve the current game state
+- `POST /game/save` and `POST /game/load`: Handle game state persistence
+- `POST /game/undo` and `POST /game/redo`: Implement undo/redo functionality
+- `POST /player/register` and `GET /player/:id`: Manage player profiles
+- `POST /lobby/create` and `GET /lobby/join`: Handle lobby matchmaking
+- `POST /card/play`: Manage card actions
+
+## Security Features
+
+- Rate limiting for API endpoints
+- Input validation and sanitization
+- Secure HTTP headers
+- Content Security Policy (CSP)
+- Authentication middleware
+
+## License
+
+This project is licensed under the ISC License.

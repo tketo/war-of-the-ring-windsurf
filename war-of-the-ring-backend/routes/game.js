@@ -16,6 +16,7 @@ const {
   gameReplaySchema 
 } = require('../utils/validation');
 const { logger, securityLogger } = require('../utils/logger');
+const rulesEngine = require('../utils/rulesEngine');
 
 /**
  * POST /game/start
@@ -518,5 +519,432 @@ router.post('/replay', requireAuth, validateBody(gameReplaySchema), async (req, 
     next(error);
   }
 });
+
+/**
+ * Make a move in a game
+ * POST /game/:gameId/move
+ */
+router.post('/:gameId/move', requireAuth, async (req, res, next) => {
+  try {
+    const { gameId } = req.params;
+    const userId = req.user.id;
+    const move = req.body;
+    
+    // Validate request body
+    if (!move || !move.type) {
+      return res.status(400).json({ error: 'Invalid move data' });
+    }
+    
+    // Find the game
+    const gameState = await GameState.findOne({ gameId });
+    if (!gameState) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Check if user is a player in the game
+    const player = gameState.players.find(p => p.playerId === userId);
+    if (!player) {
+      return res.status(403).json({ error: 'You are not a player in this game' });
+    }
+    
+    // Check if it's the player's turn
+    if (gameState.currentPlayer !== player.playerId) {
+      return res.status(403).json({ error: 'Not your turn' });
+    }
+    
+    // Add player info to the move
+    move.player = player.playerId;
+    move.faction = player.faction;
+    
+    // Validate the move using the rules engine
+    const validation = rulesEngine.validateMove(gameState, move);
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.error });
+    }
+    
+    // Apply the move
+    const updatedGameState = rulesEngine.applyMove(gameState, move);
+    
+    // Save the updated game state
+    await updatedGameState.save();
+    
+    // Emit socket event to notify players
+    req.io.to(gameId).emit('gameUpdate', {
+      type: 'move',
+      move: move,
+      player: {
+        id: player.playerId,
+        faction: player.faction
+      }
+    });
+    
+    res.status(200).json({ success: true, move: move });
+  } catch (error) {
+    console.error('Error making move:', error);
+    next(error);
+  }
+});
+
+/**
+ * Get valid actions for a player
+ * GET /game/:gameId/validActions
+ */
+router.get('/:gameId/validActions', requireAuth, async (req, res, next) => {
+  try {
+    const { gameId } = req.params;
+    const userId = req.user.id;
+    
+    // Find the game
+    const gameState = await GameState.findOne({ gameId });
+    if (!gameState) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Check if user is a player in the game
+    const player = gameState.players.find(p => p.playerId === userId);
+    if (!player) {
+      return res.status(403).json({ error: 'You are not a player in this game' });
+    }
+    
+    // Get available dice for the player
+    const playerDice = player.faction.includes('free') 
+      ? gameState.actionDice.freePeoples 
+      : gameState.actionDice.shadow;
+    
+    // Get valid actions for each die
+    const validActions = {};
+    playerDice.forEach(dieType => {
+      validActions[dieType] = rulesEngine.getValidActionsForDie(dieType, player.faction, gameState);
+    });
+    
+    res.status(200).json({ validActions });
+  } catch (error) {
+    console.error('Error getting valid actions:', error);
+    next(error);
+  }
+});
+
+/**
+ * Roll action dice for a new turn
+ * POST /game/:gameId/rollDice
+ */
+router.post('/:gameId/rollDice', requireAuth, async (req, res, next) => {
+  try {
+    const { gameId } = req.params;
+    const userId = req.user.id;
+    
+    // Find the game
+    const gameState = await GameState.findOne({ gameId });
+    if (!gameState) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Check if user is a player in the game
+    const player = gameState.players.find(p => p.playerId === userId);
+    if (!player) {
+      return res.status(403).json({ error: 'You are not a player in this game' });
+    }
+    
+    // Check if it's the start of a new turn
+    if (gameState.currentPhase !== 'action' || gameState.actionDice.freePeoples.length > 0 || gameState.actionDice.shadow.length > 0) {
+      return res.status(400).json({ error: 'Cannot roll dice at this time' });
+    }
+    
+    // Roll dice for both factions
+    const freePeoplesDice = rollActionDice('freePeoples', gameState);
+    const shadowDice = rollActionDice('shadow', gameState);
+    
+    // Update game state
+    gameState.actionDice.freePeoples = freePeoplesDice;
+    gameState.actionDice.shadow = shadowDice;
+    
+    // Save the updated game state
+    await gameState.save();
+    
+    // Emit socket event to notify players
+    req.io.to(gameId).emit('gameUpdate', {
+      type: 'diceRolled',
+      freePeoplesDice,
+      shadowDice
+    });
+    
+    res.status(200).json({ 
+      success: true, 
+      dice: {
+        freePeoples: freePeoplesDice,
+        shadow: shadowDice
+      }
+    });
+  } catch (error) {
+    console.error('Error rolling dice:', error);
+    next(error);
+  }
+});
+
+/**
+ * Hunt the Fellowship
+ * POST /game/:gameId/hunt
+ */
+router.post('/:gameId/hunt', requireAuth, async (req, res, next) => {
+  try {
+    const { gameId } = req.params;
+    const userId = req.user.id;
+    
+    // Find the game
+    const gameState = await GameState.findOne({ gameId });
+    if (!gameState) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Check if user is the Shadow player
+    const player = gameState.players.find(p => p.playerId === userId);
+    if (!player || !player.faction.includes('shadow')) {
+      return res.status(403).json({ error: 'Only the Shadow player can hunt' });
+    }
+    
+    // Create a hunt move
+    const huntMove = {
+      type: 'hunt',
+      player: player.playerId,
+      faction: player.faction
+    };
+    
+    // Validate the hunt
+    const validation = rulesEngine.validateHunt(gameState, huntMove);
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.error });
+    }
+    
+    // Apply the hunt
+    const updatedGameState = rulesEngine.applyHunt(gameState, huntMove);
+    
+    // Save the updated game state
+    await updatedGameState.save();
+    
+    // Get the hunt result (the last hunt tile drawn)
+    const huntResult = updatedGameState.huntHistory[updatedGameState.huntHistory.length - 1];
+    
+    // Emit socket event to notify players
+    req.io.to(gameId).emit('gameUpdate', {
+      type: 'hunt',
+      result: huntResult,
+      player: {
+        id: player.playerId,
+        faction: player.faction
+      }
+    });
+    
+    res.status(200).json({ 
+      success: true, 
+      result: huntResult
+    });
+  } catch (error) {
+    console.error('Error hunting:', error);
+    next(error);
+  }
+});
+
+/**
+ * Move the Fellowship
+ * POST /game/:gameId/moveFellowship
+ */
+router.post('/:gameId/moveFellowship', requireAuth, async (req, res, next) => {
+  try {
+    const { gameId } = req.params;
+    const userId = req.user.id;
+    const { steps } = req.body;
+    
+    // Validate request body
+    if (steps === undefined) {
+      return res.status(400).json({ error: 'Steps parameter is required' });
+    }
+    
+    // Find the game
+    const gameState = await GameState.findOne({ gameId });
+    if (!gameState) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Check if user is the Free Peoples player
+    const player = gameState.players.find(p => p.playerId === userId);
+    if (!player || !player.faction.includes('free')) {
+      return res.status(403).json({ error: 'Only the Free Peoples player can move the Fellowship' });
+    }
+    
+    // Create a Fellowship movement move
+    const fellowshipMove = {
+      type: 'fellowshipMovement',
+      player: player.playerId,
+      faction: player.faction,
+      steps: parseInt(steps)
+    };
+    
+    // Validate the movement
+    const validation = rulesEngine.validateFellowshipMovement(gameState, fellowshipMove);
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.error });
+    }
+    
+    // Apply the movement
+    const updatedGameState = rulesEngine.applyFellowshipMovement(gameState, fellowshipMove);
+    
+    // Save the updated game state
+    await updatedGameState.save();
+    
+    // Get the updated Fellowship position
+    const fellowship = updatedGameState.characters.find(c => c.characterId === 'fellowship');
+    
+    // Emit socket event to notify players
+    req.io.to(gameId).emit('gameUpdate', {
+      type: 'fellowshipMovement',
+      steps: steps,
+      newPosition: fellowship.position,
+      player: {
+        id: player.playerId,
+        faction: player.faction
+      }
+    });
+    
+    res.status(200).json({ 
+      success: true, 
+      fellowship: {
+        position: fellowship.position,
+        status: fellowship.status,
+        corruption: fellowship.corruption
+      }
+    });
+  } catch (error) {
+    console.error('Error moving Fellowship:', error);
+    next(error);
+  }
+});
+
+/**
+ * Update political status of a nation
+ * POST /game/:gameId/political
+ */
+router.post('/:gameId/political', requireAuth, async (req, res, next) => {
+  try {
+    const { gameId } = req.params;
+    const userId = req.user.id;
+    const { nation, direction } = req.body;
+    
+    // Validate request body
+    if (!nation || !direction) {
+      return res.status(400).json({ error: 'Nation and direction parameters are required' });
+    }
+    
+    // Find the game
+    const gameState = await GameState.findOne({ gameId });
+    if (!gameState) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    // Check if user is a player in the game
+    const player = gameState.players.find(p => p.playerId === userId);
+    if (!player) {
+      return res.status(403).json({ error: 'You are not a player in this game' });
+    }
+    
+    // Create a political action move
+    const politicalMove = {
+      type: 'politicalAction',
+      player: player.playerId,
+      faction: player.faction,
+      nation: nation,
+      direction: direction
+    };
+    
+    // Validate the political action
+    const validation = rulesEngine.validatePoliticalAction(gameState, politicalMove);
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.error });
+    }
+    
+    // Apply the political action
+    const updatedGameState = rulesEngine.applyPoliticalAction(gameState, politicalMove);
+    
+    // Save the updated game state
+    await updatedGameState.save();
+    
+    // Get the updated nation status
+    const nationStatus = updatedGameState.nations[nation].status;
+    
+    // Emit socket event to notify players
+    req.io.to(gameId).emit('gameUpdate', {
+      type: 'politicalAction',
+      nation: nation,
+      status: nationStatus,
+      player: {
+        id: player.playerId,
+        faction: player.faction
+      }
+    });
+    
+    res.status(200).json({ 
+      success: true, 
+      nation: nation,
+      status: nationStatus
+    });
+  } catch (error) {
+    console.error('Error updating political status:', error);
+    next(error);
+  }
+});
+
+/**
+ * Roll action dice for a faction
+ * @param {String} faction - Faction (freePeoples or shadow)
+ * @param {Object} gameState - Current game state
+ * @returns {Array} - Array of dice results
+ */
+function rollActionDice(faction, gameState) {
+  // Determine number of dice based on faction and game state
+  let numDice = 0;
+  
+  if (faction === 'freePeoples') {
+    // Free Peoples start with 4 dice, plus additional dice based on active nations
+    numDice = 4;
+    
+    // Add dice for active nations (except Elves which start active)
+    if (gameState.nations.north.active) numDice++;
+    if (gameState.nations.rohan.active) numDice++;
+    if (gameState.nations.gondor.active) numDice++;
+    if (gameState.nations.dwarves.active) numDice++;
+    
+    // Maximum of 10 dice
+    numDice = Math.min(numDice, 10);
+  } else {
+    // Shadow starts with 7 dice
+    numDice = 7;
+    
+    // Maximum of 10 dice
+    numDice = Math.min(numDice, 10);
+  }
+  
+  // Roll the dice
+  const dice = [];
+  for (let i = 0; i < numDice; i++) {
+    dice.push(rollSingleDie(faction));
+  }
+  
+  return dice;
+}
+
+/**
+ * Roll a single action die for a faction
+ * @param {String} faction - Faction (freePeoples or shadow)
+ * @returns {String} - Die result
+ */
+function rollSingleDie(faction) {
+  // Define die faces based on faction
+  const dieFaces = faction === 'freePeoples' 
+    ? ['character', 'character', 'muster', 'muster', 'army', 'army', 'event', 'event', 'will', 'will']
+    : ['character', 'character', 'muster', 'muster', 'army', 'army', 'event', 'event', 'eye', 'eye'];
+  
+  // Roll the die (random selection from die faces)
+  const randomIndex = Math.floor(Math.random() * dieFaces.length);
+  return dieFaces[randomIndex];
+}
 
 module.exports = router;

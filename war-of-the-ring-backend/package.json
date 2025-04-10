@@ -12,7 +12,8 @@
     "test:coverage": "jest tests/unit --coverage",
     "test:watch": "jest tests/unit --watch",
     "test:ci": "jest tests/unit --ci --coverage",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "generate-types": "node scripts/generateTypes.js"
   },
   "keywords": [
     "war of the ring",
@@ -38,6 +39,7 @@
     "jest": "^29.7.0",
     "mongodb-memory-server": "^10.1.4",
     "nodemon": "^3.0.1",
+    "quicktype": "^23.0.171",
     "supertest": "^7.1.0"
   }
 }

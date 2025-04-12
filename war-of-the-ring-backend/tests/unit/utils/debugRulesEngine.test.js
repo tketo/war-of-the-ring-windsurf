@@ -6,12 +6,25 @@ const rulesEngine = require('../../../utils/rulesEngine');
 // Create a simplified mock game state
 const mockGameState = {
   players: [
-    { playerId: 'player1', faction: 'freePeoples', role: 'player', isActive: true },
-    { playerId: 'player2', faction: 'shadow', role: 'player', isActive: true }
+    { playerId: 'player1', team: 'Free', role: 'GondorElves', isActive: true },
+    { playerId: 'player2', team: 'Shadow', role: 'Sauron', isActive: true }
   ],
   actionDice: {
-    freePeoples: ['character', 'army', 'muster', 'event', 'will'],
-    shadow: ['character', 'army', 'muster', 'event', 'eye']
+    free: [
+      { type: 'character', selected: false },
+      { type: 'army', selected: false },
+      { type: 'muster', selected: false },
+      { type: 'will', selected: false }
+    ],
+    shadow: [
+      { type: 'character', selected: false },
+      { type: 'army', selected: false },
+      { type: 'muster', selected: false },
+      { type: 'event', selected: false },
+      { type: 'eye', selected: false },
+      { type: 'eye', selected: false },
+      { type: 'eye', selected: false }
+    ]
   }
 };
 
@@ -20,8 +33,8 @@ describe('Debug Rules Engine', () => {
     const move = { 
       type: 'useActionDie', 
       player: 'player1', 
-      faction: 'freePeoples',
-      dieType: 'unavailableDie', 
+      team: 'Free',
+      dieIndex: 10, // Out of bounds
       action: 'moveCharacter' 
     };
     
@@ -33,6 +46,6 @@ describe('Debug Rules Engine', () => {
     console.log('Result:', JSON.stringify(result));
     
     expect(result.isValid).toBe(false);
-    expect(result.error).toContain('No unavailableDie die available');
+    expect(result.error).toContain('Invalid die index');
   });
 });

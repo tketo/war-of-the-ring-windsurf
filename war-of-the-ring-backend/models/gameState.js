@@ -35,10 +35,27 @@ const gameStateSchema = new mongoose.Schema({
   },
   players: [{
     playerId: String,
-    faction: String,
-    role: String,
-    isActive: Boolean
+    team: { 
+      type: String, 
+      enum: ["Free", "Shadow"],
+      required: true
+    },
+    role: { 
+      type: String, 
+      enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "IsengardSouthrons"],
+      required: true
+    },
+    isAI: Boolean,
+    aiStrategy: String,
+    isLeading: Boolean,
+    hand: [String], // Cards held, max 4 in 4-player
+    controlledNations: [String] // Nation codes: "3" (Gondor), "7" (Sauron), etc.
   }],
+  playerCount: {
+    type: Number,
+    enum: [1, 2, 3, 4],
+    default: 2
+  },
   currentPhase: {
     type: String,
     enum: ['setup', 'hunt', 'action', 'combat', 'end'],
@@ -51,9 +68,21 @@ const gameStateSchema = new mongoose.Schema({
   currentPlayer: {
     type: String
   },
+  turnOrder: {
+    type: [String],
+    default: []
+  },
   actionDice: {
-    freePeoples: [String],
-    shadow: [String]
+    free: [{
+      type: String,
+      selected: Boolean,
+      owner: String
+    }],
+    shadow: [{
+      type: String,
+      selected: Boolean,
+      owner: String
+    }]
   },
   characters: [{
     characterId: String,
@@ -205,6 +234,10 @@ const gameStateSchema = new mongoose.Schema({
       type: String,
       enum: ['full', 'unrestricted', 'companion'],
       default: 'full'
+    },
+    rulesEnforced: {
+      type: Boolean,
+      default: true
     },
     expansions: [String],
     scenario: String

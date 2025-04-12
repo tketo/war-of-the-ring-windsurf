@@ -1,6 +1,6 @@
-# War of the Ring Rules Guide v1.3 (Base Game Edition)
+# War of the Ring Rules Guide v1.4 (Base Game Edition)
 
-*Note*: Version 1.3 integrates detailed combat rules from "Resolving a Battle," focusing on the base game with hooks for expansions/scenarios. Aligned with PRD v1.3, Implementation Guide v1.3, and TODO List v1.3.
+*Note*: Version 1.4 integrates detailed combat rules from "Resolving a Battle," focusing on the base game with hooks for expansions/scenarios. Aligned with PRD v1.3, Implementation Guide v2.2, and TODO List v1.8. Updated to reflect shared Action Dice pools for Free Peoples and Shadow with no individual ownership. Clarified Siege Stacking edge case.
 
 ## Setting Up the Game
 - **Players**: 2-4 players (2: Free Peoples [FP] vs. Shadow [SP]; 3-4: teams split—FP: Gondor, Rohan; SP: Witch-king, Saruman).
@@ -14,7 +14,7 @@
 - **Elven Rings**: Place 3 counters (ring side up) in the FP Elven Rings box.
 - **Cards**: Separate unmustered Minion/Character cards; shuffle 4 Event decks (FP Character, FP Strategy, SP Character, SP Strategy) and place on board.
 - **Hunt Tiles**: Place 16 standard tiles (12 numbered 0-3, 4 Eye) in an opaque Hunt Pool. *Note*: Special tiles added via expansions.
-- **Action Dice**: SP gets 7 red dice; FP gets 4 blue dice.
+- **Action Dice**: The Shadow side receives 7 red dice as a single shared pool; the Free Peoples side receives 4 blue dice as a single shared pool. These dice are used collectively by all players on each respective side, regardless of the number of players (1-4).
 - **Political Track**:
   - SP nations (Sauron, Isengard, Southrons & Easterlings) start face up (active).
   - FP nations (Elves, Gondor, Rohan, Dwarves, North) start face down (passive), except Elves (face up, active).
@@ -27,13 +27,13 @@
 2. **Fellowship Phase**:
    - Declare position (if hidden): Move figure up to Progress Counter regions, reset Counter to 0 (hidden), heal 1 Corruption if in FP City/Stronghold (not enemy-controlled), activate that nation.
    - Change Guide if composition changes or at turn end (highest Level; FP chooses on tie).
-3. **Hunt Allocation**: SP allocates 0 to N dice (N = Companions in Fellowship, min 1 for Gollum) to Hunt box, Eye side up.
-4. **Action Roll**: Roll remaining dice; add rolled Eyes to Hunt box.
-5. **Action Resolution**: Alternate actions (FP first):
-   - Use 1 die for an action (see Action Dice).
-   - Place used Fellowship movement dice in Hunt box; others aside.
-   - Pass if fewer dice than opponent.
-   - If one side exhausts dice, the other uses remaining dice sequentially.
+3. **Hunt Allocation**: SP allocates 0 to N dice (N = Companions in Fellowship, min 1 for Gollum) to Hunt box, Eye side up, from their shared pool.
+4. **Action Roll**: Roll remaining dice from each side’s shared pool; add rolled Eyes to Hunt box.
+5. **Action Resolution**: Alternate actions (Free Peoples side acts first):
+   - Use 1 die from the side’s shared pool for an action (see Action Dice).
+   - Place used Fellowship movement dice in Hunt box; place other used dice aside.
+   - A side may pass if they have fewer dice remaining in their pool than their opponent.
+   - If one side exhausts their dice pool, the other side uses their remaining dice sequentially.
 6. **Military Victory Check**: SP wins with 10+ VP at turn end; FP wins with 4+ VP if SP <10.
 
 ## Game Board
@@ -57,6 +57,7 @@
 
 ## Action Dice
 - **Results**: Army, Character, Muster, Event (Palantir), Eye (SP), Will of the West (FP).
+- **Description**: The Free Peoples share a single pool of 4 blue dice, and the Shadow shares a single pool of 7 red dice. Each side uses these dice collectively, regardless of the number of players. Actions are resolved as a team, with players on the same side coordinating their use of the pool.
 - **Actions**:
   - **Army**: Move 2 armies (1 region each) or attack.
   - **Character**: Move Fellowship, separate Companions, move army with leader/character, hide Fellowship, move Nazgûl/Minions.
@@ -119,7 +120,7 @@
 ### Strongholds and Sieges
 - **Field to Siege**: Army in a Stronghold region may fight a field battle or retreat into siege before any round; move defenders to Stronghold box (update `siegeStatus: in`), battle ends, attacker may advance.
 - **Siege Rules**:
-  - Max 5 units in Stronghold; excess to reinforcements.
+  - Max 5 units in Stronghold (and any number of leaders); excess removed immediately when a Stronghold comes under siege and placed in reinforcements (SP: reinforcements, FP: reserves, not permanent casualties). Units in reinforcements can re-enter the game later via recruitment.
   - Holds all leaders/Characters; no retreat or movement (except sortie).
   - Besieging army moves as if owning the region.
   - Siege breaks when region has no enemy units; defenders return to map (`siegeStatus: out`).
@@ -150,7 +151,7 @@
 - **Hunt Roll**: Roll Hunt box dice (max 5); +1 per prior move this turn; success on 6+ (reroll per SP army, Nazgûl, Stronghold in region).
 - **Tile Effects**:
   - Number (0-3): Damage.
-  - 👁: Damage = successes, reveal.
+  - **👁**: Damage = successes, reveal.
 - **Damage**: Corruption, eliminate Companion (reduce by Level, excess as Corruption).
 
 ## Mordor Track
@@ -164,7 +165,7 @@
 
 ## Edge Cases
 - **Nazgûl**: Move freely unless card specifies (e.g., "The Nazgûl Strike!").
-- **Siege Stacking**: 5 units max in Stronghold; excess retreat or reinforce adjacent region.
+- **Siege Stacking**: A Stronghold under siege can contain a maximum of 5 army units (and any number of leaders). Any unit in excess of 5 is removed immediately when a Stronghold comes under siege and placed in reinforcements (SP: reinforcements, FP: reserves). Free Peoples do not suffer permanent casualties in this case; excess units can re-enter the game later as reinforcements.
 - **Companion Separation**: Eliminated in Mordor; if all separate, Gollum becomes Guide.
 - **Multiple Army Moves**: 2 armies, 1 region each per Army die; no splitting mid-move.
 - **Stronghold Recapture**: FP recaptures if no SP units remain after battle.
@@ -177,10 +178,10 @@
   - Pre-configured states in JSON configs.
 
 ## Developer Notes
-- **State Tracking**: `gameState`: Include `siegeStatus` (in/out), `combat {attacker, defender, region, round, leadershipForfeited {free, shadow}, combatCards {free, shadow}}`, encrypted in MongoDB.
-- **Rules Enforcement**: `validateMove`: Check combat card timing, Leadership forfeiture, siege transitions (e.g., Elite reduction), sortie rules.
-- **UI Components**: `SiegeBox`: Display Stronghold status (in/out), units, besiegers.
-- **Testing**: Validate siege battles (6 vs. 5 hits), sortie (5-6 hits), card interactions (e.g., "Grond").
+- **State Tracking**: `gameState`: Include `actionDicePools` with `freePeoples: { count, results }` and `shadow: { count, results }` to track the shared dice pools for each side, encrypted in MongoDB. Remove any reference to individual player ownership of dice.
+- **Rules Enforcement**: `validateMove`: Check combat card timing, Leadership forfeiture, siege transitions (e.g., Elite reduction), sortie rules, and siege stacking limits.
+- **UI Components**: `ActionDiceArea`: Display shared pools for Free Peoples (blue) and Shadow (red) with no per-player attribution.
+- **Testing**: Validate siege battles (6 vs. 5 hits), sortie (5-6 hits), card interactions (e.g., "Grond"), and siege stacking (excess units to reinforcements).
 
 ## Appendix A: Event Cards (96 Total)
 ### Free Peoples Character (24)

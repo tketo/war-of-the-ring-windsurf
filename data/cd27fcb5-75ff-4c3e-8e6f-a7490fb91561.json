@@ -1,0 +1,459 @@
+{
+  "regions": {
+    "28": {
+      "name": "Erebor",
+      "units": {
+        "regular": 1,
+        "elite": 2,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "1",
+      "siegeStatus": "out",
+      "nation": "1"
+    },
+    "30": {
+      "name": "Ered Luin",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "1",
+      "siegeStatus": "out",
+      "nation": "1"
+    },
+    "47": {
+      "name": "Iron Hills",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "1",
+      "siegeStatus": "out",
+      "nation": "1"
+    },
+    "51": {
+      "name": "Lorien",
+      "units": {
+        "regular": 1,
+        "elite": 2,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "2",
+      "siegeStatus": "out",
+      "nation": "2"
+    },
+    "81": {
+      "name": "Rivendell",
+      "units": {
+        "regular": 0,
+        "elite": 2,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "2",
+      "siegeStatus": "out",
+      "nation": "2"
+    },
+    "92": {
+      "name": "Grey Havens",
+      "units": {
+        "regular": 1,
+        "elite": 1,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "2",
+      "siegeStatus": "out",
+      "nation": "2"
+    },
+    "105": {
+      "name": "Woodland Realm",
+      "units": {
+        "regular": 1,
+        "elite": 1,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "2",
+      "siegeStatus": "out",
+      "nation": "2"
+    },
+    "14": {
+      "name": "Dol Amroth",
+      "units": {
+        "regular": 3,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "3",
+      "siegeStatus": "out",
+      "nation": "3"
+    },
+    "53": {
+      "name": "Minas Tirith",
+      "units": {
+        "regular": 3,
+        "elite": 1,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "3",
+      "siegeStatus": "out",
+      "nation": "3"
+    },
+    "79": {
+      "name": "Pelargir",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "3",
+      "siegeStatus": "out",
+      "nation": "3"
+    },
+    "7": {
+      "name": "Bree",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "4",
+      "siegeStatus": "out",
+      "nation": "4"
+    },
+    "10": {
+      "name": "Carrock",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "4",
+      "siegeStatus": "out",
+      "nation": "4"
+    },
+    "12": {
+      "name": "Dale",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "4",
+      "siegeStatus": "out",
+      "nation": "4"
+    },
+    "62": {
+      "name": "North Downs",
+      "units": {
+        "regular": 0,
+        "elite": 1,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "4",
+      "siegeStatus": "out",
+      "nation": "4"
+    },
+    "93": {
+      "name": "The Shire",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "4",
+      "siegeStatus": "out",
+      "nation": "4"
+    },
+    "26": {
+      "name": "Edoras",
+      "units": {
+        "regular": 1,
+        "elite": 1,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "5",
+      "siegeStatus": "out",
+      "nation": "5"
+    },
+    "37": {
+      "name": "Fords of Isen",
+      "units": {
+        "regular": 2,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "5",
+      "siegeStatus": "out",
+      "nation": "5"
+    },
+    "44": {
+      "name": "Helm's Deep",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "5",
+      "siegeStatus": "out",
+      "nation": "5"
+    },
+    "63": {
+      "name": "North Dunland",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "6",
+      "siegeStatus": "out",
+      "nation": "6"
+    },
+    "76": {
+      "name": "Orthanc",
+      "units": {
+        "regular": 4,
+        "elite": 1,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "6",
+      "siegeStatus": "out",
+      "nation": "6"
+    },
+    "84": {
+      "name": "South Dunland",
+      "units": {
+        "regular": 1,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "6",
+      "siegeStatus": "out",
+      "nation": "6"
+    },
+    "6": {
+      "name": "Barad Dur",
+      "units": {
+        "regular": 4,
+        "elite": 1,
+        "owner": "Shadow"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "15": {
+      "name": "Dol Guldur",
+      "units": {
+        "regular": 5,
+        "elite": 1,
+        "owner": "Shadow"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "42": {
+      "name": "Gorgoroth",
+      "units": {
+        "regular": 3,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "52": {
+      "name": "Minas Morgul",
+      "units": {
+        "regular": 5,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "55": {
+      "name": "Morannon",
+      "units": {
+        "regular": "5",
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 1,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "56": {
+      "name": "Moria",
+      "units": {
+        "regular": 2,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "58": {
+      "name": "Mount Gundabad",
+      "units": {
+        "regular": 2,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "72": {
+      "name": "Nurn",
+      "units": {
+        "regular": 2,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "7",
+      "siegeStatus": "out",
+      "nation": "7"
+    },
+    "34": {
+      "name": "Far Harad",
+      "units": {
+        "regular": 3,
+        "elite": 1,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "8",
+      "siegeStatus": "out",
+      "nation": "8"
+    },
+    "60": {
+      "name": "Near Harad",
+      "units": {
+        "regular": 3,
+        "elite": 1,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "8",
+      "siegeStatus": "out",
+      "nation": "8"
+    },
+    "71": {
+      "name": "North Rhun",
+      "units": {
+        "regular": 2,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "8",
+      "siegeStatus": "out",
+      "nation": "8"
+    },
+    "90": {
+      "name": "South Rhun",
+      "units": {
+        "regular": 3,
+        "elite": 1,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "8",
+      "siegeStatus": "out",
+      "nation": "8"
+    },
+    "95": {
+      "name": "Umbar",
+      "units": {
+        "regular": 3,
+        "elite": 0,
+        "owner": "Shadow"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "8",
+      "siegeStatus": "out",
+      "nation": "8"
+    },
+    "77": {
+      "name": "Osgiliath",
+      "units": {
+        "regular": 2,
+        "elite": 0,
+        "owner": "Free"
+      },
+      "leaders": 0,
+      "characters": [],
+      "control": "0",
+      "siegeStatus": "out",
+      "nation": "0"
+    }
+  }
+}

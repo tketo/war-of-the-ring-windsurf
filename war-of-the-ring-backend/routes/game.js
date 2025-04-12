@@ -48,7 +48,7 @@ router.post('/start', requireAuth, validateBody(gameStartSchema), async (req, re
       currentTurn: 1,
       currentPlayer: userId,
       actionDice: {
-        freePeoples: [],
+        free: [],
         shadow: []
       },
       characters: [],
@@ -608,7 +608,7 @@ router.get('/:gameId/validActions', requireAuth, async (req, res, next) => {
     
     // Get available dice for the player
     const playerDice = player.faction.includes('free') 
-      ? gameState.actionDice.freePeoples 
+      ? gameState.actionDice.free 
       : gameState.actionDice.shadow;
     
     // Get valid actions for each die
@@ -646,16 +646,16 @@ router.post('/:gameId/rollDice', requireAuth, async (req, res, next) => {
     }
     
     // Check if it's the start of a new turn
-    if (gameState.currentPhase !== 'action' || gameState.actionDice.freePeoples.length > 0 || gameState.actionDice.shadow.length > 0) {
+    if (gameState.currentPhase !== 'action' || gameState.actionDice.free.length > 0 || gameState.actionDice.shadow.length > 0) {
       return res.status(400).json({ error: 'Cannot roll dice at this time' });
     }
     
-    // Roll dice for both factions
-    const freePeoplesDice = rollActionDice('freePeoples', gameState);
-    const shadowDice = rollActionDice('shadow', gameState);
+    // Roll dice for both teams
+    const freeDice = rollActionDice('Free', gameState);
+    const shadowDice = rollActionDice('Shadow', gameState);
     
     // Update game state
-    gameState.actionDice.freePeoples = freePeoplesDice;
+    gameState.actionDice.free = freeDice;
     gameState.actionDice.shadow = shadowDice;
     
     // Save the updated game state
@@ -664,14 +664,14 @@ router.post('/:gameId/rollDice', requireAuth, async (req, res, next) => {
     // Emit socket event to notify players
     req.io.to(gameId).emit('gameUpdate', {
       type: 'diceRolled',
-      freePeoplesDice,
+      freeDice,
       shadowDice
     });
     
     res.status(200).json({ 
       success: true, 
       dice: {
-        freePeoples: freePeoplesDice,
+        free: freeDice,
         shadow: shadowDice
       }
     });
@@ -893,16 +893,16 @@ router.post('/:gameId/political', requireAuth, async (req, res, next) => {
 });
 
 /**
- * Roll action dice for a faction
- * @param {String} faction - Faction (freePeoples or shadow)
+ * Roll action dice for a team
+ * @param {String} team - Team (Free or Shadow)
  * @param {Object} gameState - Current game state
  * @returns {Array} - Array of dice results
  */
-function rollActionDice(faction, gameState) {
-  // Determine number of dice based on faction and game state
+function rollActionDice(team, gameState) {
+  // Determine number of dice based on team and game state
   let numDice = 0;
   
-  if (faction === 'freePeoples') {
+  if (team === 'Free') {
     // Free Peoples start with 4 dice, plus additional dice based on active nations
     numDice = 4;
     
@@ -925,26 +925,31 @@ function rollActionDice(faction, gameState) {
   // Roll the dice
   const dice = [];
   for (let i = 0; i < numDice; i++) {
-    dice.push(rollSingleDie(faction));
+    dice.push(rollSingleDie(team));
   }
   
   return dice;
 }
 
 /**
- * Roll a single action die for a faction
- * @param {String} faction - Faction (freePeoples or shadow)
+ * Roll a single action die for a team
+ * @param {String} team - Team (Free or Shadow)
  * @returns {String} - Die result
  */
-function rollSingleDie(faction) {
-  // Define die faces based on faction
-  const dieFaces = faction === 'freePeoples' 
-    ? ['character', 'character', 'muster', 'muster', 'army', 'army', 'event', 'event', 'will', 'will']
-    : ['character', 'character', 'muster', 'muster', 'army', 'army', 'event', 'event', 'eye', 'eye'];
+function rollSingleDie(team) {
+  // Define die faces based on team
+  const dieFaces = team === 'Free' 
+    ? ['character', 'character', 'army', 'army', 'muster', 'event', 'will']
+    : ['character', 'character', 'army', 'army', 'muster', 'event', 'eye'];
   
-  // Roll the die (random selection from die faces)
+  // Roll the die (random index)
   const randomIndex = Math.floor(Math.random() * dieFaces.length);
-  return dieFaces[randomIndex];
+  
+  // Return the die face
+  return {
+    type: dieFaces[randomIndex],
+    selected: false
+  };
 }
 
 module.exports = router;

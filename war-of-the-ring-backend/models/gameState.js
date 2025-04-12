@@ -75,13 +75,11 @@ const gameStateSchema = new mongoose.Schema({
   actionDice: {
     free: [{
       type: String,
-      selected: Boolean,
-      owner: String
+      selected: Boolean
     }],
     shadow: [{
       type: String,
-      selected: Boolean,
-      owner: String
+      selected: Boolean
     }]
   },
   characters: [{

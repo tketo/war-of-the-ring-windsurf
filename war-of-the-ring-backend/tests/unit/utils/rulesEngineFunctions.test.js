@@ -5,7 +5,7 @@ const rulesEngine = require('../../../utils/rulesEngine');
 
 describe('Rules Engine Functions', () => {
   test('getValidActionsForDie should return valid actions for character die', () => {
-    const actions = rulesEngine.getValidActionsForDie('character', 'freePeoples', {});
+    const actions = rulesEngine.getValidActionsForDie('character', 'Free', {});
     expect(Array.isArray(actions)).toBe(true);
   });
 

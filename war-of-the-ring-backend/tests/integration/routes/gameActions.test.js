@@ -87,11 +87,11 @@ describe('Game Action Routes', () => {
       currentPlayer: 'test-user-id',
       currentTurn: 1,
       players: [
-        { playerId: 'test-user-id', faction: 'freePeoples', role: 'player', isActive: true },
+        { playerId: 'test-user-id', faction: 'free', role: 'player', isActive: true },
         { playerId: 'opponent-id', faction: 'shadow', role: 'player', isActive: true }
       ],
       actionDice: {
-        freePeoples: ['character', 'army', 'muster', 'event', 'will'],
+        free: ['character', 'army', 'muster', 'event', 'will'],
         shadow: ['character', 'army', 'muster', 'event', 'eye']
       },
       characters: [
@@ -112,10 +112,10 @@ describe('Game Action Routes', () => {
       regions: [
         {
           regionId: 'gondor',
-          controlledBy: 'freePeoples',
+          controlledBy: 'free',
           units: [
-            { type: 'regular', count: 2, faction: 'freePeoples', nation: 'gondor', active: true },
-            { type: 'elite', count: 1, faction: 'freePeoples', nation: 'gondor', active: true }
+            { type: 'regular', count: 2, faction: 'free', nation: 'gondor', active: true },
+            { type: 'elite', count: 1, faction: 'free', nation: 'gondor', active: true }
           ]
         },
         {
@@ -226,7 +226,7 @@ describe('Game Action Routes', () => {
       await GameState.findOneAndUpdate(
         { gameId },
         { 
-          'actionDice.freePeoples': [],
+          'actionDice.free': [],
           'actionDice.shadow': []
         }
       );
@@ -236,9 +236,9 @@ describe('Game Action Routes', () => {
       
       expect(response.status).toBe(200);
       expect(response.body.success).toBe(true);
-      expect(response.body.dice).toHaveProperty('freePeoples');
+      expect(response.body.dice).toHaveProperty('free');
       expect(response.body.dice).toHaveProperty('shadow');
-      expect(response.body.dice.freePeoples.length).toBeGreaterThan(0);
+      expect(response.body.dice.free.length).toBeGreaterThan(0);
       expect(response.body.dice.shadow.length).toBeGreaterThan(0);
     });
     

@@ -33,31 +33,31 @@ class AIStrategy {
   /**
    * Determine the next move for the AI
    * @param {Object} gameState - Current game state
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
    * @returns {Object} Move object that can be processed by the rules engine
    */
-  determineMove(gameState, faction) {
+  determineMove(gameState, team) {
     throw new Error('Method determineMove() must be implemented by derived classes');
   }
 
   /**
    * Generate all possible valid moves for the current game state
    * @param {Object} gameState - Current game state
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
    * @returns {Array} Array of possible move objects
    */
-  generatePossibleMoves(gameState, faction) {
+  generatePossibleMoves(gameState, team) {
     throw new Error('Method generatePossibleMoves() must be implemented by derived classes');
   }
 
   /**
-   * Evaluate a game state
-   * @param {Object} gameState - Game state to evaluate
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
-   * @returns {Number} Score representing how good the state is for the AI (higher is better)
+   * Evaluate the current game state from the perspective of this AI's faction
+   * @param {Object} gameState - Current game state
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
+   * @returns {Number} Score representing how favorable the state is (higher is better)
    */
-  evaluateState(gameState, faction) {
-    // Default implementation counts units controlled by the faction
+  evaluateState(gameState, team) {
+    // Default implementation counts units controlled by the team
     if (!gameState || !gameState.regions) {
       return 0.5; // Neutral score if no valid game state
     }
@@ -68,7 +68,7 @@ class AIStrategy {
     gameState.regions.forEach(region => {
       if (region.units) {
         region.units.forEach(unitGroup => {
-          if (unitGroup.faction === faction) {
+          if (unitGroup.team === team) {
             ownUnits += unitGroup.count;
           } else {
             enemyUnits += unitGroup.count;
@@ -83,14 +83,14 @@ class AIStrategy {
   }
 
   /**
-   * React to an opponent's move by updating internal strategy
+   * React to an opponent's move by adjusting strategy
    * @param {Object} gameState - Current game state after opponent's move
    * @param {Object} opponentMove - The move the opponent just made
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
    */
-  reactToOpponentMove(gameState, opponentMove, faction) {
+  reactToOpponentMove(gameState, opponentMove, team) {
     // Default implementation does nothing
-    // Derived classes can override to adjust strategy based on opponent moves
+    // Derived classes can override to adjust strategy
   }
   
   /**

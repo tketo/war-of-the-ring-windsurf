@@ -17,12 +17,24 @@ const createMockGameState = () => ({
   currentPhase: 'action',
   currentPlayer: 'player1',
   players: [
-    { playerId: 'player1', faction: 'freePeoples', role: 'player', isActive: true },
-    { playerId: 'player2', faction: 'shadow', role: 'player', isActive: true }
+    { playerId: 'player1', team: 'Free', role: 'GondorElves', isActive: true },
+    { playerId: 'player2', team: 'Shadow', role: 'Sauron', isActive: true }
   ],
   actionDice: {
-    freePeoples: ['character', 'army', 'muster', 'event', 'will'],
-    shadow: ['character', 'army', 'muster', 'event', 'eye']
+    free: [
+      { type: 'character', selected: false },
+      { type: 'army', selected: false },
+      { type: 'muster', selected: false },
+      { type: 'event', selected: false },
+      { type: 'will', selected: false }
+    ],
+    shadow: [
+      { type: 'character', selected: false },
+      { type: 'army', selected: false },
+      { type: 'muster', selected: false },
+      { type: 'event', selected: false },
+      { type: 'eye', selected: false }
+    ]
   },
   characters: [
     { 
@@ -30,45 +42,49 @@ const createMockGameState = () => ({
       location: 'rivendell', 
       status: 'hidden',
       corruption: 0,
-      progress: 0
+      position: 0
     },
     {
       characterId: 'gandalf',
+      type: 'companion',
       location: 'rivendell',
-      status: 'active',
-      canBearRing: true
+      status: 'active'
     }
   ],
-  units: [
-    { type: 'regular', count: 2, faction: 'freePeoples', nation: 'gondor', active: true },
-    { type: 'elite', count: 1, faction: 'freePeoples', nation: 'gondor', active: true },
-    { type: 'regular', count: 3, faction: 'shadow', nation: 'mordor', active: true },
-    { type: 'elite', count: 2, faction: 'shadow', nation: 'southEast', active: true }
-  ],
   regions: [
-    { regionId: 'region1', controlledBy: 'freePeoples', combat: false },
-    { regionId: 'region2', controlledBy: null, combat: false },
-    { regionId: 'region3', controlledBy: 'shadow', combat: false }
+    {
+      regionId: 'region1', 
+      controlledBy: 'Free', 
+      combat: false,
+      units: [
+        { type: 'regular', count: 2, team: 'Free', nation: 'gondor', active: true },
+        { type: 'elite', count: 1, team: 'Free', nation: 'gondor', active: true }
+      ]
+    },
+    {
+      regionId: 'region2', 
+      controlledBy: 'Shadow', 
+      combat: false,
+      units: [
+        { type: 'regular', count: 3, team: 'Shadow', nation: 'mordor', active: true },
+        { type: 'elite', count: 2, team: 'Shadow', nation: 'mordor', active: true }
+      ]
+    }
   ],
   nations: {
-    north: { status: 0, active: false },
+    gondor: { status: 0, active: true },
     rohan: { status: 0, active: false },
-    gondor: { status: 0, active: false },
-    elves: { status: 2, active: true },
+    north: { status: 0, active: false },
+    elves: { status: 0, active: true },
     dwarves: { status: 0, active: false },
-    southEast: { status: -2, active: true }
+    mordor: { status: -2, active: true },
+    isengard: { status: -1, active: true },
+    southEast: { status: -1, active: false }
   },
-  huntBox: ['eye', 'eye'],
-  huntPool: {
-    regular: 12,
-    eye: 0
-  },
-  cards: {
-    playerHands: new Map([
-      ['ai_freePeoples', [{ id: 'card1', type: 'event' }, { id: 'card2', type: 'combat' }]],
-      ['ai_shadow', [{ id: 'card3', type: 'event' }, { id: 'card4', type: 'combat' }]]
-    ])
-  }
+  cards: new Map([
+    ['player1', [{ id: 'card1', type: 'event' }, { id: 'card2', type: 'combat' }]],
+    ['player2', [{ id: 'card3', type: 'event' }, { id: 'card4', type: 'character' }]]
+  ])
 });
 
 describe('AI Manager', () => {
@@ -81,14 +97,14 @@ describe('AI Manager', () => {
   });
 
   test('should create and retrieve AI instances', () => {
-    const ai = aiManager.createAI('test-game', 'freePeoples', 'random');
+    const ai = aiManager.createAI('test-game', 'Free', 'random');
     expect(ai).toBeInstanceOf(RandomStrategy);
     
-    const retrievedAI = aiManager.getAI('test-game', 'freePeoples');
+    const retrievedAI = aiManager.getAI('test-game', 'Free');
     expect(retrievedAI).toBe(ai);
     
-    aiManager.removeAI('test-game', 'freePeoples');
-    expect(aiManager.getAI('test-game', 'freePeoples')).toBeNull();
+    aiManager.removeAI('test-game', 'Free');
+    expect(aiManager.getAI('test-game', 'Free')).toBeNull();
   });
 });
 
@@ -122,17 +138,17 @@ describe('AI Strategies - Basic Functionality', () => {
   test('each strategy should evaluate game states', () => {
     // Test Random Strategy
     const randomAI = new RandomStrategy();
-    const randomScore = randomAI.evaluateState(mockGameState, 'freePeoples');
+    const randomScore = randomAI.evaluateState(mockGameState, 'Free');
     expect(typeof randomScore).toBe('number');
     
     // Test Queller Strategy
     const quellerAI = new QuellerStrategy();
-    const quellerScore = quellerAI.evaluateState(mockGameState, 'freePeoples');
+    const quellerScore = quellerAI.evaluateState(mockGameState, 'Free');
     expect(typeof quellerScore).toBe('number');
     
     // Test Fellowship Strategy
     const fellowshipAI = new FellowshipStrategy();
-    const fellowshipScore = fellowshipAI.evaluateState(mockGameState, 'freePeoples');
+    const fellowshipScore = fellowshipAI.evaluateState(mockGameState, 'Free');
     expect(typeof fellowshipScore).toBe('number');
   });
 });
@@ -150,8 +166,8 @@ describe('Fellowship Strategy - Specific Tests', () => {
     // Initial weights
     const initialWeights = { ...fellowshipAI.weights };
     
-    // React to a hunt move as Free Peoples
-    fellowshipAI.reactToOpponentMove(mockGameState, { type: 'hunt' }, 'freePeoples');
+    // React to a hunt move as Free
+    fellowshipAI.reactToOpponentMove(mockGameState, { type: 'hunt' }, 'Free');
     
     // Weights should be adjusted but still sum to approximately 1
     const weightSum = Object.values(fellowshipAI.weights).reduce((sum, w) => sum + w, 0);
@@ -159,7 +175,7 @@ describe('Fellowship Strategy - Specific Tests', () => {
     
     // React to a fellowship movement as Shadow
     fellowshipAI.weights = { ...initialWeights }; // Reset weights
-    fellowshipAI.reactToOpponentMove(mockGameState, { type: 'fellowshipMovement' }, 'shadow');
+    fellowshipAI.reactToOpponentMove(mockGameState, { type: 'fellowshipMovement' }, 'Shadow');
     
     // Weights should be adjusted but still sum to approximately 1
     const weightSum2 = Object.values(fellowshipAI.weights).reduce((sum, w) => sum + w, 0);
@@ -169,24 +185,24 @@ describe('Fellowship Strategy - Specific Tests', () => {
   test('should generate moves based on game phase', () => {
     // Setup phase
     mockGameState.currentPhase = 'setup';
-    let moves = fellowshipAI.generatePossibleMoves(mockGameState, 'freePeoples');
+    let moves = fellowshipAI.generatePossibleMoves(mockGameState, 'Free');
     expect(moves.length).toBeGreaterThan(0);
     expect(moves[0].type).toBe('setup');
     
     // Hunt phase
     mockGameState.currentPhase = 'hunt';
-    moves = fellowshipAI.generatePossibleMoves(mockGameState, 'shadow');
+    moves = fellowshipAI.generatePossibleMoves(mockGameState, 'Shadow');
     expect(moves.length).toBeGreaterThan(0);
     expect(moves.some(m => m.type === 'allocateHuntDice')).toBe(true);
     
     // Action phase
     mockGameState.currentPhase = 'action';
-    moves = fellowshipAI.generatePossibleMoves(mockGameState, 'freePeoples');
+    moves = fellowshipAI.generatePossibleMoves(mockGameState, 'Free');
     expect(moves.length).toBeGreaterThan(0);
     
     // End phase
     mockGameState.currentPhase = 'end';
-    moves = fellowshipAI.generatePossibleMoves(mockGameState, 'freePeoples');
+    moves = fellowshipAI.generatePossibleMoves(mockGameState, 'Free');
     expect(moves.length).toBeGreaterThan(0);
     expect(moves[0].type).toBe('endTurn');
   });

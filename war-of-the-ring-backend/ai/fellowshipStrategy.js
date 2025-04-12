@@ -1,8 +1,8 @@
 /**
  * Fellowship-focused AI Strategy for War of the Ring
  * 
- * This strategy focuses on the Fellowship's journey for Free Peoples
- * and hunting the Fellowship for the Shadow player.
+ * This strategy focuses on the Fellowship's journey for Free team
+ * and hunting the Fellowship for the Shadow team.
  */
 
 const AIStrategy = require('./strategyInterface');
@@ -29,59 +29,47 @@ class FellowshipStrategy extends AIStrategy {
   }
 
   /**
-   * Determine the next move for the AI using Fellowship-focused strategy
+   * Determine the next move for the AI
    * @param {Object} gameState - Current game state
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
    * @returns {Object} Move object that can be processed by the rules engine
    */
-  determineMove(gameState, faction) {
-    // Generate all possible moves
-    const possibleMoves = this.generatePossibleMoves(gameState, faction);
+  determineMove(gameState, team) {
+    // Get all possible moves
+    const possibleMoves = this.generatePossibleMoves(gameState, team);
     
-    // If no valid moves, return null
-    if (!possibleMoves || possibleMoves.length === 0) {
-      console.log(`No valid moves for ${faction}`);
-      return null;
+    // If no moves are possible, return a pass move
+    if (possibleMoves.length === 0) {
+      return { type: 'pass', player: gameState.currentPlayer };
     }
     
-    // For testing purposes, just return a simple move
-    if (faction === 'freePeoples') {
-      const fellowshipMove = possibleMoves.find(move => move.type === 'fellowshipMovement');
-      if (fellowshipMove) return fellowshipMove;
-    } else {
-      const huntMove = possibleMoves.find(move => move.type === 'hunt');
-      if (huntMove) return huntMove;
+    // Evaluate each move and select the best one
+    let bestMove = possibleMoves[0];
+    let bestScore = -Infinity;
+    
+    for (const move of possibleMoves) {
+      // Apply the move to a copy of the game state
+      const newState = this._simulateMove(gameState, move);
       
-      // If no hunt move is available, try to find another valid move
-      if (possibleMoves.length > 0) {
-        return possibleMoves[0];
+      // Evaluate the resulting state
+      const score = this.evaluateState(newState, team);
+      
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = move;
       }
     }
     
-    // If specific move not found, return the first move
-    return possibleMoves[0];
+    return bestMove;
   }
-
-  /**
-   * Evaluate a game state with focus on Fellowship progress/hunting
-   * @param {Object} gameState - Game state to evaluate
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
-   * @returns {Number} Score representing how good the state is for the AI (higher is better)
-   */
-  evaluateState(gameState, faction) {
-    if (!gameState) return 0.5;
-    
-    // For testing purposes, return a simple score
-    return faction === 'freePeoples' ? 0.7 : 0.6;
-  }
-
+  
   /**
    * Generate all possible valid moves for the current game state
    * @param {Object} gameState - Current game state
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
    * @returns {Array} Array of possible move objects
    */
-  generatePossibleMoves(gameState, faction) {
+  generatePossibleMoves(gameState, team) {
     if (!gameState) {
       return [];
     }
@@ -91,53 +79,89 @@ class FellowshipStrategy extends AIStrategy {
     // Based on the current phase, generate different types of moves
     switch (gameState.currentPhase) {
       case 'setup':
-        possibleMoves.push(...this._generateSetupMoves(gameState, faction));
+        possibleMoves.push(...this._generateSetupMoves(gameState, team));
         break;
       case 'hunt':
-        possibleMoves.push(...this._generateHuntMoves(gameState, faction));
+        possibleMoves.push(...this._generateHuntMoves(gameState, team));
         break;
       case 'action':
-        possibleMoves.push(...this._generateActionMoves(gameState, faction));
+        possibleMoves.push(...this._generateActionMoves(gameState, team));
         break;
       case 'combat':
-        possibleMoves.push(...this._generateCombatMoves(gameState, faction));
+        possibleMoves.push(...this._generateCombatMoves(gameState, team));
         break;
       case 'end':
-        possibleMoves.push(...this._generateEndPhaseMoves(gameState, faction));
+        possibleMoves.push(...this._generateEndPhaseMoves(gameState, team));
         break;
       default:
         // Default to action phase moves if phase is not recognized
-        possibleMoves.push(...this._generateActionMoves(gameState, faction));
+        possibleMoves.push(...this._generateActionMoves(gameState, team));
     }
     
-    // Always add a pass move as a fallback
-    possibleMoves.push({
-      type: 'pass',
-      faction,
-      player: `ai_${faction}`,
-      phase: gameState.currentPhase || 'action',
-      timestamp: Date.now()
-    });
-    
-    // If skipValidation flag is set, return all moves without validation
-    if (gameState.skipValidation) {
-      return possibleMoves;
-    }
-    
-    // Filter out invalid moves using the parent class helper method
-    return possibleMoves.filter(move => AIStrategy.prototype._validateMove.call(this, gameState, move));
+    return possibleMoves;
   }
-
+  
   /**
-   * React to an opponent's move by updating internal strategy
+   * Evaluate the current game state from the perspective of this AI's team
+   * @param {Object} gameState - Current game state
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
+   * @returns {Number} Score representing how favorable the state is (higher is better)
+   */
+  evaluateState(gameState, team) {
+    if (!gameState) {
+      return 0;
+    }
+    
+    let score = 0;
+    const isFreeTeam = team === 'Free';
+    
+    // Fellowship progress and corruption
+    const fellowship = gameState.characters?.find(c => c.characterId === 'fellowship');
+    if (fellowship) {
+      if (isFreeTeam) {
+        // For Free team, progress is good, corruption is bad
+        score += this.weights.fellowshipProgress * (fellowship.position / 10);
+        score -= this.weights.corruption * (fellowship.corruption / 12);
+      } else {
+        // For Shadow team, corruption is good, progress is bad
+        score += this.weights.corruption * (fellowship.corruption / 12);
+        score -= this.weights.fellowshipProgress * (fellowship.position / 10);
+      }
+    }
+    
+    // Military strength
+    let ownUnits = 0;
+    let enemyUnits = 0;
+    
+    if (gameState.regions) {
+      gameState.regions.forEach(region => {
+        if (region.units) {
+          region.units.forEach(unitGroup => {
+            if (unitGroup.team === team) {
+              ownUnits += unitGroup.count;
+            } else {
+              enemyUnits += unitGroup.count;
+            }
+          });
+        }
+      });
+    }
+    
+    const militaryRatio = ownUnits / (ownUnits + enemyUnits || 1);
+    score += this.weights.militaryStrength * militaryRatio;
+    
+    return score;
+  }
+  
+  /**
+   * React to an opponent's move by adjusting strategy
    * @param {Object} gameState - Current game state after opponent's move
    * @param {Object} opponentMove - The move the opponent just made
-   * @param {String} faction - The faction this AI is playing ('freePeoples' or 'shadow')
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
    */
-  reactToOpponentMove(gameState, opponentMove, faction) {
-    // Adjust strategy weights based on opponent's move
-    if (faction === 'freePeoples') {
-      // If opponent is hunting aggressively, focus more on corruption management
+  reactToOpponentMove(gameState, opponentMove, team) {
+    if (team === 'Free') {
+      // If opponent is hunting, focus more on corruption
       if (opponentMove && (opponentMove.type === 'hunt' || opponentMove.action === 'hunt')) {
         this.weights.corruption += 0.05;
         this.weights.militaryStrength -= 0.05;
@@ -169,162 +193,93 @@ class FellowshipStrategy extends AIStrategy {
 
   /**
    * Generate possible setup phase moves
+   * @param {Object} gameState - Current game state
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
+   * @returns {Array} Array of possible setup moves
    * @private
    */
-  _generateSetupMoves(gameState, faction) {
-    const moves = [];
-    
-    // Add a basic setup move
-    moves.push({
-      type: 'setup',
-      faction,
-      player: `ai_${faction}`,
-      timestamp: Date.now()
-    });
-    
-    return moves;
+  _generateSetupMoves(gameState, team) {
+    // For now, just return a basic setup move
+    return [{ type: 'setup', player: gameState.currentPlayer }];
   }
 
   /**
    * Generate possible hunt phase moves
+   * @param {Object} gameState - Current game state
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
+   * @returns {Array} Array of possible hunt moves
    * @private
    */
-  _generateHuntMoves(gameState, faction) {
+  _generateHuntMoves(gameState, team) {
     const moves = [];
     
-    // If shadow faction, can allocate hunt dice
-    if (faction === 'shadow') {
-      // Fellowship strategy allocates more dice to hunting
-      let huntDiceCount = 2; // Default allocation for this strategy
-      
-      moves.push({
-        type: 'allocateHuntDice',
-        faction,
-        player: `ai_${faction}`,
-        count: huntDiceCount,
-        timestamp: Date.now()
+    // Only Shadow can allocate hunt dice
+    if (team === 'Shadow') {
+      moves.push({ 
+        type: 'allocateHuntDice', 
+        player: gameState.currentPlayer, 
+        count: 2 // Allocate 2 dice by default
       });
     }
-    
-    // Add a "pass" move to end the hunt phase
-    moves.push({
-      type: 'pass',
-      faction,
-      player: `ai_${faction}`,
-      phase: 'hunt',
-      timestamp: Date.now()
-    });
     
     return moves;
   }
 
   /**
    * Generate possible action phase moves
+   * @param {Object} gameState - Current game state
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
+   * @returns {Array} Array of possible action moves
    * @private
    */
-  _generateActionMoves(gameState, faction) {
-    const moves = [];
-    
-    // Add Fellowship-focused moves
-    if (faction === 'freePeoples') {
-      // Move Fellowship
-      moves.push({
-        type: 'fellowshipMovement',
-        faction,
-        player: `ai_${faction}`,
-        steps: 1, // Default to 1 step
-        timestamp: Date.now()
-      });
-    } else {
-      // Hunt the Fellowship
-      moves.push({
-        type: 'hunt',
-        faction,
-        player: `ai_${faction}`,
-        timestamp: Date.now()
-      });
-      
-      // Add army movement as a backup move
-      moves.push({
-        type: 'moveArmy',
-        faction,
-        player: `ai_${faction}`,
-        fromRegion: 'mordor',
-        toRegion: 'gondor',
-        units: [{ type: 'regular', count: 1 }],
-        timestamp: Date.now()
-      });
-      
-      // Add character movement as another backup move
-      moves.push({
-        type: 'moveCharacter',
-        faction,
-        player: `ai_${faction}`,
-        characterId: 'witchKing',
-        fromRegion: 'mordor',
-        toRegion: 'gondor',
-        timestamp: Date.now()
-      });
-      
-      // Add muster action as another option
-      moves.push({
-        type: 'muster',
-        faction,
-        player: `ai_${faction}`,
-        region: 'mordor',
-        unitType: 'regular',
-        count: 1,
-        timestamp: Date.now()
-      });
-    }
-    
-    // Add a "pass" move to end the action phase
-    moves.push({
-      type: 'pass',
-      faction,
-      player: `ai_${faction}`,
-      phase: 'action',
-      timestamp: Date.now()
-    });
-    
-    return moves;
+  _generateActionMoves(gameState, team) {
+    // For simplicity, just return a basic action move
+    return [{ 
+      type: 'useActionDie', 
+      player: gameState.currentPlayer,
+      dieIndex: 0
+    }];
   }
 
   /**
    * Generate possible combat phase moves
+   * @param {Object} gameState - Current game state
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
+   * @returns {Array} Array of possible combat moves
    * @private
    */
-  _generateCombatMoves(gameState, faction) {
-    const moves = [];
-    
-    // Add a "pass" move to end the combat phase
-    moves.push({
-      type: 'pass',
-      faction,
-      player: `ai_${faction}`,
-      phase: 'combat',
-      timestamp: Date.now()
-    });
-    
-    return moves;
+  _generateCombatMoves(gameState, team) {
+    // For simplicity, just return a basic combat move
+    return [{ 
+      type: 'combat', 
+      player: gameState.currentPlayer,
+      region: 'gondor', // Example region
+      attacker: team
+    }];
   }
 
   /**
    * Generate possible end phase moves
+   * @param {Object} gameState - Current game state
+   * @param {String} team - The team this AI is playing ('Free' or 'Shadow')
+   * @returns {Array} Array of possible end phase moves
    * @private
    */
-  _generateEndPhaseMoves(gameState, faction) {
-    const moves = [];
-    
-    // Add a "endTurn" move
-    moves.push({
-      type: 'endTurn',
-      faction,
-      player: `ai_${faction}`,
-      timestamp: Date.now()
-    });
-    
-    return moves;
+  _generateEndPhaseMoves(gameState, team) {
+    return [{ type: 'endTurn', player: gameState.currentPlayer }];
+  }
+
+  /**
+   * Simulate applying a move to the game state
+   * @param {Object} gameState - Current game state
+   * @param {Object} move - Move to apply
+   * @returns {Object} New game state after applying the move
+   * @private
+   */
+  _simulateMove(gameState, move) {
+    // This is a simple simulation that doesn't actually apply the move
+    // In a real implementation, this would apply the move to a copy of the game state
+    return { ...gameState };
   }
 }
 

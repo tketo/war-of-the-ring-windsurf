@@ -33,7 +33,7 @@ const gameStateSchema = {
   players: [{
     id: String,
     team: { type: String, enum: ["Free", "Shadow"] },
-    role: { type: String, enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "IsengardSouthrons"] },
+    role: { type: String, enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "Saruman"] },
     isAI: Boolean,
     aiStrategy: String,
     isLeading: Boolean,
@@ -117,7 +117,7 @@ const gameStateSchema = {
     { id: "p1", team: "Free", role: "GondorElves", isLeading: true, controlledNations: ["3", "2"], hand: [] },
     { id: "p2", team: "Free", role: "RohanNorthDwarves", isLeading: false, controlledNations: ["5", "4", "1"], hand: [] },
     { id: "p3", team: "Shadow", role: "Sauron", isLeading: true, controlledNations: ["7"], hand: [] },
-    { id: "p4", team: "Shadow", role: "IsengardSouthrons", isLeading: false, controlledNations: ["6", "8"], hand: [] }
+    { id: "p4", team: "Shadow", role: "Saruman", isLeading: false, controlledNations: ["6", "8"], hand: [] }
   ],
   board: {
     regions: { 
@@ -211,7 +211,7 @@ const gameStateSchema = {
           { name: "Voice of Saruman", description: "If Saruman is in Orthanc and Isengard is active, use a Muster die to recruit 2 Regulars in Orthanc" }
         ],
         canGuide: false,
-        playableBy: "Isengard"
+        playableBy: "Saruman"
       },
       {
         id: "frodo",
@@ -313,7 +313,7 @@ const gameStateSchema = {
         "GondorElves": ["Gondor", "Elves"],
         "RohanNorthDwarves": ["Rohan", "The North", "Dwarves"],
         "Sauron": ["Sauron"],
-        "IsengardSouthrons": ["Isengard", "Southrons & Easterlings"],
+        "Saruman": ["Saruman"],
         "FreeAll": ["Free Peoples", "Gondor", "Elves", "Rohan", "The North", "Dwarves", "Any"]
       };
       const allowed = rolePlayableMap[player.role] || [];
@@ -357,7 +357,7 @@ const gameStateSchema = {
    - **Input**: Free (p1, FreeAll) selects Free die and plays "gandalf_grey" ("Free Peoples").
    - **Expected**: Valid; "Free Peoples" allowed for "FreeAll".
 - 16. **Invalid Character Play**:
-   - **Input**: p4 (IsengardSouthrons) attempts to play "legolas" (Elves).
+   - **Input**: p4 (Saruman) attempts to play "legolas" (Elves).
    - **Expected**: `valid: false`, `message: i18n.t("action.wrongPlayer")`.
 - 17. **Character Ability Validation**:
    - **Input**: p2 (RohanNorthDwarves) plays "gimli" in Erebor, uses any die to advance Dwarves on Political Track.

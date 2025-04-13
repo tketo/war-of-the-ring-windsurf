@@ -70,7 +70,7 @@ describe('Character Playability in Multiplayer Games', () => {
         { playerId: 'p1', team: 'Free', role: 'GondorElves', isLeading: true, controlledNations: ['2', '3'] },
         { playerId: 'p2', team: 'Free', role: 'RohanNorthDwarves', isLeading: false, controlledNations: ['1', '4', '5'] },
         { playerId: 'p3', team: 'Shadow', role: 'Sauron', isLeading: true, controlledNations: ['7'] },
-        { playerId: 'p4', team: 'Shadow', role: 'IsengardSouthrons', isLeading: false, controlledNations: ['6', '8'] }
+        { playerId: 'p4', team: 'Shadow', role: 'Saruman', isLeading: false, controlledNations: ['6', '8'] }
       ],
       characters: [
         { characterId: 'boromir', location: 'minas_tirith', status: 'active' },
@@ -91,7 +91,7 @@ describe('Character Playability in Multiplayer Games', () => {
       players: [
         { playerId: 'p1', team: 'Free', role: 'FreeAll', isLeading: true, controlledNations: ['1', '2', '3', '4', '5'] },
         { playerId: 'p2', team: 'Shadow', role: 'Sauron', isLeading: true, controlledNations: ['7'] },
-        { playerId: 'p3', team: 'Shadow', role: 'IsengardSouthrons', isLeading: false, controlledNations: ['6', '8'] }
+        { playerId: 'p3', team: 'Shadow', role: 'Saruman', isLeading: false, controlledNations: ['6', '8'] }
       ],
       characters: [...fourPlayerGameState.characters]
     };
@@ -164,7 +164,7 @@ describe('Character Playability in Multiplayer Games', () => {
       expect(result.isValid).toBe(true);
     });
 
-    test('IsengardSouthrons player cannot play Sauron characters', () => {
+    test('Saruman player cannot play Sauron characters', () => {
       const move = {
         type: 'characterAction',
         action: 'move',
@@ -255,8 +255,8 @@ describe('Character Playability in Multiplayer Games', () => {
       const sauronResult = rulesEngine.validateCharacterAction(threePlayerGameState, sauronMove);
       expect(sauronResult.isValid).toBe(true);
 
-      // IsengardSouthrons player can play Isengard characters
-      const isengardMove = {
+      // Saruman player can play Isengard characters
+      const sarumanMove = {
         type: 'characterAction',
         action: 'move',
         characterId: 'saruman',
@@ -264,10 +264,10 @@ describe('Character Playability in Multiplayer Games', () => {
         targetRegion: 'isengard'
       };
 
-      const isengardResult = rulesEngine.validateCharacterAction(threePlayerGameState, isengardMove);
-      expect(isengardResult.isValid).toBe(true);
+      const sarumanResult = rulesEngine.validateCharacterAction(threePlayerGameState, sarumanMove);
+      expect(sarumanResult.isValid).toBe(true);
 
-      // IsengardSouthrons player cannot play Sauron characters
+      // Saruman player cannot play Sauron characters
       const invalidMove = {
         type: 'characterAction',
         action: 'move',

@@ -1,0 +1,92 @@
+{
+    "nations": [
+      {
+        "id": 0,
+        "nation": "neutral",
+        "units_total": {
+          "regular": 0,
+          "elite": 0,
+          "leaders": 0
+        }
+      },
+      {
+        "id": 1,
+        "nation": "Dwarves",
+        "units_total": {
+          "regular": 5,
+          "elite": 5,
+          "leaders": 4
+        }
+      },
+      {
+        "id": 2,
+        "nation": "Elves",
+        "units_total": {
+          "regular": 5,
+          "elite": 10,
+          "leaders": 4
+        }
+      },
+      {
+        "id": 3,
+        "nation": "Gondor",
+        "units_total": {
+          "regular": 15,
+          "elite": 5,
+          "leaders": 4
+        }
+      },
+      {
+        "id": 4,
+        "nation": "The North",
+        "units_total": {
+          "regular": 10,
+          "elite": 5,
+          "leaders": 4
+        }
+      },
+      {
+        "id": 5,
+        "nation": "Rohan",
+        "units_total": {
+          "regular": 10,
+          "elite": 5,
+          "leaders": 4
+        }
+      },
+      {
+        "id": 6,
+        "nation": "Isengard",
+        "units_total": {
+          "regular": 12,
+          "elite": 6,
+          "leaders": 0
+        }
+      },
+      {
+        "id": 7,
+        "nation": "Sauron",
+        "units_total": {
+          "regular": 36,
+          "elite": 6,
+          "leaders": 0
+        }
+      },
+      {
+        "id": 8,
+        "nation": "Southrons & Easterlings",
+        "units_total": {
+          "regular": 24,
+          "elite": 6,
+          "leaders": 0
+        }
+      }
+    ],
+    "shared_leader_pools": {
+      "nazgul": {
+        "name": "Nazgûl",
+        "total_leaders": 8,
+        "shared_by": [6, 7, 8]
+      }
+    }
+}

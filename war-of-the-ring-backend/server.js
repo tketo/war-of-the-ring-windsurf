@@ -16,6 +16,7 @@ const playerRoutes = require('./routes/player');
 const lobbyRoutes = require('./routes/lobby');
 const cardRoutes = require('./routes/card');
 const aiRoutes = require('./routes/ai');
+const testRoutes = require('./routes/test'); // Add test routes
 
 // Import WebSocket handler
 const setupSocketHandlers = require('./websockets/socketHandler');
@@ -35,6 +36,7 @@ app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   credentials: true
 }));
+app.use(express.static('public'));
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -99,6 +101,7 @@ app.use('/player', playerRoutes);
 app.use('/lobby', lobbyRoutes);
 app.use('/card', cardRoutes);
 app.use('/ai', aiRoutes);
+app.use('/test', testRoutes); // Add test routes
 
 // 404 handler
 app.use(notFound);
@@ -109,6 +112,12 @@ app.use(errorHandler);
 // Self-signed certificates for development
 // In production, use proper certificates
 let server;
+// For development, let's use HTTP by default
+const http = require('http');
+server = http.createServer(app);
+console.log('HTTP server created for development');
+
+/* Commented out HTTPS for now to avoid certificate issues
 try {
   const options = {
     key: fs.readFileSync('./certs/key.pem', 'utf8'),
@@ -126,6 +135,7 @@ try {
   const http = require('http');
   server = http.createServer(app);
 }
+*/
 
 // Socket.io setup
 const io = new Server(server, {

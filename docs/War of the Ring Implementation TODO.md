@@ -63,7 +63,7 @@
 
 ## 5. Multiplayer and Player Options
 - [ ] **Player Configurations**:
-  - [ ] Support 1-4 players with roles: "FreeAll" (3-player), "GondorElves", "RohanNorthDwarves", "Sauron", "IsengardSouthrons".
+  - [ ] Support 1-4 players with roles: "FreeAll" (3-player), "GondorElves", "RohanNorthDwarves", "Sauron", "Saruman".
   - [ ] Implement turn order for 3/4-player games using shared dice pools (see Guide v2.2, Rules Engine).
 - [ ] **Lobby/Matchmaking**: Set up Redis queue for lobbies, support team assignments.
 - [ ] **Spectator Mode**: Enable read-only WebSocket feed.

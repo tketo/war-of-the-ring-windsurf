@@ -636,7 +636,8 @@
     "combatTitle": "Dread and Despair",
     "combatId": "s20-dread-and-despair",
     "side": "shadow",
-    "type": "character"
+    "type": "character",
+    "playableBy": "Witch-king"
   },
   {
     "cardNumber": "21/24",
@@ -654,7 +655,8 @@
     "combatTitle": "Cruel as Death",
     "combatId": "s21-cruel-as-death",
     "side": "shadow",
-    "type": "character"
+    "type": "character",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "22/24",
@@ -672,7 +674,8 @@
     "combatTitle": "Foul Stench",
     "combatId": "s22-foul-stench",
     "side": "shadow",
-    "type": "character"
+    "type": "character",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "23/24",
@@ -703,7 +706,8 @@
     "combatTitle": "Foul Stench",
     "combatId": "s24-foul-stench",
     "side": "shadow",
-    "type": "character"
+    "type": "character",
+    "playableBy": "Witch-king"
   },
   {
     "cardNumber": "1/24",
@@ -742,7 +746,8 @@
     "combatTitle": "No Quarter",
     "combatId": "fp2-no-quarter",
     "side": "freePeoples",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "2/24",
@@ -755,7 +760,8 @@
     "combatTitle": "Onslaught",
     "combatId": "s2-onslaught",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "3/24",
@@ -768,7 +774,8 @@
     "combatTitle": "Advantageous Position",
     "combatId": "fp3-advantageous-position",
     "side": "freePeoples",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "3/24",
@@ -794,7 +801,8 @@
     "combatTitle": "Advantageous Position",
     "combatId": "fp4-advantageous-position",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "4/24",
@@ -846,7 +854,8 @@
     "combatTitle": "Shield-wall",
     "combatId": "fp6-shield-wall",
     "side": "freePeoples",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "6/24",
@@ -872,7 +881,8 @@
     "combatTitle": "Shield-wall",
     "combatId": "fp7-shield-wall",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "7/24",
@@ -924,7 +934,8 @@
     "combatTitle": "Scouts",
     "combatId": "fp9-scouts",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "9/24",
@@ -963,7 +974,8 @@
     "combatTitle": "Deadly Strife",
     "combatId": "s10-deadly-strife",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "11/24",
@@ -989,7 +1001,8 @@
     "combatTitle": "Relentless Assault",
     "combatId": "s11-relentless-assault",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "12/24",
@@ -1015,7 +1028,8 @@
     "combatTitle": "Swarm of Bats",
     "combatId": "s12-swarm-of-bats",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Sauron"
   },
   {
     "cardNumber": "13/24",
@@ -1028,7 +1042,8 @@
     "combatTitle": "Charge",
     "combatId": "fp13-charge",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "13/24",
@@ -1041,7 +1056,8 @@
     "combatTitle": "We Come to Kill",
     "combatId": "s13-we-come-to-kill",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "14/24",
@@ -1054,7 +1070,8 @@
     "combatTitle": "Charge",
     "combatId": "fp14-charge",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "14/24",
@@ -1067,7 +1084,8 @@
     "combatTitle": "We Come to Kill",
     "combatId": "s14-we-come-to-kill",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Sauron"
   },
   {
     "cardNumber": "15/24",
@@ -1080,7 +1098,8 @@
     "combatTitle": "Daylight",
     "combatId": "fp15-daylight",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "15/24",
@@ -1093,7 +1112,8 @@
     "combatTitle": "We Come to Kill",
     "combatId": "s15-we-come-to-kill",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Sauron"
   },
   {
     "cardNumber": "16/24",
@@ -1106,7 +1126,8 @@
     "combatTitle": "Daylight",
     "combatId": "fp16-daylight",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "16/24",
@@ -1119,7 +1140,8 @@
     "combatTitle": "Great Host",
     "combatId": "s16-great-host",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "17/24",
@@ -1132,7 +1154,8 @@
     "combatTitle": "Scouts",
     "combatId": "fp17-scouts",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "17/24",
@@ -1145,7 +1168,8 @@
     "combatTitle": "Great Host",
     "combatId": "s17-great-host",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "18/24",
@@ -1158,7 +1182,8 @@
     "combatTitle": "Shield-wall",
     "combatId": "fp18-shield-wall",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "18/24",
@@ -1171,7 +1196,8 @@
     "combatTitle": "Relentless Assault",
     "combatId": "s18-relentless-assault",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Sauron"
   },
   {
     "cardNumber": "19/24",
@@ -1184,7 +1210,8 @@
     "combatTitle": "Shield-wall",
     "combatId": "fp19-shield-wall",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "19/24",
@@ -1197,7 +1224,8 @@
     "combatTitle": "Onslaught",
     "combatId": "s19-onslaught",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Sauron"
   },
   {
     "cardNumber": "20/24",
@@ -1210,7 +1238,8 @@
     "combatTitle": "Advantageous Position",
     "combatId": "fp20-advantageous-position",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "20/24",
@@ -1223,7 +1252,8 @@
     "combatTitle": "Onslaught",
     "combatId": "s20-onslaught",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Sauron"
   },
   {
     "cardNumber": "21/24",
@@ -1236,7 +1266,8 @@
     "combatTitle": "Advantageous Position",
     "combatId": "fp21-advantageous-position",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "21/24",
@@ -1249,7 +1280,8 @@
     "combatTitle": "Deadly Strife",
     "combatId": "s21-deadly-strife",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Saruman"
   },
   {
     "cardNumber": "22/24",
@@ -1262,7 +1294,8 @@
     "combatTitle": "Valour",
     "combatId": "fp22-valour",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "22/24",
@@ -1275,7 +1308,8 @@
     "combatTitle": "Desperate Battle",
     "combatId": "s22-desperate-battle",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+    "playableBy": "Sauron"
   },
   {
     "cardNumber": "23/24",
@@ -1288,7 +1322,8 @@
     "combatTitle": "Valour",
     "combatId": "fp23-valour",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Rohan"
   },
   {
     "cardNumber": "23/24",
@@ -1314,7 +1349,8 @@
     "combatTitle": "Valour",
     "combatId": "fp24-valour",
     "side": "freePeoples",
-    "type": "army"
+    "type": "army",
+    "playableBy": "Gondor"
   },
   {
     "cardNumber": "24/24",
@@ -1327,7 +1363,8 @@
     "combatTitle": "Desperate Battle",
     "combatId": "s24-desperate-battle",
     "side": "shadow",
-    "type": "muster"
+    "type": "muster",
+		"playableBy": "Sauron"
   }
 ]
 

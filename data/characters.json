@@ -39,7 +39,7 @@
 					"description": "Isengard Elite units count as both Leaders and Army units"
 				}
 			],
-			"playableBy": "Isengard"
+			"playableBy": "Saruman"
 		},
 		{
 			"id": "boromir",

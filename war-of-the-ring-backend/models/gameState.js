@@ -42,7 +42,7 @@ const gameStateSchema = new mongoose.Schema({
     },
     role: { 
       type: String, 
-      enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "IsengardSouthrons"],
+      enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "Saruman"],
       required: true
     },
     isAI: Boolean,

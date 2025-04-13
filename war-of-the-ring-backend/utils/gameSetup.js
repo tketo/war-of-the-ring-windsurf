@@ -131,7 +131,7 @@ function setupPlayers(gameState, players, playerCount) {
       // 3-player game: 1 Free Peoples, 2 Shadow
       const freePlayerThree = players.find(p => p.team === 'Free') || { playerId: 'p1', team: 'Free' };
       const sauronPlayer = players.find(p => p.role === 'Sauron') || { playerId: 'p2', team: 'Shadow', role: 'Sauron' };
-      const isengardPlayer = players.find(p => p.role === 'IsengardSouthrons') || { playerId: 'p3', team: 'Shadow', role: 'IsengardSouthrons' };
+      const isengardPlayer = players.find(p => p.role === 'Saruman') || { playerId: 'p3', team: 'Shadow', role: 'Saruman' };
 
       gameState.players.push({
         playerId: freePlayerThree.playerId,
@@ -158,7 +158,7 @@ function setupPlayers(gameState, players, playerCount) {
       gameState.players.push({
         playerId: isengardPlayer.playerId,
         team: 'Shadow',
-        role: 'IsengardSouthrons',
+        role: 'Saruman',
         isLeading: false,
         isAI: isengardPlayer.isAI || false,
         aiStrategy: isengardPlayer.aiStrategy,
@@ -172,7 +172,7 @@ function setupPlayers(gameState, players, playerCount) {
       const gondorElvesPlayer = players.find(p => p.role === 'GondorElves') || { playerId: 'p1', team: 'Free', role: 'GondorElves' };
       const rohanNorthDwarvesPlayer = players.find(p => p.role === 'RohanNorthDwarves') || { playerId: 'p2', team: 'Free', role: 'RohanNorthDwarves' };
       const sauronPlayerFour = players.find(p => p.role === 'Sauron') || { playerId: 'p3', team: 'Shadow', role: 'Sauron' };
-      const isengardPlayerFour = players.find(p => p.role === 'IsengardSouthrons') || { playerId: 'p4', team: 'Shadow', role: 'IsengardSouthrons' };
+      const isengardPlayerFour = players.find(p => p.role === 'Saruman') || { playerId: 'p4', team: 'Shadow', role: 'Saruman' };
 
       gameState.players.push({
         playerId: gondorElvesPlayer.playerId,
@@ -210,7 +210,7 @@ function setupPlayers(gameState, players, playerCount) {
       gameState.players.push({
         playerId: isengardPlayerFour.playerId,
         team: 'Shadow',
-        role: 'IsengardSouthrons',
+        role: 'Saruman',
         isLeading: false,
         isAI: isengardPlayerFour.isAI || false,
         aiStrategy: isengardPlayerFour.aiStrategy,
@@ -299,7 +299,7 @@ function setupTurnOrder(gameState) {
   // For 3-4 player games, we need a specific turn order
   if (gameState.playerCount > 2) {
     // Example turn order for 4-player game (can be randomized)
-    // Free (GondorElves) -> Shadow (IsengardSouthrons) -> Free (RohanNorthDwarves) -> Shadow (Sauron)
+    // Free (GondorElves) -> Shadow (Saruman) -> Free (RohanNorthDwarves) -> Shadow (Sauron)
     const freePlayers = gameState.players.filter(p => p.team === 'Free');
     const shadowPlayers = gameState.players.filter(p => p.team === 'Shadow');
 

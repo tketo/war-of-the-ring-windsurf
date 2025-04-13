@@ -73,7 +73,7 @@ The React frontend application:
 ### Multiplayer Support (1-4 Players)
 - **Player Roles**: 
   - 3-Player: "FreeAll" (single Free player), two Shadow players
-  - 4-Player: Two Free players ("GondorElves", "RohanNorthDwarves"), two Shadow players ("Sauron", "IsengardSouthrons")
+  - 4-Player: Two Free players ("GondorElves", "RohanNorthDwarves"), two Shadow players ("Sauron", "Saruman")
 - **Character Restrictions**: Characters have `playableBy` attribute determining which roles can use them
 - **Turn Order**: Specific turn order rules for 3/4-player games
 

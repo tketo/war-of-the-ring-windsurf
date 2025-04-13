@@ -16,7 +16,7 @@ describe('Action Dice Selection in Multiplayer Games', () => {
         { playerId: 'p1', team: 'Free', role: 'GondorElves' },
         { playerId: 'p2', team: 'Free', role: 'RohanNorthDwarves' },
         { playerId: 'p3', team: 'Shadow', role: 'Sauron' },
-        { playerId: 'p4', team: 'Shadow', role: 'IsengardSouthrons' }
+        { playerId: 'p4', team: 'Shadow', role: 'Saruman' }
       ],
       currentPhase: 'action',
       currentPlayer: 'p1',

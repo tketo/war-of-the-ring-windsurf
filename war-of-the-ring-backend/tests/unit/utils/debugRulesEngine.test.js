@@ -5,26 +5,37 @@ const rulesEngine = require('../../../utils/rulesEngine');
 
 // Create a simplified mock game state
 const mockGameState = {
+  gameId: 'test-game',
+  turn: {
+    phase: 'action',
+    activePlayer: 'player1',
+    turnOrder: ['player1', 'player2']
+  },
   players: [
-    { playerId: 'player1', team: 'Free', role: 'GondorElves', isActive: true },
-    { playerId: 'player2', team: 'Shadow', role: 'Sauron', isActive: true }
+    { id: 'player1', playerId: 'player1', team: 'Free', role: 'GondorElves', isLeading: true, hand: [] },
+    { id: 'player2', playerId: 'player2', team: 'Shadow', role: 'Sauron', isLeading: true, hand: [] }
   ],
-  actionDice: {
-    free: [
-      { type: 'character', selected: false },
-      { type: 'army', selected: false },
-      { type: 'muster', selected: false },
-      { type: 'will', selected: false }
-    ],
-    shadow: [
-      { type: 'character', selected: false },
-      { type: 'army', selected: false },
-      { type: 'muster', selected: false },
-      { type: 'event', selected: false },
-      { type: 'eye', selected: false },
-      { type: 'eye', selected: false },
-      { type: 'eye', selected: false }
-    ]
+  board: {
+    actionDiceArea: {
+      free: [
+        { type: 'Character', selected: false },
+        { type: 'Army', selected: false },
+        { type: 'Muster', selected: false },
+        { type: 'Will', selected: false }
+      ],
+      shadow: [
+        { type: 'Character', selected: false },
+        { type: 'Army', selected: false },
+        { type: 'Muster', selected: false },
+        { type: 'Event', selected: false },
+        { type: 'Eye', selected: false },
+        { type: 'Eye', selected: false },
+        { type: 'Eye', selected: false }
+      ]
+    }
+  },
+  addToHistory: function(action, player, commit) {
+    // Mock function for testing
   }
 };
 
@@ -33,13 +44,12 @@ describe('Debug Rules Engine', () => {
     const move = { 
       type: 'useActionDie', 
       player: 'player1', 
-      team: 'Free',
       dieIndex: 10, // Out of bounds
       action: 'moveCharacter' 
     };
     
     console.log('Testing validateActionDie with:', JSON.stringify(move));
-    console.log('Game state actionDice:', JSON.stringify(mockGameState.actionDice));
+    console.log('Game state actionDiceArea:', JSON.stringify(mockGameState.board.actionDiceArea));
     
     const result = rulesEngine.validateActionDie(mockGameState, move);
     

@@ -1,3 +1,7 @@
+Below is the updated **Product Requirements Document (PRD)** for the *War of the Ring Web Application v1.3*, incorporating the specified updates to the **State Management** section to reflect the detailed requirements for Redux and React Hooks. The updates ensure clarity on how Redux manages the global game state with `reduxjs/toolkit` and how React Hooks handle local UI state for component-specific interactions. I’ve integrated these changes into the existing PRD structure, maintaining its high-level focus and ensuring all other sections remain consistent with the original document, including the emphasis on multi-language support via `react-i18next`.
+
+---
+
 # Product Requirements Document (PRD): War of the Ring Web Application v1.3
 
 ## 1. Overview
@@ -131,59 +135,66 @@ The War of the Ring Web App is a digital adaptation of the "War of the Ring, 2nd
 ## 3. Technical Specifications
 
 ### 3.1 Architecture
-- **Frontend**: React with JSX, Tailwind CSS, `react-i18next` for i18n, hosted via CDN (e.g., `cdn.jsdelivr.net`). All communication (WebSocket, API) must use HTTPS for encryption.
-- **State Management**:
-  - **Redux**: Manages global game state with `reduxjs/toolkit`, including `settings.language` and `settings.securityToken`.
-  - **React Hooks**: Handles local UI state (e.g., animations, toggles) with `useState` and `useReducer`.
-- **Backend**: Node.js with Express and `crypto` for encryption, managing game logic and persistence.
-- **Database**: MongoDB with encrypted game states and multilingual card rules.
-- **Communication**: WebSocket with encrypted payloads and token-based validation.
+- **Frontend**: 
+  - Built with **React** using **JSX** for dynamic user interfaces and styled with **Tailwind CSS** for efficient, responsive design.
+  - Libraries such as React and Redux are hosted via a **CDN** (e.g., `cdn.jsdelivr.net`) to optimize load times and reduce local storage needs.
+  - Utilizes `react-i18next` for multi-language support, ensuring all text is localized dynamically.
+- **State Management**: 
+  - **Redux**: Manages the global game state, including the board, dice, players, action history, and more, utilizing **`reduxjs/toolkit`** to simplify setup and minimize boilerplate code. Global state encompasses all shared game data required for synchronization and persistence, including settings such as language and security tokens.
+  - **React Hooks**: Handles local UI state for component-specific interactions, such as dice roll animations or hover effects, using **`useState`** and **`useReducer`** to manage transient, client-side behaviors efficiently.
+- **Backend**: 
+  - Powered by **Node.js** with **Express** to manage game logic, state persistence, and multiplayer synchronization.
+  - Employs **`crypto`** for encryption to secure state and communication.
+- **Database**: 
+  - **MongoDB** stores game states, player profiles, and multilingual card rules, providing a flexible and scalable solution for data persistence.
+- **Communication**: 
+  - **WebSocket** enables real-time updates, dispatching Redux actions to ensure all clients remain synchronized with the latest game state.
+  - All communication (WebSocket, API) must use **HTTPS** for encryption to protect data integrity.
 
 ### 3.2 Frontend Components
-- **Board**: Renders map with localized names, connected to Redux, token-verified state.
-- **Dice Roller**: Animated with `useState`, results synced to Redux after server validation.
-- **Card Display**: Deck/hand/discard with Redux state, text via i18n, tooltips via `useState`.
-- **Player HUD**: Displays turn/actions/chat, driven by Redux, localized, Hooks for toggles.
+- **Board**: 
+  - A React component that renders the game map, directly connected to the Redux store to reflect real-time state changes, with localized names via i18n.
+- **Dice Roller**: 
+  - An animated component managing visual roll effects locally, with final results synchronized to the Redux store after server validation.
+- **Card Display**: 
+  - Components for deck, hand, and discard piles, driven by Redux state to reflect the current game situation, with text localized via i18n and tooltips managed locally.
+- **Player HUD**: 
+  - Displays turn information, available actions, and chat functionality, powered by Redux for core data, with local UI toggles (e.g., chat visibility) handled by React Hooks.
 
 ### 3.3 Backend Modules
-- **Game Engine**: Validates moves, checks tokens, dispatches Redux actions.
-- **Card Database**: Stores multilingual card rules (e.g., `{ en: {}, es: {} }`), queried for Redux.
-- **AI Plugin Loader**: Loads AI strategies, dispatches validated actions.
-- **State Manager**: Encrypts/decrypts state, manages save/load/undo/redo/replay with token validation.
+- **Game Engine**: 
+  - Validates player moves and updates the game state, dispatching Redux-compatible actions to all connected clients to maintain consistency.
+- **Card Database**: 
+  - Stores card rules and metadata with multilingual support, queried by the backend to provide updates to the Redux store as needed during gameplay.
+- **AI Plugin Loader**: 
+  - Loads modular AI strategies, enabling AI opponents to dispatch validated actions to the Redux store, supporting both solo play and testing.
+- **State Manager**: 
+  - Manages save/load functionality, undo/redo operations, and replay capabilities by leveraging encrypted Redux action logs for state tracking and persistence.
 
 ### 3.4 Data Models
 - **Redux Store**:
-  ```javascript
-  {
-    game: {
-      board: { regions: { MT: { army: [3, 1, 2] } }, tracks: { political: {}, victory: {} } },
-      dice: { FP: [], SP: [] },
-      players: { FP: {}, SP: {} },
-      fellowship: { position: 'Rivendell', corruption: 0 },
-      hunt: { pool: [], box: [] },
-      history: [{ type: 'MOVE_ARMY', payload: {} }, ...],
-      settings: { language: 'en', securityToken: 'uuid' }
-    }
-  }
-  ```
-- **Player Profile**: `{ userId, username, stats, achievements, preferredLanguage, sessionToken }`.
-- **Replay File**: Encrypted sequential action list from Redux history.
+  - A centralized structure capturing the game’s global state, including board configuration, dice results, player details, action history, and settings like language and security tokens.
+- **Player Profile**: 
+  - Stores user-specific data such as ID, username, statistics, achievements, preferred language, and session tokens for secure authentication.
+- **Replay File**: 
+  - An encrypted sequential list of actions from the Redux history, enabling playback of game sessions.
 
 ### 3.5 State Management Details
 - **Redux Usage**:
-  - Centralized store updated via actions (e.g., `MOVE_ARMY`, `SET_LANGUAGE`), tamper-protected.
-  - Reducers split by domain (e.g., `boardReducer`), combined with `combineReducers`.
-  - Async actions (e.g., WebSocket sync) via `redux-thunk`.
-  - Undo/redo:
-    - **Rules Enforced**: Limited to current turn’s phase before commit, tracked in Redux history with server validation.
-    - **Unrestricted**: Full history access with `redux-undo` or equivalent, encrypted.
+  - Manages the global game state through actions (e.g., moving armies, changing languages), ensuring tamper-protection via server-side validation.
+  - Organizes reducers by domain (e.g., board, players) for modularity, combined into a single store.
+  - Supports asynchronous operations (e.g., real-time multiplayer sync) through middleware.
+  - Undo/redo functionality:
+    - **Rules Enforced Mode**: Limited to the current turn’s phase before actions are committed, tracked securely in the Redux action history with server validation.
+    - **Unrestricted Mode**: Provides full access to the game’s history for unlimited undo/redo, using encrypted action logs.
 - **Hooks Usage**:
-  - Local state (e.g., `const [isMuted, setIsMuted] = useState(false)`).
-  - Transient UI effects (e.g., dice animations).
+  - Manages local UI state for dynamic, component-specific interactions (e.g., toggling audio, animating dice rolls).
+  - Handles transient effects to enhance user experience without affecting the global state.
 - **Security**:
-  - AES-256 encryption for state in MongoDB and WebSocket messages.
-  - UUID session tokens assigned per client, validated server-side.
-  - Server validates all Redux actions for integrity.
+  - Employs AES-256 encryption for storing game states in MongoDB and securing WebSocket communications.
+  - Assigns UUID session tokens per client, validated server-side to ensure authorized access.
+  - Validates all Redux actions server-side to maintain game integrity and prevent unauthorized modifications.
+  - Logs suspicious activity to monitor and maintain multiplayer reliability.
 
 ---
 
@@ -191,69 +202,70 @@ The War of the Ring Web App is a digital adaptation of the "War of the Ring, 2nd
 
 ### 4.1 Phases
 1. **Phase 1: Core Game**
-   - Set up Redux with i18n and security, implement base game rules and UI.
-   - Add encrypted save/load and phase-limited undo/redo (rules enforced) via Redux.
+   - Set up Redux with multi-language support and security measures, implement base game rules and UI.
+   - Add encrypted save/load and phase-limited undo/redo for rules-enforced mode via Redux.
 2. **Phase 2: Multiplayer and Expansions**
-   - Integrate encrypted WebSocket with Redux for sync.
+   - Integrate encrypted WebSocket with Redux for real-time synchronization.
    - Add modular, multilingual reducers for expansions.
 3. **Phase 3: AI and Companion Mode**
    - Develop secure AI plugins dispatching Redux actions.
-   - Build companion mode with localized Redux state and Hooks UI.
+   - Build companion mode with localized Redux state and Hooks-based UI toggles.
 4. **Phase 4: Polish and Features**
-   - Enhance graphics/audio (Hooks for controls, Redux for secure state).
-   - Add profiles, chat, replay with full language/security support, unlimited undo/redo for unrestricted mode.
+   - Enhance graphics and audio, using Hooks for controls and Redux for secure state management.
+   - Add player profiles, chat, and replay features with full language and security support, including unlimited undo/redo for unrestricted mode.
 
 ### 4.2 Milestones
-- **M1**: Secure base game playable with Redux/i18n (3 months).
+- **M1**: Secure base game playable with Redux and multi-language support (3 months).
 - **M2**: Multiplayer and expansions functional (2 months).
 - **M3**: AI and companion mode complete (2 months).
-- **M4**: Full release with all features, languages, and security (2 months).
+- **M4**: Full release with all features, languages, and security measures (2 months).
 
 ---
 
 ## 5. Assumptions and Constraints
-- **Assumption**: Players select a language at startup, trust server validation.
+- **Assumption**: Players select a language at startup and trust server-side validation for secure gameplay.
 - **Constraint**: No local file I/O; encrypted state persists in MongoDB via Redux.
-- **Constraint**: Browser-only, initial languages (English, Spanish, French, German, Italian), lightweight security (AES, tokens).
+- **Constraint**: Browser-only application, initially supporting English, Spanish, French, German, and Italian with lightweight security measures (AES, tokens).
 
 ---
 
 ## 6. Acceptance Criteria
-- Game enforces rules/expansions with secure, localized UI via Redux.
-- Multiplayer syncs state across clients with encrypted WebSocket and token validation.
-- AI plugins dispatch valid, secure Redux actions.
-- Undo/redo:
-  - Rules Enforced: Limited to current phase before commit, works seamlessly with encrypted Redux history.
-  - Unrestricted: Unlimited across game, UI adapts to language.
-- Replay works with encrypted Redux history, UI adapts to language.
-- Companion mode tracks secure state with Redux, toggled via Hooks.
-- Client data integrity maintained via encryption, tokens, and server validation.
+- The game enforces rules and expansions accurately with a secure, localized UI powered by Redux.
+- Multiplayer functionality synchronizes state across clients using encrypted WebSocket and token validation.
+- AI plugins dispatch valid, secure Redux actions to support solo and multiplayer scenarios.
+- Undo/redo functionality:
+  - In Rules Enforced Mode, limited to the current phase before action commitment, seamlessly integrated with encrypted Redux history.
+  - In Unrestricted Mode, allows unlimited navigation across the game’s history, adapting to the selected language.
+- Replay feature enables stepping through encrypted Redux action history, with UI adapting to the user’s language.
+- Companion mode tracks secure state via Redux, with UI toggles managed by Hooks.
+- Client data integrity is maintained through encryption, session tokens, and server-side validation.
 
 ---
 
 ## Key Changes
 1. **Multi-Language Support**:
-   - Added i18n with `react-i18next` for UI, cards, and rules (2.1, 2.6).
-   - Included language selection in Redux settings (2.6, 3.4).
-   - Specified initial languages: English, Spanish, French, German, Italian (2.7).
+   - Incorporated i18n with `react-i18next` for UI, cards, and rules (Sections 2.1, 2.6).
+   - Added language selection stored in Redux settings (Sections 2.6, 3.4).
+   - Specified initial languages: English, Spanish, French, German, Italian (Section 2.7).
 2. **Security Enhancements**:
-   - Integrated AES-256 encryption for state and communication (2.7, 3.5).
-   - Added session tokens in Redux and server-side validation (2.4, 3.4).
-   - Ensured tamper protection for state management and multiplayer sync (2.1, 3.5).
-   - Added HTTPS requirement for all communication (3.1).
-   - Included managed authentication for player profiles and endpoints (2.4, 2.6).
-   - Specified DDoS protection and monitoring for multiplayer uptime (1.3).
-   - Added logging of suspicious activity for integrity (2.7).
+   - Integrated AES-256 encryption for state and communication (Sections 2.7, 3.5).
+   - Added session tokens in Redux with server-side validation (Sections 2.4, 3.4).
+   - Ensured tamper protection for state management and multiplayer synchronization (Sections 2.1, 3.5).
+   - Required HTTPS for all communication (Section 3.1).
+   - Included managed authentication for player profiles and endpoints (Sections 2.4, 2.6).
+   - Specified DDoS protection and monitoring for multiplayer uptime (Section 1.3).
+   - Added logging of suspicious activity for multiplayer integrity (Section 2.7).
 3. **Undo/Redo Restriction**:
-   - Updated 2.1.4 and 3.5 to limit undo/redo in "rules enforced" mode to a player’s turn within a phase before actions commit, while allowing full undo/redo in "unrestricted" mode.
+   - Updated Sections 2.1.4 and 3.5 to limit undo/redo in "rules enforced" mode to a player’s turn within a phase before actions commit, while allowing full undo/redo in "unrestricted" mode.
+4. **State Management Update**:
+   - Enhanced Section 3.1 to specify that Redux uses `reduxjs/toolkit` to manage global state (board, dice, players, action history, etc.), encompassing all shared game data for synchronization and persistence.
+   - Clarified that React Hooks handle local UI state for component-specific interactions (e.g., dice roll animations, hover effects) using `useState` and `useReducer`.
 
 ---
 
 ### Notes on Additions
-- **Undo/Redo Change**: Modified in Section 2.1.4 ("State Management") and 3.5 ("State Management Details") to reflect the new restriction, ensuring rules enforcement aligns with gameplay integrity while unrestricted mode retains flexibility.
-- **Use HTTPS exclusively**: Added to Section 3.1 ("Architecture") as a fundamental requirement for all communication, complementing AES encryption.
-- **Use managed auth solutions securely**: Integrated into Section 2.4 ("Lobby/Matchmaking") and 2.6 ("Player Profiles") to protect endpoints and enhance token-based security with a service like Clerk.
-- **Set up DDoS protection and monitoring**: Added to Section 1.3 ("Objectives") to ensure multiplayer reliability, a high-level goal.
-- **Log and monitor suspicious activity**: Included in Section 2.7 ("Additional Features") as a security feature supporting multiplayer integrity, tied to gameplay.
+- **State Management Update**: Modified Section 3.1 ("Architecture") to provide detailed requirements for Redux and React Hooks, ensuring clarity on their roles in managing global and local state, respectively. The update emphasizes `reduxjs/toolkit` for streamlined Redux setup and specifies that Hooks handle dynamic UI interactions, aligning with the app’s performance and usability goals.
+- **Preservation of Existing Structure**: All other sections, including multi-language support, security measures, and feature details, remain unchanged to maintain consistency with the original PRD, focusing on high-level requirements without introducing unnecessary changes.
+- **Multi-Language Support**: Retained as a core feature, ensuring that UI, cards, and rules are localized via `react-i18next`, supporting the global audience as outlined in Sections 1.3, 1.4, and 2.6.
 
-These changes enhance the PRD’s clarity and security posture without altering its core structure, keeping it focused on requirements. Let me know if you’d like further refinements!
+This updated PRD serves as a comprehensive guide for the development team, ensuring the *War of the Ring Web App* meets all technical and functional requirements while maintaining a clear, high-level focus. Let me know if you need further refinements or additional details!

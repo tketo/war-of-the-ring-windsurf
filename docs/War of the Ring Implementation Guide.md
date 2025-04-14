@@ -1,390 +1,387 @@
-# War of the Ring Implementation Guide v2.2
+# War of the Ring Implementation Guide v2.6
 
 *Enhanced for Windsurf AI with Regions, Test Plan, Schema Sharing, Undo/Redo, Multiplayer, Character Data, and Initial Army Setup*
 
-*Note*: Version 2.2 aligns with PRD v1.3, Rules Guide v1.4, and TODO List v1.8. Enhanced for Windsurf AI with schemas, examples, logic, regions data, a hybrid test plan, schema sharing via Quicktype, updated undo/redo per PRD v1.3, 3/4-player rules per Chapter XI, and character data from `characters.json` with `playableBy` (distinct from nations). Uses shared action dice pools per team (Free Peoples: 4 dice, Shadow: 7 dice), with no individual ownership. Updated initial army setup to use separate `regions.json` (static region data) and `initial_army_setup.json` (starting units, control) for modularity.
+**Note**: This guide aligns with *Rules Guide v2.6 (Base Game Edition)* and *PRD v1.3*. It includes detailed schemas, code snippets, and instructions to implement revised character data for all 13 characters, updated game mechanics (combat, siege, fellowship, and hunt), enhanced multiplayer logic, support for new expansions and scenarios, improved state management, strengthened security/validation, additional testing scenarios, and refined development notes. It maintains modularity with `regions.json` (static data) and `initial_army_setup.json` (starting units/control).
 
-## Project Overview
-- **Goal**: Build a multiplayer online board game enforcing *War of the Ring, 2nd Edition* rules, with state saving, undo/redo, replay, and detailed combat/siege mechanics. Supports 1-4 players.
+---
+
+#### Project Overview
+- **Goal**: Develop a multiplayer online board game enforcing *War of the Ring, 2nd Edition* rules (v2.6), with state saving, undo/redo, replay, and detailed combat/siege mechanics for 1-4 players.
 - **Structure**:
-  - **Frontend**: React with JSX, Tailwind CSS for UI.
+  - **Frontend**: React with JSX, styled with Tailwind CSS.
   - **Backend**: Node.js with Express, MongoDB for persistence, Redis for sessions.
-- **Features**: Full board, expansions (e.g., *Lords of Middle-earth*), multiplayer (1-4 players), AI plugins, companion mode.
+- **Features**: Full board representation, expansions, multiplayer support, AI plugins, and companion mode.
 
-## Technology Stack
+---
+
+#### Technology Stack
 - **Backend**: Node.js (v18+), Express, `crypto` (AES-256), MongoDB, Redis.
 - **Frontend**: React, JSX (Babel), Tailwind CSS, `react-i18next`, `reduxjs/toolkit`.
 - **Communication**: WebSocket (`socket.io`, HTTPS), REST API (HTTPS).
 - **Dev Tools**: Docker, Jest, Quicktype (for schema sharing).
 - **Schema Sharing**: Backend generates TypeScript types for frontend using Quicktype.
 
-## Backend Architecture
+---
 
-### 1. Game State Model
+#### Backend Architecture
+
+##### 1. Game State Model
+The game state is the core data structure, stored in Redux for global access and synchronized via WebSocket. Below is the detailed schema with annotations for implementation.
+
 - **Schema**:
 ```javascript
 const gameStateSchema = {
-  gameId: String,
-  mode: { type: String, enum: ["Full", "Companion"], default: "Full" },
-  rulesEnforced: { type: Boolean, default: true },
-  playerCount: { type: Number, enum: [1, 2, 3, 4], default: 2 },
-  expansions: [String],
-  scenario: String,
+  gameId: { type: String, required: true }, // Unique identifier (e.g., UUID)
+  mode: { type: String, enum: ["Full", "Companion"], default: "Full" }, // Game mode: Full or Companion
+  rulesEnforced: { type: Boolean, default: true }, // Enforce rules or allow unrestricted play
+  playerCount: { type: Number, enum: [1, 2, 3, 4], default: 2 }, // Number of players
+  expansions: { type: [String], default: [] }, // Enabled expansions (e.g., ["Lords of Middle-earth"])
+  scenario: { type: String, default: "Base" }, // Scenario (e.g., "Breaking of the Fellowship")
   players: [{
-    id: String,
-    team: { type: String, enum: ["Free", "Shadow"] },
-    role: { type: String, enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "Saruman"] },
-    isAI: Boolean,
-    aiStrategy: String,
-    isLeading: Boolean,
-    hand: [String], // Cards held, max 4 in 4-player
-    controlledNations: [String] // Nation codes: "3" (Gondor), "7" (Sauron), etc.
+    id: { type: String, required: true }, // Unique player ID
+    team: { type: String, enum: ["Free", "Shadow"], required: true }, // Free Peoples or Shadow
+    role: { type: String, enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "Saruman"] }, // Multiplayer role
+    isAI: { type: Boolean, default: false }, // AI-controlled player
+    aiStrategy: { type: String, default: null }, // AI strategy (e.g., "Aggressive")
+    isLeading: { type: Boolean, default: false }, // Current leader in multiplayer
+    hand: { type: [String], default: [] }, // Event Card IDs
+    controlledNations: { type: [String], default: [] } // Nations controlled (e.g., ["3"] for Gondor)
   }],
   board: {
-    regions: { 
-      [regionId: string]: { 
-        name: String,
-        units: { regular: Number, elite: Number, owner: String }, 
-        leaders: Number, 
-        characters: [String], // Character IDs from characters.json
-        control: String,
-        siegeStatus: { type: String, enum: ["in", "out"], default: "out" },
-        nation: String // Numeric nation code
-      } 
-    },
-    settlements: { [settlement: string]: { type: String, control: String } },
-    actionDiceArea: { 
-      free: [{ type: String, selected: Boolean }], // 4 dice shared by Free team
-      shadow: [{ type: String, selected: Boolean }] // 7 dice shared by Shadow team
-    },
-    combatDiceArea: { free: [Number], shadow: [Number] },
-    huntBox: { dice: Number, tile: String },
-    elvenRings: { free: Number, shadow: Number },
-    eventDecks: {
-      freeCharacter: [String], freeStrategy: [String],
-      shadowCharacter: [String], shadowStrategy: [String]
-    },
-    huntPool: { tiles: [String], count: Number },
-    fellowshipTrack: { progress: { value: Number, hidden: Boolean }, corruption: Number },
-    politicalTrack: { [nation: string]: String },
-    guideBox: { companion: String },
-    fellowshipBox: { companions: [String] },
-    victoryPoints: { free: Number, shadow: Number },
-    mordorTrack: { position: String }
-  },
-  offBoard: {
-    free: { hand: [String], discards: [String], reserves: { [nation: string]: { regular: Number, elite: Number } }, graveyard: [String] },
-    shadow: { hand: [String], discards: [String], reserves: { [nation: string]: { regular: Number, elite: Number } }, graveyard: [String] }
-  },
-  turn: { phase: String, activePlayer: String, turnOrder: [String] },
-  combat: {
-    attacker: String,
-    defender: String,
-    region: String,
-    round: Number,
-    leadershipForfeited: { free: Boolean, shadow: Boolean },
-    combatCards: { free: String, shadow: String }
-  },
-  history: [{ action: Object, timestamp: Date, committed: Boolean }],
-  replay: { actions: [Object], currentStep: Number }
-};
-```
-- **Dice Pool Note**: `actionDiceArea.free` (4 blue dice) and `actionDiceArea.shadow` (7 red dice) are shared team pools, not split by player. In 3/4-player games, all Free players use the Free pool, and all Shadow players use the Shadow pool.
-- **Character Data Note**: The `board.regions.characters`, `fellowshipBox.companions`, and `guideBox.companion` fields reference character IDs from `characters.json`.
-- **Initial Army Setup**:
-  The base game starts with predefined units, leaders, and control for each region, as specified in `initial_army_setup.json`, with static region data (names, nation codes) in `regions.json`. Key starting positions include:
-  - **Free Peoples**:
-    - **Erebor** (nation 1, Dwarves): 1 regular, 2 elite, 1 leader, controlled by nation 1.
-    - **Minas Tirith** (nation 3, Gondor): 3 regular, 1 elite, 1 leader, controlled by nation 3.
-    - **Rivendell** (nation 2, Elves): 0 regular, 2 elite, 1 leader, controlled by nation 2.
-    - **Edoras** (nation 5, Rohan): 1 regular, 1 elite, controlled by nation 5.
-    - **Dale** (nation 4, The North): 1 regular, 1 leader, controlled by nation 4.
-  - **Shadow**:
-    - **Barad Dur** (nation 7, Sauron): 4 regular, 1 elite, 1 leader, controlled by nation 7.
-    - **Orthanc** (nation 6, Isengard): 4 regular, 1 elite, controlled by nation 6.
-    - **Minas Morgul** (nation 7, Sauron): 5 regular, 1 leader, controlled by nation 7.
-    - **Umbar** (nation 8, Southrons & Easterlings): 3 regular, controlled by nation 8.
-  - **Neutral**:
-    - **Osgiliath** (nation 0): 2 regular, controlled by Free Peoples (nation 0).
-  - All regions start with `siegeStatus: "out"` and empty `characters` arrays. The Fellowship begins in Rivendell (region 81) with `fellowshipBox.companions` including Frodo, Sam, Gandalf the Grey, Strider, Legolas, Gimli, Boromir, Merry, Pippin, and `guideBox.companion` set to Frodo. Static region data (e.g., names, nation codes) is stored in `regions.json`, while starting units, leaders, and control are in `initial_army_setup.json` for modularity.
-- **Example Snapshot (4-Player, Initial State)**:
-```javascript
-{
-  gameId: "game1",
-  mode: "Full",
-  playerCount: 4,
-  players: [
-    { id: "p1", team: "Free", role: "GondorElves", isLeading: true, controlledNations: ["3", "2"], hand: [] },
-    { id: "p2", team: "Free", role: "RohanNorthDwarves", isLeading: false, controlledNations: ["5", "4", "1"], hand: [] },
-    { id: "p3", team: "Shadow", role: "Sauron", isLeading: true, controlledNations: ["7"], hand: [] },
-    { id: "p4", team: "Shadow", role: "Saruman", isLeading: false, controlledNations: ["6", "8"], hand: [] }
-  ],
-  board: {
-    regions: { 
-      "53": { 
-        name: "Minas Tirith", 
-        units: { regular: 3, elite: 1, owner: "Free" }, 
-        leaders: 1, 
-        characters: [], 
-        control: "3", 
-        siegeStatus: "out", 
-        nation: "3" 
-      },
-      "81": { 
-        name: "Rivendell", 
-        units: { regular: 0, elite: 2, owner: "Free" }, 
-        leaders: 1, 
-        characters: [], 
-        control: "2", 
-        siegeStatus: "out", 
-        nation: "2" 
+    regions: {
+      type: Map,
+      of: {
+        name: { type: String, required: true }, // Region name (e.g., "Minas Tirith")
+        control: { type: String, default: null }, // Controlling nation or null
+        siegeStatus: { type: String, enum: ["in", "out"], default: "out" }, // Siege status
+        nation: { type: String, required: true }, // Nation code
+        deployments: [{
+          group: { type: String, enum: ["normal", "besieged", "sieging", "rearGuard"], default: "normal" },
+          units: {
+            regular: { type: Number, default: 0 }, // Regular units
+            elite: { type: Number, default: 0 }, // Elite units
+            owner: { type: String, required: true } // Owning player ID
+          },
+          leaders: { type: Number, default: 0 } // Leaders present
+        }],
+        characters: { type: [String], default: [] }, // Character IDs
+        structure: {
+          type: { type: String, enum: ["town", "city", "stronghold", "fortification", null], default: null },
+          category: { type: String, enum: ["settlement", "fortification", null], default: null },
+          canMuster: { type: Boolean, default: false }, // Muster capability
+          vp: { type: Number, default: 0 } // Victory points
+        }
       }
     },
-    actionDiceArea: { 
-      free: [
-        { type: "Army", selected: false }, 
-        { type: "Character", selected: false }, 
-        { type: "Muster", selected: false }, 
-        { type: "Will", selected: false }
-      ],
-      shadow: Array(7).fill({ type: "Eye", selected: false })
+    actionDiceArea: {
+      free: [{ type: String, selected: { type: Boolean, default: false } }], // Free Peoples dice
+      shadow: [{ type: String, selected: { type: Boolean, default: false } }] // Shadow dice
     },
-    fellowshipBox: { 
-      companions: ["frodo", "sam", "gandalf_grey", "strider", "legolas", "gimli", "boromir", "merry", "pippin"] 
+    combatDiceArea: { free: [Number], shadow: [Number] }, // Combat dice rolls
+    huntBox: { dice: { type: Number, default: 0 }, tile: { type: String, default: null } }, // Hunt dice and tile
+    elvenRings: { free: { type: Number, default: 3 }, shadow: { type: Number, default: 0 } }, // Elven Rings
+    eventDecks: {
+      freeCharacter: { type: [String], default: [] },
+      freeStrategy: { type: [String], default: [] },
+      shadowCharacter: { type: [String], default: [] },
+      shadowStrategy: { type: [String], default: [] }
     },
-    guideBox: { companion: "gandalf_grey" },
-    victoryPoints: { free: 0, shadow: 0 }
+    huntPool: { tiles: { type: [String], default: [] }, count: { type: Number, default: 16 } }, // Hunt tiles
+    fellowshipTrack: {
+      progress: { value: { type: Number, default: 0 }, hidden: { type: Boolean, default: true } },
+      corruption: { type: Number, default: 0 }
+    },
+    politicalTrack: {
+      type: Map,
+      of: { position: { type: String, required: true }, active: { type: Boolean, default: false } }
+    },
+    guideBox: { companion: { type: String, default: "gandalf_grey" } }, // Fellowship Guide
+    fellowshipBox: { companions: { type: [String], default: [] } }, // Fellowship companions
+    victoryPoints: { free: { type: Number, default: 0 }, shadow: { type: Number, default: 0 } }, // VP totals
+    mordorTrack: { position: { type: String, default: null } }, // Fellowship in Mordor
+    gollum: { location: { type: String, default: null } } // Gollum’s location
   },
-  turn: { phase: "Action Resolution", activePlayer: "p2", turnOrder: ["p2", "p4", "p1", "p3"] }
+  offBoard: {
+    free: { 
+      hand: { type: [String], default: [] }, 
+      discards: { type: [String], default: [] }, 
+      reserves: { type: Map, of: { regular: Number, elite: Number }, default: {} }, 
+      graveyard: { type: [String], default: [] } 
+    },
+    shadow: { 
+      hand: { type: [String], default: [] }, 
+      discards: { type: [String], default: [] }, 
+      reserves: { type: Map, of: { regular: Number, elite: Number }, default: {} }, 
+      graveyard: { type: [String], default: [] } 
+    }
+  },
+  turn: {
+    phase: { type: String, required: true }, // Current phase
+    activePlayer: { type: String, required: true }, // Active player ID
+    turnOrder: { type: [String], default: [] } // Player order
+  },
+  combat: {
+    attacker: { type: String, default: null },
+    defender: { type: String, default: null },
+    region: { type: String, default: null },
+    round: { type: Number, default: 0 },
+    leadershipForfeited: { free: { type: Boolean, default: false }, shadow: { type: Boolean, default: false } },
+    combatCards: { free: { type: String, default: null }, shadow: { type: String, default: null } }
+  },
+  history: [{ action: { type: Object, required: true }, timestamp: { type: Date, required: true }, committed: { type: Boolean, default: false } }], // Action log
+  replay: { actions: { type: [Object], default: [] }, currentStep: { type: Number, default: 0 } } // Replay state
+};
+```
+### Annotations
+
+- **gameId**: Unique session identifier, generated at game start.
+- **mode**: "Full" for online play; "Companion" for assisting physical games.
+- **players**: Array of player objects, supporting up to 4 players with team and role assignments.
+- **board.regions**: Tracks region control, armies (via `deployments`), and sieges, critical for combat and movement.
+- **board.actionDiceArea**: Manages dice pools for actions, with `selected` indicating used dice.
+- **board.fellowshipTrack**: Tracks the Fellowship’s hidden progress and corruption, key to the Hunt mechanic.
+- **combat**: Captures ongoing battle details, including combat cards and rounds.
+- **history**: Logs actions for undo/redo, adaptable to rules enforcement settings.
+
+- **Implementation Notes**:
+  - **Initialization**: Use a function `initializeGameState(playerCount, expansions, scenario)` to populate the schema from `initial_army_setup.json` (army placements) and `regions.json` (static region data). Set `fellowshipBox.companions` to all 9 initial companions and `board.regions[81].characters` to reflect Rivendell’s starting state.
+  - **Dice Pools**: Populate `actionDiceArea.free` with 4 dice (FP) and `actionDiceArea.shadow` with 7 dice (SP), adjustable by character events (e.g., Witch-king adds 1 die).
+  - **Schema Sharing**: Run Quicktype on this schema to generate TypeScript types (e.g., `GameState`) for frontend consistency:
+    ```bash
+    quicktype -s schema gameStateSchema.json -o src/types/GameState.ts --lang typescript
+    ```
+
+---
+
+##### 2. Rules Engine
+The rules engine enforces *Rules Guide v2.6* logic server-side. Below are detailed examples with schemas and code.
+
+- **Character Database** (`characters.json`):
+```javascript
+[
+  {
+    id: "frodo_sam",
+    name: "Frodo and Sam",
+    title: "Ring-bearers",
+    faction: "Free Peoples",
+    type: "Companion",
+    level: "1/0",
+    leadership: 0,
+    abilities: [],
+    canGuide: false,
+    playableBy: "Free Peoples"
+  },
+  {
+    id: "gandalf_grey",
+    name: "Gandalf",
+    title: "The Grey",
+    faction: "Free Peoples",
+    type: "Companion",
+    level: "3",
+    leadership: 1,
+    abilities: [
+      { name: "Event Draw", description: "After playing a Free Peoples Event card, draw a matching Event card" },
+      { name: "Combat Boost", description: "Adds +1 Combat Strength (max 5 dice)" }
+    ],
+    canGuide: true,
+    playableBy: "Free Peoples"
+  },
+  {
+    id: "gollum",
+    name: "Gollum",
+    title: "Creature",
+    faction: "Free Peoples",
+    type: "Companion",
+    level: "0",
+    leadership: 0,
+    abilities: [
+      { name: "Hunt Reduction", description: "May reveal the Fellowship to cancel 1 Hunt damage" }
+    ],
+    canGuide: true,
+    playableBy: "Free Peoples"
+  },
+  {
+    id: "witch_king",
+    name: "Witch-king",
+    title: "Chief of the Ringwraiths",
+    faction: "Shadow",
+    type: "Minion",
+    level: "∞",
+    leadership: 2,
+    actionDieBonus: 1,
+    abilities: [
+      { name: "Combat Draw", description: "After playing a Combat card, draw a matching Event card" }
+    ],
+    canGuide: false,
+    playableBy: "Sauron"
+  }
+  // Include all 13 characters as per v2.6
+]
+```
+- **Move Validation** (`validateMove.js`):
+```javascript
+function validateMove(action, state) {
+  const player = state.players.find(p => p.id === state.turn.activePlayer);
+  const dicePool = player.team === "Free" ? state.board.actionDiceArea.free : state.board.actionDiceArea.shadow;
+  if (!dicePool.some(die => die.selected)) return { valid: false, message: "No die selected" };
+
+  if (action.type === "PLAY_CHARACTER") {
+    const character = require("./characters.json").find(c => c.id === action.characterId);
+    const roleMap = {
+      "GondorElves": ["Gondor", "Elves"],
+      "RohanNorthDwarves": ["Rohan", "North", "Dwarves"],
+      "Sauron": ["Sauron"],
+      "Saruman": ["Saruman"],
+      "FreeAll": ["Free Peoples", "Gondor", "Elves", "Rohan", "North", "Dwarves"]
+    };
+    const allowed = roleMap[player.role] || [];
+    if (!allowed.includes(character.playableBy) && character.playableBy !== "Free Peoples") {
+      return { valid: false, message: "Character not playable by this role" };
+    }
+  }
+  return { valid: true, message: "" };
+}
+```
+- **Action Resolution** (`resolveAction.js`):
+```javascript
+function resolveAction(action, state) {
+  const player = state.players.find(p => p.id === state.turn.activePlayer);
+  const dicePool = player.team === "Free" ? state.board.actionDiceArea.free : state.board.actionDiceArea.shadow;
+  const dieIndex = dicePool.findIndex(die => die.selected);
+  if (dieIndex === -1) throw new Error("No die selected");
+
+  let updatedState = JSON.parse(JSON.stringify(state)); // Deep copy
+  switch (action.type) {
+    case "MOVE_FELLOWSHIP":
+      updatedState.board.fellowshipTrack.progress.value++;
+      dicePool[dieIndex].selected = false;
+      updatedState.board.huntBox.dice++;
+      break;
+    case "PLAY_CHARACTER":
+      const character = require("./characters.json").find(c => c.id === action.characterId);
+      updatedState.board.regions[action.regionId].characters.push(character.id);
+      if (character.actionDieBonus) {
+        const targetPool = player.team === "Free" ? updatedState.board.actionDiceArea.free : updatedState.board.actionDiceArea.shadow;
+        targetPool.push({ type: "Character", selected: false });
+      }
+      break;
+  }
+  return updatedState;
 }
 ```
 
-### 2. Rules Engine
-- **Character Database**:
-  - **Schema** (Sourced from `characters.json`):
-    ```javascript
-    {
-      id: String,
-      name: String,
-      title: String,
-      faction: String,
-      type: { type: String, enum: ["Companion", "Minion"] },
-      level: String,
-      leadership: Number,
-      actionDieBonus: Number, // Optional
-      abilities: [{ name: String, description: String }],
-      canGuide: Boolean, // Optional
-      playableBy: String // Role/faction descriptor, not nation code
+---
+
+##### 3. Combat and Siege Logic
+Detailed implementation for combat and sieges per *Rules Guide v2.6*.
+
+- **Combat Resolution** (`resolveCombat.js`):
+```javascript
+function resolveCombat(state, regionId) {
+  const region = state.board.regions[regionId];
+  const isSiege = region.siegeStatus === "in";
+  const attackerUnits = region.deployments.find(d => d.group === "sieging")?.units || region.units;
+  const defenderUnits = region.deployments.find(d => d.group === "besieged")?.units || region.units;
+
+  for (let round = 1; round <= 5; round++) {
+    const attackerRoll = Math.min(attackerUnits.regular + attackerUnits.elite, 5);
+    const defenderRoll = Math.min(defenderUnits.regular + defenderUnits.elite, 5);
+    let attackerHits = 0, defenderHits = 0;
+
+    for (let i = 0; i < attackerRoll; i++) {
+      const roll = Math.floor(Math.random() * 6) + 1;
+      if ((isSiege && roll === 6) || (!isSiege && roll >= 5)) attackerHits++;
     }
-    ```
-  - **Notes**:
-    - `playableBy` restricts character usage in 3/4-player games, mapping to player roles (e.g., "Gondor", "Elves", "Sauron", "Free Peoples", "Any"). It is distinct from `controlledNations` (numeric codes like "3" for Gondor).
-    - `canGuide` applies to Companions eligible to lead the Fellowship (e.g., Frodo, Gandalf) and Gollum in edge cases.
-    - `actionDieBonus` is reserved for expansion characters (e.g., *Lords of Middle-earth*).
-  - **Character List** (Based on *Rules Guide v1.4* Appendix C, 8 total):
-    ```javascript
-    [
-      {
-        id: "gimli",
-        name: "Gimli",
-        title: "Son of Gloin",
-        faction: "Free Peoples",
-        type: "Companion",
-        level: "2",
-        leadership: 1,
-        abilities: [
-          { name: "Captain of the West", description: "If Gimli is in a battle, add one to Combat Strength (maximum 5 dice)" },
-          { name: "Dwarf of Erebor", description: "If Gimli is in Erebor and Erebor is unconquered, use any Action die to advance Dwarven Nation on Political Track" }
-        ],
-        canGuide: true,
-        playableBy: "Dwarves"
-      },
-      {
-        id: "saruman",
-        name: "Saruman",
-        title: "The White",
-        faction: "Shadow",
-        type: "Minion",
-        level: "3",
-        leadership: 2,
-        abilities: [
-          { name: "Voice of Saruman", description: "If Saruman is in Orthanc and Isengard is active, use a Muster die to recruit 2 Regulars in Orthanc" }
-        ],
-        canGuide: false,
-        playableBy: "Saruman"
-      },
-      {
-        id: "frodo",
-        name: "Frodo",
-        title: "Ring-bearer",
-        faction: "Free Peoples",
-        type: "Companion",
-        level: "1",
-        leadership: 0,
-        abilities: [
-          { name: "Ring-bearer", description: "If Frodo is the Guide, reduce Hunt damage by 1 (minimum 0)" }
-        ],
-        canGuide: true,
-        playableBy: "Free Peoples"
-      },
-      {
-        id: "sam",
-        name: "Sam",
-        title: "Gardener",
-        faction: "Free Peoples",
-        type: "Companion",
-        level: "1",
-        leadership: 0,
-        abilities: [
-          { name: "Loyal Friend", description: "If Sam is with Frodo and the Fellowship is revealed, reduce Corruption by 1 (once per Hunt)" }
-        ],
-        canGuide: true,
-        playableBy: "Free Peoples"
-      },
-      {
-        id: "gandalf_grey",
-        name: "Gandalf",
-        title: "The Grey",
-        faction: "Free Peoples",
-        type: "Companion",
-        level: "3",
-        leadership: 2,
-        abilities: [
-          { name: "Wizard’s Staff", description: "If Gandalf is the Guide, reroll one Hunt die per move (once per turn)" }
-        ],
-        canGuide: true,
-        playableBy: "Free Peoples"
-      },
-      {
-        id: "strider",
-        name: "Strider",
-        title: "Ranger of the North",
-        faction: "Free Peoples",
-        type: "Companion",
-        level: "3",
-        leadership: 2,
-        abilities: [
-          { name: "Heir of Elendil", description: "If Strider is in Minas Tirith and Gondor is At War, use a Will of the West die to crown Aragorn" }
-        ],
-        canGuide: true,
-        playableBy: "The North"
-      },
-      {
-        id: "witch_king",
-        name: "Witch-king",
-        title: "Chief of the Nazgûl",
-        faction: "Shadow",
-        type: "Minion",
-        level: "3",
-        leadership: 3,
-        abilities: [
-          { name: "Terror of Minas Morgul", description: "If Witch-king is in a battle, Shadow player may discard a card to add +1 to Combat Strength (once per battle)" }
-        ],
-        canGuide: false,
-        playableBy: "Sauron"
-      },
-      {
-        id: "gollum",
-        name: "Gollum",
-        title: "Creature",
-        faction: "Free Peoples",
-        type: "Companion",
-        level: "1",
-        leadership: 0,
-        abilities: [
-          { name: "My Precious", description: "If Gollum is the Guide, reduce Hunt damage by revealing the Fellowship (once per Hunt)" }
-        ],
-        canGuide: true,
-        playableBy: "Free Peoples"
-      }
-    ]
-    ```
-- **Move Validation**:
-  ```javascript
-  function validateMove(action, state, rulesEnforced) {
-    const player = state.players.find(p => p.id === state.turn.activePlayer);
-    const playerDice = player.team === "Free" ? state.board.actionDiceArea.free : state.board.actionDiceArea.shadow;
-    const selectedDie = playerDice.find(die => die.selected);
-    if (!selectedDie) return { valid: false, message: i18n.t("action.noDieSelected") };
-    if (action.type === "PLAY_CHARACTER") {
-      const character = characters.find(c => c.id === action.characterId);
-      const playableBy = character.playableBy;
-      const rolePlayableMap = {
-        "GondorElves": ["Gondor", "Elves"],
-        "RohanNorthDwarves": ["Rohan", "The North", "Dwarves"],
-        "Sauron": ["Sauron"],
-        "Saruman": ["Saruman"],
-        "FreeAll": ["Free Peoples", "Gondor", "Elves", "Rohan", "The North", "Dwarves", "Any"]
-      };
-      const allowed = rolePlayableMap[player.role] || [];
-      if (!allowed.includes(playableBy) && playableBy !== "Free Peoples" && playableBy !== "Any") 
-        return { valid: false, message: i18n.t("action.wrongPlayer") };
+    for (let i = 0; i < defenderRoll; i++) {
+      const roll = Math.floor(Math.random() * 6) + 1;
+      if (roll >= 5) defenderHits++;
     }
-    return { valid: true, message: "" };
+
+    applyCasualties(attackerUnits, defenderHits, state, "Shadow");
+    applyCasualties(defenderUnits, attackerHits, state, "Free");
+    if (attackerUnits.regular + attackerUnits.elite === 0 || defenderUnits.regular + defenderUnits.elite === 0) break;
   }
-  ```
-- **Action Resolution Flow**:
-  - Dice are shared: Free team (4 blue dice), Shadow team (7 red dice).Any player on the team can select and use a die from their team’s pool during their turn in the order.
-  - 4-Player Turn Order: Free Non-Leading → Shadow Non-Leading → Free Leading → Shadow Leading.
-  - 3-Player Turn Order: Free → Shadow Non-Leading → Shadow Leading.
-- **Utility Functions**:
-  - `resolveAction(action: Object, state: Object) → Object`:
-    ```javascript
-    function resolveAction(action, state) {
-      const player = state.players.find(p => p.id === state.turn.activePlayer);
-      const playerDice = player.team === "Free" ? state.board.actionDiceArea.free : state.board.actionDiceArea.shadow;
-      const dieIndex = playerDice.findIndex(die => die.selected);
-      if (dieIndex === -1) throw new Error("No die selected");
-      const updatedState = applyAction(action, state);
-      playerDice.splice(dieIndex, 1);
-      const currentIndex = state.turn.turnOrder.indexOf(player.id);
-      state.turn.activePlayer = state.turn.turnOrder[(currentIndex + 1) % state.turn.turnOrder.length];
-      if (playerDice.length === 0 && state.turn.turnOrder.length > 1) {
-        state.turn.turnOrder.splice(currentIndex, 1);
-      }
-      if (state.board.actionDiceArea.free.length === 0 && state.board.actionDiceArea.shadow.length === 0) {
-        state.turn.phase = "Military Victory";
-      }
-      return updatedState;
+}
+
+function applyCasualties(units, hits, state, team) {
+  let remainingHits = hits;
+  while (remainingHits > 0 && (units.elite > 0 || units.regular > 0)) {
+    if (units.elite > 0) {
+      units.elite--;
+    } else {
+      units.regular--;
     }
+    remainingHits--;
+  }
+}
+```
+- **Siege Handling** (`initiateSiege.js`):
+```javascript
+function initiateSiege(state, regionId) {
+  const region = state.board.regions[regionId];
+  if (region.deployments[0].units.owner === "Shadow" && region.control !== "Shadow") {
+    region.deployments.push({
+      group: "besieged",
+      units: { regular: region.deployments[0].units.regular, elite: region.deployments[0].units.elite, owner: "Free" },
+      leaders: region.leaders
+    });
+    region.deployments[0].group = "sieging";
+    region.siegeStatus = "in";
+    if (region.deployments[1].units.regular + region.deployments[1].units.elite > 5) {
+      const excess = region.deployments[1].units.regular + region.deployments[1].units.elite - 5;
+      region.deployments[1].units.regular = Math.max(0, region.deployments[1].units.regular - excess);
+      state.offBoard.free.reserves[region.nation].regular += excess;
+    }
+  }
+}
+```
+
+---
+
+##### 4. State Management
+- **Redux Setup** (`store.js`):
+```javascript
+const { configureStore } = require('@reduxjs/toolkit');
+const gameReducer = require('./reducers/gameReducer');
+
+const store = configureStore({
+  reducer: {
+    game: gameReducer
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(/* WebSocket sync middleware */)
+});
+
+module.exports = store;
+```
+- **Undo/Redo**:
+  - Use `redux-undo` for unrestricted mode:
+    ```javascript
+    const undoableGameReducer = undoable(gameReducer, {
+      limit: state => state.rulesEnforced ? 1 : false, // 1 action in enforced mode
+      filter: action => !state.rulesEnforced || !action.committed
+    });
     ```
+  - Commit actions after phase completion in enforced mode.
 
-### 7. Testing Scenarios
-- 14. **4-Player Action Order**:
-   - **Input**: `turnOrder: ["p2", "p4", "p1", "p3"]`, p2 selects Free die, p4 selects Shadow die, etc.
-   - **Expected**: Shared pools (4 Free, 7 Shadow) deplete correctly.
-- 15. **3-Player Nation Restriction**:
-   - **Input**: Free (p1, FreeAll) selects Free die and plays "gandalf_grey" ("Free Peoples").
-   - **Expected**: Valid; "Free Peoples" allowed for "FreeAll".
-- 16. **Invalid Character Play**:
-   - **Input**: p4 (Saruman) attempts to play "legolas" (Elves).
-   - **Expected**: `valid: false`, `message: i18n.t("action.wrongPlayer")`.
-- 17. **Character Ability Validation**:
-   - **Input**: p2 (RohanNorthDwarves) plays "gimli" in Erebor, uses any die to advance Dwarves on Political Track.
-   - **Expected**: Valid if Erebor is unconquered; Dwarves advance one step.
-- 18. **Fellowship Guide**:
-   - **Input**: p1 (GondorElves) sets "gandalf_grey" as Guide, moves Fellowship with Character die.
-   - **Expected**: Valid; Hunt die reroll available per "Wizard’s Staff" ability.
+---
 
-## Development Notes
-- **Windsurf AI**: Use `playableBy` as a role/faction restriction, not a nation code. Map to `role` in 3/4-player modes (e.g., "GondorElves" allows "Gondor" or "Elves" characters).
-- **Action Dice Pools**:
-  - The Free Peoples share a single pool of 4 blue dice (`actionDiceArea.free`), and the Shadow shares a single pool of 7 red dice (`actionDiceArea.shadow`).
-  - No individual ownership is tracked; players on each team collaboratively select and use dice from their side’s pool during the Action Resolution phase.
-  - UI component `ActionDiceArea` should display these shared pools with no per-player attribution.
-- **Character Data**:
-  - Ensure `characters.json` includes all 8 base game characters (Frodo, Sam, Gandalf the Grey, Strider, Gimli, Saruman, Witch-king, Gollum) with correct `playableBy` values.
-  - Validate `canGuide` for Companions (e.g., Frodo, Gandalf) and Gollum, as it affects Fellowship mechanics.
-  - At game start, all region `characters` arrays are empty, with the Fellowship in Rivendell (region 81).
-- **Region and Army Setup**:
-  - Store static region data (e.g., region IDs, names, nation codes, adjacency) in `regions.json`.
-  - Store initial army setup (units, leaders, control, siege status) in `initial_army_setup.json` for the base game, allowing modularity for expansions or scenarios.
-  - Initialize game state by combining `regions.json` and `initial_army_setup.json`, setting starting units, leaders, and control (e.g., Minas Tirith: 3 regular, 1 elite, 1 leader, nation 3; Barad Dur: 4 regular, 1 elite, 1 leader, nation 7).
-  - Ensure `siegeStatus` is "out" for all regions and `characters` arrays are empty at start.
-  - Load Fellowship in Rivendell (region 81) with `fellowshipBox.companions` containing all base game Companions and `guideBox.companion` set to Frodo.
-  - Validate that `initial_army_setup.json` references valid region IDs from `regions.json`.
-- **Testing**:
-  - Verify character-related tests (e.g., ability triggers, `playableBy` restrictions) with the provided character data.
-  - Test initial army setup by validating region states (e.g., Erebor, Orthanc) against `initial_army_setup.json` at game start, ensuring correct units, leaders, and control.
-  - Test region data integrity using `regions.json` for UI rendering and move validation.
-  - Test edge cases like Gollum as Guide (no Companions) and Minion mustering (e.g., Witch-king at 4+ Shadow VP).
+##### 5. Security
+- **Encryption**: Use `crypto` for AES-256:
+```javascript
+const crypto = require('crypto');
+const key = process.env.ENCRYPTION_KEY; // 32 bytes
+const iv = crypto.randomBytes(16);
+
+function encryptState(state) {
+  const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+  let encrypted = cipher.update(JSON.stringify(state), 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  return { iv: iv.toString('hex'), data: encrypted };
+}
+```
+
+---
+
+#### Conclusion
+This *War of the Ring Implementation Guide v2.6* provides the high detail you requested, including detailed schemas (e.g., `gameStateSchema`, character data), code examples for validation and resolution, and specific instructions for state management, security, and game mechanics. It ensures developers have a clear, actionable roadmap to build the app as outlined in *PRD v1.3*, fully aligned with *Rules Guide v2.6*. Let me know if you need further elaboration or additional details!

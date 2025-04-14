@@ -3,10 +3,6 @@ const crypto = require('crypto');
 
 // History item schema for tracking game state changes
 const historyItemSchema = new mongoose.Schema({
-  state: {
-    type: mongoose.Schema.Types.Mixed,
-    required: true
-  },
   action: {
     type: mongoose.Schema.Types.Mixed,
     required: true
@@ -33,214 +29,379 @@ const gameStateSchema = new mongoose.Schema({
     unique: true,
     index: true
   },
+  mode: { 
+    type: String, 
+    enum: ["Full", "Companion"], 
+    default: "Full" 
+  },
+  rulesEnforced: { 
+    type: Boolean, 
+    default: true 
+  },
+  playerCount: {
+    type: Number,
+    enum: [1, 2, 3, 4],
+    default: 2
+  },
+  expansions: { 
+    type: [String], 
+    default: [] 
+  },
+  scenario: { 
+    type: String, 
+    default: "Base" 
+  },
   players: [{
-    playerId: String,
+    id: { 
+      type: String, 
+      required: true 
+    },
     team: { 
       type: String, 
-      enum: ["Free", "Shadow"],
-      required: true
+      enum: ["Free", "Shadow"], 
+      required: true 
     },
     role: { 
       type: String, 
       enum: ["FreeAll", "GondorElves", "RohanNorthDwarves", "Sauron", "Saruman"],
       required: true
     },
-    isAI: Boolean,
-    aiStrategy: String,
-    isLeading: Boolean,
-    hand: [String], // Cards held, max 4 in 4-player
-    controlledNations: [String] // Nation codes: "3" (Gondor), "7" (Sauron), etc.
-  }],
-  playerCount: {
-    type: Number,
-    enum: [1, 2, 3, 4],
-    default: 2
-  },
-  currentPhase: {
-    type: String,
-    enum: ['setup', 'hunt', 'action', 'combat', 'end'],
-    default: 'setup'
-  },
-  currentTurn: {
-    type: Number,
-    default: 1
-  },
-  currentPlayer: {
-    type: String
-  },
-  turnOrder: {
-    type: [String],
-    default: []
-  },
-  actionDice: {
-    free: [{
-      type: String,
-      selected: Boolean
-    }],
-    shadow: [{
-      type: String,
-      selected: Boolean
-    }]
-  },
-  characters: [{
-    characterId: String,
-    location: String,
-    status: String,
-    modifiers: [String],
-    corruption: {
-      type: Number,
-      default: 0
+    isAI: { 
+      type: Boolean, 
+      default: false 
     },
-    position: {
-      type: Number,
-      default: 0
+    aiStrategy: { 
+      type: String, 
+      default: null 
+    },
+    isLeading: { 
+      type: Boolean, 
+      default: false 
+    },
+    hand: { 
+      type: [String], 
+      default: [] 
+    },
+    controlledNations: { 
+      type: [String], 
+      default: [] 
     }
   }],
-  regions: [{
-    regionId: String,
-    controlledBy: String,
-    units: [{
-      type: String,
-      count: Number,
-      faction: String,
-      nation: String,
-      active: {
-        type: Boolean,
-        default: false
-      }
-    }]
-  }],
-  nations: {
-    north: {
-      status: {
-        type: Number,
-        default: 0,
-        min: -2,
-        max: 2
-      },
-      active: {
-        type: Boolean,
-        default: false
-      }
-    },
-    rohan: {
-      status: {
-        type: Number,
-        default: 0,
-        min: -2,
-        max: 2
-      },
-      active: {
-        type: Boolean,
-        default: false
-      }
-    },
-    gondor: {
-      status: {
-        type: Number,
-        default: 0,
-        min: -2,
-        max: 2
-      },
-      active: {
-        type: Boolean,
-        default: false
-      }
-    },
-    elves: {
-      status: {
-        type: Number,
-        default: 2, // Elves start active for Free Peoples
-        min: -2,
-        max: 2
-      },
-      active: {
-        type: Boolean,
-        default: true
-      }
-    },
-    dwarves: {
-      status: {
-        type: Number,
-        default: 0,
-        min: -2,
-        max: 2
-      },
-      active: {
-        type: Boolean,
-        default: false
-      }
-    },
-    southEast: {
-      status: {
-        type: Number,
-        default: -2, // South/East starts active for Shadow
-        min: -2,
-        max: 2
-      },
-      active: {
-        type: Boolean,
-        default: true
-      }
-    }
-  },
-  huntBox: [String], // Dice allocated to the hunt box
-  huntPool: {
-    regular: {
-      type: Number,
-      default: 12
-    },
-    eye: {
-      type: Number,
-      default: 0
-    }
-  },
-  huntHistory: [{
-    type: {
-      type: String,
-      enum: ['regular', 'reveal', 'eye', 'character']
-    },
-    value: Number,
-    drawnAt: {
-      type: Date,
-      default: Date.now
-    }
-  }],
-  victoryPoints: {
-    freePeoples: {
-      type: Number,
-      default: 0
-    },
-    shadow: {
-      type: Number,
-      default: 0
-    }
-  },
-  cards: {
-    eventDeck: [String],
-    eventDiscard: [String],
-    combatDeck: [String],
-    combatDiscard: [String],
-    playerHands: {
+  board: {
+    regions: {
       type: Map,
-      of: [String]
+      of: {
+        name: { 
+          type: String, 
+          required: true 
+        },
+        control: { 
+          type: String, 
+          default: null 
+        },
+        siegeStatus: { 
+          type: String, 
+          enum: ["in", "out"], 
+          default: "out" 
+        },
+        nation: { 
+          type: String, 
+          required: true 
+        },
+        deployments: [{
+          group: { 
+            type: String, 
+            enum: ["normal", "besieged", "sieging", "rearGuard"], 
+            default: "normal" 
+          },
+          units: {
+            regular: { 
+              type: Number, 
+              default: 0 
+            },
+            elite: { 
+              type: Number, 
+              default: 0 
+            },
+            owner: { 
+              type: String, 
+              required: true 
+            }
+          },
+          leaders: { 
+            type: Number, 
+            default: 0 
+          }
+        }],
+        characters: { 
+          type: [String], 
+          default: [] 
+        },
+        structure: {
+          type: { 
+            type: String, 
+            enum: ["town", "city", "stronghold", "fortification", null], 
+            default: null 
+          },
+          category: { 
+            type: String, 
+            enum: ["settlement", "fortification", null], 
+            default: null 
+          },
+          canMuster: { 
+            type: Boolean, 
+            default: false 
+          },
+          vp: { 
+            type: Number, 
+            default: 0 
+          }
+        }
+      }
+    },
+    actionDiceArea: {
+      free: [{ 
+        type: String, 
+        selected: { 
+          type: Boolean, 
+          default: false 
+        } 
+      }],
+      shadow: [{ 
+        type: String, 
+        selected: { 
+          type: Boolean, 
+          default: false 
+        } 
+      }]
+    },
+    combatDiceArea: { 
+      free: [Number], 
+      shadow: [Number] 
+    },
+    huntBox: { 
+      dice: { 
+        type: Number, 
+        default: 0 
+      }, 
+      tile: { 
+        type: String, 
+        default: null 
+      } 
+    },
+    elvenRings: { 
+      free: { 
+        type: Number, 
+        default: 3 
+      }, 
+      shadow: { 
+        type: Number, 
+        default: 0 
+      } 
+    },
+    eventDecks: {
+      freeCharacter: { 
+        type: [String], 
+        default: [] 
+      },
+      freeStrategy: { 
+        type: [String], 
+        default: [] 
+      },
+      shadowCharacter: { 
+        type: [String], 
+        default: [] 
+      },
+      shadowStrategy: { 
+        type: [String], 
+        default: [] 
+      }
+    },
+    huntPool: { 
+      tiles: { 
+        type: [String], 
+        default: [] 
+      }, 
+      count: { 
+        type: Number, 
+        default: 16 
+      } 
+    },
+    fellowshipTrack: {
+      progress: { 
+        value: { 
+          type: Number, 
+          default: 0 
+        }, 
+        hidden: { 
+          type: Boolean, 
+          default: true 
+        } 
+      },
+      corruption: { 
+        type: Number, 
+        default: 0 
+      }
+    },
+    politicalTrack: {
+      type: Map,
+      of: { 
+        position: { 
+          type: String, 
+          required: true 
+        }, 
+        active: { 
+          type: Boolean, 
+          default: false 
+        } 
+      }
+    },
+    guideBox: { 
+      companion: { 
+        type: String, 
+        default: "gandalf_grey" 
+      } 
+    },
+    fellowshipBox: { 
+      companions: { 
+        type: [String], 
+        default: [] 
+      } 
+    },
+    victoryPoints: { 
+      free: { 
+        type: Number, 
+        default: 0 
+      }, 
+      shadow: { 
+        type: Number, 
+        default: 0 
+      } 
+    },
+    mordorTrack: { 
+      position: { 
+        type: String, 
+        default: null 
+      } 
+    },
+    gollum: { 
+      location: { 
+        type: String, 
+        default: null 
+      } 
+    }
+  },
+  offBoard: {
+    free: { 
+      hand: { 
+        type: [String], 
+        default: [] 
+      }, 
+      discards: { 
+        type: [String], 
+        default: [] 
+      }, 
+      reserves: { 
+        type: Map, 
+        of: { 
+          regular: Number, 
+          elite: Number 
+        }, 
+        default: {} 
+      }, 
+      graveyard: { 
+        type: [String], 
+        default: [] 
+      } 
+    },
+    shadow: { 
+      hand: { 
+        type: [String], 
+        default: [] 
+      }, 
+      discards: { 
+        type: [String], 
+        default: [] 
+      }, 
+      reserves: { 
+        type: Map, 
+        of: { 
+          regular: Number, 
+          elite: Number 
+        }, 
+        default: {} 
+      }, 
+      graveyard: { 
+        type: [String], 
+        default: [] 
+      } 
+    }
+  },
+  turn: {
+    phase: { 
+      type: String, 
+      required: true,
+      default: 'setup',
+      enum: ['setup', 'recover', 'fellowship', 'hunt', 'action', 'combat', 'victory', 'end']
+    },
+    activePlayer: { 
+      type: String, 
+      required: true 
+    },
+    turnOrder: { 
+      type: [String], 
+      default: [] 
+    }
+  },
+  combat: {
+    attacker: { 
+      type: String, 
+      default: null 
+    },
+    defender: { 
+      type: String, 
+      default: null 
+    },
+    region: { 
+      type: String, 
+      default: null 
+    },
+    round: { 
+      type: Number, 
+      default: 0 
+    },
+    leadershipForfeited: { 
+      free: { 
+        type: Boolean, 
+        default: false 
+      }, 
+      shadow: { 
+        type: Boolean, 
+        default: false 
+      } 
+    },
+    combatCards: { 
+      free: { 
+        type: String, 
+        default: null 
+      }, 
+      shadow: { 
+        type: String, 
+        default: null 
+      } 
     }
   },
   history: [historyItemSchema],
-  settings: {
-    mode: {
-      type: String,
-      enum: ['full', 'unrestricted', 'companion'],
-      default: 'full'
-    },
-    rulesEnforced: {
-      type: Boolean,
-      default: true
-    },
-    expansions: [String],
-    scenario: String
+  replay: { 
+    actions: { 
+      type: [Object], 
+      default: [] 
+    }, 
+    currentStep: { 
+      type: Number, 
+      default: 0 
+    } 
   },
-  // Encrypted field for sensitive data
   encryptedData: {
     type: String
   },
@@ -280,9 +441,8 @@ gameStateSchema.methods.decrypt = function(encryptedData, key) {
 };
 
 // Method to add an action to history
-gameStateSchema.methods.addToHistory = function(state, action, player, committed = false) {
+gameStateSchema.methods.addToHistory = function(action, player, committed = false) {
   this.history.push({
-    state: state,
     action: action,
     player: player,
     committed: committed,
@@ -294,7 +454,7 @@ gameStateSchema.methods.addToHistory = function(state, action, player, committed
 gameStateSchema.methods.getUncommittedHistory = function(phase) {
   return this.history.filter(item => 
     !item.committed && 
-    item.state.currentPhase === phase
+    item.action.phase === phase
   );
 };
 

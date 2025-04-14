@@ -39,3 +39,8 @@ data/db/
 
 # Testing
 .nyc_output/
+
+# unwanted docs
+docs/Wotr Impl
+docs/Refactoring.md
+docs/archive

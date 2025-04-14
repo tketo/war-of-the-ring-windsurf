@@ -49,9 +49,9 @@ This folder contains the JSON files that define the game's core elements:
 ### `docs/`
 This folder contains markdown files with essential documentation:
 - **`Product Requirements Document (PRD).md` (v1.3)**: Outlines the project's goals, features, and requirements.
-- **`War of the Ring Rules Guide.md` (v1.4)**: Details the game rules and mechanics, including 3/4-player rules.
-- **`War of the Ring Implementation TODO.md` (v1.8)**: Lists tasks and pending work, updated for AI automation, undo/redo, schema sharing, and multiplayer.
-- **`War of the Ring Implementation Guide.md` (v2.2)**: Provides technical implementation details, including game state schema, rules engine, and multiplayer support.
+- **`War of the Ring Rules Guide.md` (v2.6)**: Details the game rules and mechanics, including 3/4-player rules.
+- **`War of the Ring Implementation TODO.md` (v1.9)**: Lists tasks and pending work, updated for AI automation, undo/redo, schema sharing, and multiplayer.
+- **`War of the Ring Implementation Guide.md` (v2.6)**: Provides technical implementation details, including game state schema, rules engine, and multiplayer support.
 
 ### `war-of-the-ring-backend/`
 The Node.js backend application:

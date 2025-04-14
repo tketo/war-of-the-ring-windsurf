@@ -12,30 +12,38 @@ describe('Action Dice Selection in Multiplayer Games', () => {
     gameState = {
       gameId: 'test-game',
       playerCount: 4,
+      turn: {
+        phase: 'action',
+        activePlayer: 'p1',
+        turnOrder: ['p1', 'p2', 'p3', 'p4']
+      },
       players: [
-        { playerId: 'p1', team: 'Free', role: 'GondorElves' },
-        { playerId: 'p2', team: 'Free', role: 'RohanNorthDwarves' },
-        { playerId: 'p3', team: 'Shadow', role: 'Sauron' },
-        { playerId: 'p4', team: 'Shadow', role: 'Saruman' }
+        { id: 'p1', playerId: 'p1', team: 'Free', role: 'GondorElves', hand: [] },
+        { id: 'p2', playerId: 'p2', team: 'Free', role: 'RohanNorthDwarves', hand: [] },
+        { id: 'p3', playerId: 'p3', team: 'Shadow', role: 'Sauron', hand: [] },
+        { id: 'p4', playerId: 'p4', team: 'Shadow', role: 'Saruman', hand: [] }
       ],
-      currentPhase: 'action',
-      currentPlayer: 'p1',
-      actionDice: {
-        free: [
-          { type: 'Character', selected: false },
-          { type: 'Muster', selected: false },
-          { type: 'Army', selected: false },
-          { type: 'Will', selected: false }
-        ],
-        shadow: [
-          { type: 'Character', selected: false },
-          { type: 'Muster', selected: false },
-          { type: 'Army', selected: false },
-          { type: 'Eye', selected: false },
-          { type: 'Eye', selected: false },
-          { type: 'Eye', selected: false },
-          { type: 'Event', selected: false }
-        ]
+      board: {
+        actionDiceArea: {
+          free: [
+            { type: 'Character', selected: false },
+            { type: 'Muster', selected: false },
+            { type: 'Army', selected: false },
+            { type: 'Will', selected: false }
+          ],
+          shadow: [
+            { type: 'Character', selected: false },
+            { type: 'Muster', selected: false },
+            { type: 'Army', selected: false },
+            { type: 'Eye', selected: false },
+            { type: 'Eye', selected: false },
+            { type: 'Eye', selected: false },
+            { type: 'Event', selected: false }
+          ]
+        }
+      },
+      addToHistory: function(action, player, commit) {
+        // Mock function for testing
       }
     };
   });
@@ -63,7 +71,7 @@ describe('Action Dice Selection in Multiplayer Games', () => {
       expect(anotherValidResult.isValid).toBe(true);
 
       // Shadow player can select Shadow dice
-      gameState.currentPlayer = 'p3'; // Change to Shadow player
+      gameState.turn.activePlayer = 'p3'; // Change to Shadow player
       
       const shadowMove = {
         type: 'useActionDie', 
@@ -74,7 +82,7 @@ describe('Action Dice Selection in Multiplayer Games', () => {
       const shadowResult = rulesEngine.validateActionDie(gameState, shadowMove);
       expect(shadowResult.isValid).toBe(true);
       
-      gameState.currentPlayer = 'p1'; // Reset
+      gameState.turn.activePlayer = 'p1'; // Reset
     });
 
     test('Player cannot select a die with invalid index', () => {
@@ -91,7 +99,7 @@ describe('Action Dice Selection in Multiplayer Games', () => {
 
     test('Only one die can be selected at a time per team', () => {
       // Set up dice for testing with one already selected
-      gameState.actionDice.free[0].selected = true;
+      gameState.board.actionDiceArea.free[0].selected = true;
 
       const move = {
         type: 'useActionDie', 
@@ -118,13 +126,13 @@ describe('Action Dice Selection in Multiplayer Games', () => {
       const updatedState = rulesEngine.applyActionDie(gameState, move);
 
       // Check that the die is selected
-      expect(updatedState.actionDice.free[0].selected).toBe(true);
-      expect(updatedState.actionDice.free[1].selected).toBe(false);
+      expect(updatedState.board.actionDiceArea.free[0].selected).toBe(true);
+      expect(updatedState.board.actionDiceArea.free[1].selected).toBe(false);
     });
 
     test('Selecting a new die deselects previously selected dice for the same team', () => {
       // Set up dice for testing with one already selected
-      gameState.actionDice.free[0].selected = true;
+      gameState.board.actionDiceArea.free[0].selected = true;
       
       // Apply a move to select a different die
       const move = {
@@ -137,8 +145,8 @@ describe('Action Dice Selection in Multiplayer Games', () => {
       const updatedState = rulesEngine.applyActionDie(gameState, move);
 
       // Check that the new die is selected and the old one is deselected
-      expect(updatedState.actionDice.free[0].selected).toBe(false);
-      expect(updatedState.actionDice.free[1].selected).toBe(true);
+      expect(updatedState.board.actionDiceArea.free[0].selected).toBe(false);
+      expect(updatedState.board.actionDiceArea.free[1].selected).toBe(true);
     });
 
     test('Players from different teams can each have a selected die', () => {
@@ -153,7 +161,7 @@ describe('Action Dice Selection in Multiplayer Games', () => {
       const updatedState1 = rulesEngine.applyActionDie(gameState, freeMove);
       
       // Change current player to Shadow team
-      updatedState1.currentPlayer = 'p3';
+      updatedState1.turn.activePlayer = 'p3';
       
       // Apply a move for Shadow team player to select a die
       const shadowMove = {
@@ -166,8 +174,8 @@ describe('Action Dice Selection in Multiplayer Games', () => {
       const updatedState2 = rulesEngine.applyActionDie(updatedState1, shadowMove);
 
       // Check that both teams have a selected die
-      expect(updatedState2.actionDice.free[0].selected).toBe(true);
-      expect(updatedState2.actionDice.shadow[0].selected).toBe(true);
+      expect(updatedState2.board.actionDiceArea.free[0].selected).toBe(true);
+      expect(updatedState2.board.actionDiceArea.shadow[0].selected).toBe(true);
     });
   });
 });

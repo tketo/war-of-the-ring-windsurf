@@ -10,14 +10,34 @@ describe('Rules Engine Functions', () => {
   });
 
   test('drawHuntTile should return a hunt tile', () => {
-    const tile = rulesEngine.drawHuntTile({});
-    expect(tile).toHaveProperty('type');
-    expect(tile).toHaveProperty('value');
+    const mockGameState = {
+      board: {
+        huntPool: {
+          tiles: ['reveal_0', 'damage_1', 'eye_0'],
+          count: 3
+        }
+      }
+    };
+    const tile = rulesEngine.drawHuntTile(mockGameState);
+    expect(typeof tile).toBe('string');
+    expect(mockGameState.board.huntPool.count).toBe(2);
   });
 
   test('activateNationUnits should handle empty gameState', () => {
-    const gameState = {};
-    const result = rulesEngine.activateNationUnits(gameState, 'gondor');
+    const gameState = {
+      board: {
+        regions: new Map(),
+        politicalTrack: new Map([
+          ['3', { position: 'passive', active: false }]
+        ])
+      }
+    };
+    
+    // Mock the necessary methods
+    gameState.addToHistory = jest.fn();
+    
+    const result = rulesEngine.activateNationUnits(gameState, '3');
     expect(result).toBe(gameState);
+    expect(gameState.board.politicalTrack.get('3').active).toBe(true);
   });
 });

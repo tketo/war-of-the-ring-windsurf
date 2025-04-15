@@ -1,0 +1,359 @@
+{
+  "nations": [
+    {
+      "id": 0,
+      "name": "neutral",
+      "total_units": { "regular": 0, "elite": 0, "leaders": 0 },
+      "deployed_units": [
+        {
+          "region_id": "77",
+          "name": "Osgiliath",
+          "units": { "regular": 2, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "0",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 0, "elite": 0, "leaders": 0 }
+    },
+    {
+      "id": 1,
+      "name": "Dwarves",
+      "total_units": { "regular": 5, "elite": 5, "leaders": 4 },
+      "deployed_units": [
+        {
+          "region_id": "28",
+          "name": "Erebor",
+          "units": { "regular": 1, "elite": 2, "leaders": 1 },
+          "owner": "Free",
+          "control": "1",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "30",
+          "name": "Ered Luin",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "1",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "47",
+          "name": "Iron Hills",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "1",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 2, "elite": 3, "leaders": 3 }
+    },
+    {
+      "id": 2,
+      "name": "Elves",
+      "total_units": { "regular": 5, "elite": 10, "leaders": 4 },
+      "deployed_units": [
+        {
+          "region_id": "51",
+          "name": "Lorien",
+          "units": { "regular": 1, "elite": 2, "leaders": 1 },
+          "owner": "Free",
+          "control": "2",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "81",
+          "name": "Rivendell",
+          "units": { "regular": 0, "elite": 2, "leaders": 1 },
+          "owner": "Free",
+          "control": "2",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "92",
+          "name": "Grey Havens",
+          "units": { "regular": 1, "elite": 1, "leaders": 1 },
+          "owner": "Free",
+          "control": "2",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "105",
+          "name": "Woodland Realm",
+          "units": { "regular": 1, "elite": 1, "leaders": 1 },
+          "owner": "Free",
+          "control": "2",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 2, "elite": 4, "leaders": 0 }
+    },
+    {
+      "id": 3,
+      "name": "Gondor",
+      "total_units": { "regular": 15, "elite": 5, "leaders": 4 },
+      "deployed_units": [
+        {
+          "region_id": "14",
+          "name": "Dol Amroth",
+          "units": { "regular": 3, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "3",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "53",
+          "name": "Minas Tirith",
+          "units": { "regular": 3, "elite": 1, "leaders": 1 },
+          "owner": "Free",
+          "control": "3",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "79",
+          "name": "Pelargir",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "3",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 8, "elite": 4, "leaders": 3 }
+    },
+    {
+      "id": 4,
+      "name": "The North",
+      "total_units": { "regular": 10, "elite": 5, "leaders": 4 },
+      "deployed_units": [
+        {
+          "region_id": "7",
+          "name": "Bree",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "4",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "10",
+          "name": "Carrock",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "4",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "12",
+          "name": "Dale",
+          "units": { "regular": 1, "elite": 0, "leaders": 1 },
+          "owner": "Free",
+          "control": "4",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "62",
+          "name": "North Downs",
+          "units": { "regular": 0, "elite": 1, "leaders": 0 },
+          "owner": "Free",
+          "control": "4",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "93",
+          "name": "The Shire",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "4",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 6, "elite": 4, "leaders": 3 }
+    },
+    {
+      "id": 5,
+      "name": "Rohan",
+      "total_units": { "regular": 10, "elite": 5, "leaders": 4 },
+      "deployed_units": [
+        {
+          "region_id": "26",
+          "name": "Edoras",
+          "units": { "regular": 1, "elite": 1, "leaders": 0 },
+          "owner": "Free",
+          "control": "5",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "37",
+          "name": "Fords of Isen",
+          "units": { "regular": 2, "elite": 0, "leaders": 1 },
+          "owner": "Free",
+          "control": "5",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "44",
+          "name": "Helm's Deep",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Free",
+          "control": "5",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 6, "elite": 4, "leaders": 3 }
+    },
+    {
+      "id": 6,
+      "name": "Isengard",
+      "total_units": { "regular": 12, "elite": 6, "leaders": 0 },
+      "deployed_units": [
+        {
+          "region_id": "63",
+          "name": "North Dunland",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "6",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "76",
+          "name": "Orthanc",
+          "units": { "regular": 4, "elite": 1, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "6",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "84",
+          "name": "South Dunland",
+          "units": { "regular": 1, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "6",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 6, "elite": 5, "leaders": 0 },
+      "nazgul_reserves": 4
+    },
+    {
+      "id": 7,
+      "name": "Sauron",
+      "total_units": { "regular": 36, "elite": 6, "leaders": 0 },
+      "deployed_units": [
+        {
+          "region_id": "6",
+          "name": "Barad Dur",
+          "units": { "regular": 4, "elite": 1, "leaders": 1 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "15",
+          "name": "Dol Guldur",
+          "units": { "regular": 5, "elite": 1, "leaders": 1 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "42",
+          "name": "Gorgoroth",
+          "units": { "regular": 3, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "52",
+          "name": "Minas Morgul",
+          "units": { "regular": 5, "elite": 0, "leaders": 1 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "55",
+          "name": "Morannon",
+          "units": { "regular": 5, "elite": 0, "leaders": 1 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "56",
+          "name": "Moria",
+          "units": { "regular": 2, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "58",
+          "name": "Mount Gundabad",
+          "units": { "regular": 2, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "72",
+          "name": "Nurn",
+          "units": { "regular": 2, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "7",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 8, "elite": 4, "leaders": 0 },
+      "nazgul_reserves": 4
+    },
+    {
+      "id": 8,
+      "name": "Southrons & Easterlings",
+      "total_units": { "regular": 24, "elite": 6, "leaders": 0 },
+      "deployed_units": [
+        {
+          "region_id": "34",
+          "name": "Far Harad",
+          "units": { "regular": 3, "elite": 1, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "8",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "60",
+          "name": "Near Harad",
+          "units": { "regular": 3, "elite": 1, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "8",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "71",
+          "name": "North Rhun",
+          "units": { "regular": 2, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "8",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "90",
+          "name": "South Rhun",
+          "units": { "regular": 3, "elite": 1, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "8",
+          "siege_status": "out"
+        },
+        {
+          "region_id": "95",
+          "name": "Umbar",
+          "units": { "regular": 3, "elite": 0, "leaders": 0 },
+          "owner": "Shadow",
+          "control": "8",
+          "siege_status": "out"
+        }
+      ],
+      "reserve_units": { "regular": 10, "elite": 3, "leaders": 0 },
+      "nazgul_reserves": 4
+    }
+  ]
+}

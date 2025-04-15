@@ -77,6 +77,9 @@ function initializeGameState(options) {
  */
 function setupPlayers(gameState, players, playerCount) {
   gameState.players = [];
+  
+  // Initialize player areas
+  gameState.offBoard.playerAreas = new Map();
 
   switch (playerCount) {
     case 1:
@@ -88,8 +91,13 @@ function setupPlayers(gameState, players, playerCount) {
         role: 'FreeAll',
         isLeading: true,
         isAI: false,
-        controlledNations: ['1', '2', '3', '4', '5'], // All Free nations
-        hand: []
+        controlledNations: ['1', '2', '3', '4', '5'] // All Free nations
+      });
+      
+      // Set up player area
+      gameState.offBoard.playerAreas.set(singlePlayer.id, {
+        hand: [],
+        reserved: []
       });
 
       // AI opponent
@@ -100,8 +108,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: true,
         isAI: true,
         aiStrategy: 'random',
-        controlledNations: ['6', '7', '8'], // All Shadow nations
-        hand: []
+        controlledNations: ['6', '7', '8'] // All Shadow nations
+      });
+      
+      // Set up AI player area
+      gameState.offBoard.playerAreas.set('ai', {
+        hand: [],
+        reserved: []
       });
       break;
 
@@ -117,8 +130,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: true,
         isAI: freePlayer.isAI || false,
         aiStrategy: freePlayer.aiStrategy,
-        controlledNations: ['1', '2', '3', '4', '5'], // All Free nations
-        hand: []
+        controlledNations: ['1', '2', '3', '4', '5'] // All Free nations
+      });
+      
+      // Set up free player area
+      gameState.offBoard.playerAreas.set(freePlayer.id, {
+        hand: [],
+        reserved: []
       });
 
       gameState.players.push({
@@ -128,8 +146,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: true,
         isAI: shadowPlayer.isAI || false,
         aiStrategy: shadowPlayer.aiStrategy,
-        controlledNations: ['6', '7', '8'], // All Shadow nations
-        hand: []
+        controlledNations: ['6', '7', '8'] // All Shadow nations
+      });
+      
+      // Set up shadow player area
+      gameState.offBoard.playerAreas.set(shadowPlayer.id, {
+        hand: [],
+        reserved: []
       });
       break;
 
@@ -146,8 +169,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: true,
         isAI: freePlayerThree.isAI || false,
         aiStrategy: freePlayerThree.aiStrategy,
-        controlledNations: ['1', '2', '3', '4', '5'], // All Free nations
-        hand: []
+        controlledNations: ['1', '2', '3', '4', '5'] // All Free nations
+      });
+      
+      // Set up free player area
+      gameState.offBoard.playerAreas.set(freePlayerThree.id, {
+        hand: [],
+        reserved: []
       });
 
       gameState.players.push({
@@ -157,8 +185,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: true,
         isAI: sauronPlayer.isAI || false,
         aiStrategy: sauronPlayer.aiStrategy,
-        controlledNations: ['7'], // Sauron
-        hand: []
+        controlledNations: ['7', '8'] // Sauron, Southrons
+      });
+      
+      // Set up Sauron player area
+      gameState.offBoard.playerAreas.set(sauronPlayer.id, {
+        hand: [],
+        reserved: []
       });
 
       gameState.players.push({
@@ -168,8 +201,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: false,
         isAI: sarumanPlayer.isAI || false,
         aiStrategy: sarumanPlayer.aiStrategy,
-        controlledNations: ['6', '8'], // Isengard, Southrons
-        hand: []
+        controlledNations: ['6'] // Isengard
+      });
+      
+      // Set up Saruman player area
+      gameState.offBoard.playerAreas.set(sarumanPlayer.id, {
+        hand: [],
+        reserved: []
       });
       break;
 
@@ -187,8 +225,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: true,
         isAI: gondorElvesPlayer.isAI || false,
         aiStrategy: gondorElvesPlayer.aiStrategy,
-        controlledNations: ['2', '3'], // Elves, Gondor
-        hand: []
+        controlledNations: ['2', '3'] // Elves, Gondor
+      });
+      
+      // Set up Gondor/Elves player area
+      gameState.offBoard.playerAreas.set(gondorElvesPlayer.id, {
+        hand: [],
+        reserved: []
       });
 
       gameState.players.push({
@@ -198,8 +241,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: false,
         isAI: rohanNorthDwarvesPlayer.isAI || false,
         aiStrategy: rohanNorthDwarvesPlayer.aiStrategy,
-        controlledNations: ['1', '4', '5'], // Dwarves, Rohan, North
-        hand: []
+        controlledNations: ['1', '4', '5'] // Dwarves, North, Rohan
+      });
+      
+      // Set up Rohan/North/Dwarves player area
+      gameState.offBoard.playerAreas.set(rohanNorthDwarvesPlayer.id, {
+        hand: [],
+        reserved: []
       });
 
       gameState.players.push({
@@ -209,8 +257,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: true,
         isAI: sauronPlayerFour.isAI || false,
         aiStrategy: sauronPlayerFour.aiStrategy,
-        controlledNations: ['7'], // Sauron
-        hand: []
+        controlledNations: ['7', '8'] // Sauron, Southrons
+      });
+      
+      // Set up Sauron player area
+      gameState.offBoard.playerAreas.set(sauronPlayerFour.id, {
+        hand: [],
+        reserved: []
       });
 
       gameState.players.push({
@@ -220,8 +273,13 @@ function setupPlayers(gameState, players, playerCount) {
         isLeading: false,
         isAI: sarumanPlayerFour.isAI || false,
         aiStrategy: sarumanPlayerFour.aiStrategy,
-        controlledNations: ['6', '8'], // Isengard, Southrons
-        hand: []
+        controlledNations: ['6'] // Isengard
+      });
+      
+      // Set up Saruman player area
+      gameState.offBoard.playerAreas.set(sarumanPlayerFour.id, {
+        hand: [],
+        reserved: []
       });
       break;
   }
@@ -232,29 +290,31 @@ function setupPlayers(gameState, players, playerCount) {
  * @param {Object} gameState - Game state to modify
  */
 function setupActionDice(gameState) {
-  // Initialize shared dice pools
-  gameState.board = gameState.board || {};
+  // Initialize action dice areas
   gameState.board.actionDiceArea = {
     free: [],
     shadow: []
   };
+  
+  gameState.board.selectedDiceArea = {
+    free: [],
+    shadow: []
+  };
+  
+  gameState.board.usedDiceArea = {
+    free: [],
+    shadow: []
+  };
 
-  // Free Peoples always gets 4 dice
+  // Standard setup: 4 Free dice, 7 Shadow dice
   for (let i = 0; i < 4; i++) {
     const dieType = getDieType('Free', i);
-    gameState.board.actionDiceArea.free.push({
-      type: dieType,
-      selected: false
-    });
+    gameState.board.actionDiceArea.free.push({ type: dieType });
   }
 
-  // Shadow always gets 7 dice
   for (let i = 0; i < 7; i++) {
     const dieType = getDieType('Shadow', i);
-    gameState.board.actionDiceArea.shadow.push({
-      type: dieType,
-      selected: false
-    });
+    gameState.board.actionDiceArea.shadow.push({ type: dieType });
   }
 }
 
@@ -324,136 +384,118 @@ function setupTurnOrder(gameState) {
  * @param {Object} gameState - Game state to modify
  */
 function setupRegions(gameState) {
-  // Initialize regions map
-  gameState.board.regions = new Map();
-  
   try {
-    // Load regions data from regions.json
-    const regionsData = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/regions.json'), 'utf8'));
+    // Initialize regions map
+    gameState.board.regions = new Map();
     
-    // Load initial army setup from initial_army_setup.json
-    const armySetupData = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/initial_army_setup.json'), 'utf8'));
+    // Try to load regions data
+    const regionsPath = path.join(__dirname, '../data/regions.json');
+    const regionsData = JSON.parse(fs.readFileSync(regionsPath, 'utf8'));
     
-    // Process regions data
-    regionsData.forEach(region => {
-      const regionId = region.id.toString();
+    // Try to load initial army setup data
+    const setupPath = path.join(__dirname, '../data/initial_army_setup.json');
+    const setupData = JSON.parse(fs.readFileSync(setupPath, 'utf8'));
+    
+    // Create regions with initial setup
+    Object.entries(regionsData).forEach(([id, regionData]) => {
+      const regionSetup = setupData.regions[id] || {};
       
-      // Create basic region structure
-      const regionEntry = {
-        name: region.name,
-        control: null,
-        siegeStatus: "out",
-        nation: region.nation,
+      // Create base region
+      const region = {
+        name: regionData.name,
+        control: regionSetup.control || null,
+        nation: regionData.nation,
         deployments: [],
         characters: [],
         structure: {
-          type: region.structureType || null,
-          category: region.structureCategory || null,
-          canMuster: region.canMuster || false,
-          vp: region.victoryPoints || 0
+          type: regionData.structure?.type || null,
+          category: regionData.structure?.category || null,
+          canMuster: regionData.structure?.canMuster || false,
+          vp: regionData.structure?.vp || 0
         }
       };
       
-      // Find army setup for this region
-      const armySetup = armySetupData.find(setup => setup.regionId === regionId);
-      if (armySetup) {
-        regionEntry.control = armySetup.controlledBy || null;
-        
-        // Add deployments
-        if (armySetup.units && armySetup.units.length > 0) {
-          armySetup.units.forEach(unit => {
-            regionEntry.deployments.push({
-              group: "normal",
-              units: {
-                regular: unit.regular || 0,
-                elite: unit.elite || 0,
-                owner: unit.faction === "Free" ? gameState.players.find(p => p.team === "Free").id : 
-                                               gameState.players.find(p => p.team === "Shadow").id
-              },
-              leaders: unit.leaders || 0
-            });
+      // Add initial deployments if present
+      if (regionSetup.deployments && regionSetup.deployments.length > 0) {
+        regionSetup.deployments.forEach(deployment => {
+          // Find the player that controls this nation
+          const nationId = regionData.nation;
+          const controllingPlayer = gameState.players.find(p => 
+            p.controlledNations.includes(nationId)
+          );
+          
+          // Default to first player of appropriate team if no specific controller found
+          const team = (nationId <= 5) ? 'Free' : 'Shadow';
+          const defaultPlayer = gameState.players.find(p => p.team === team);
+          const ownerId = controllingPlayer?.id || defaultPlayer?.id;
+          
+          // Add deployment with owner
+          region.deployments.push({
+            group: deployment.group || 'normal',
+            units: {
+              regular: deployment.regular || 0,
+              elite: deployment.elite || 0,
+              owner: ownerId
+            },
+            leaders: deployment.leaders || 0
           });
-        }
+        });
       }
       
-      // Add to regions map
-      gameState.board.regions.set(regionId, regionEntry);
+      // Add initial characters if present
+      if (regionSetup.characters && regionSetup.characters.length > 0) {
+        regionSetup.characters.forEach(characterId => {
+          // Determine character owner based on character data
+          // For simplicity, assign to first player of appropriate team
+          const characterTeam = characterId.startsWith('gandalf') || 
+                              characterId.startsWith('aragorn') || 
+                              characterId.startsWith('legolas') || 
+                              characterId.startsWith('gimli') || 
+                              characterId.startsWith('boromir') || 
+                              characterId.startsWith('frodo') || 
+                              characterId.startsWith('merry') || 
+                              characterId.startsWith('pippin') ? 'Free' : 'Shadow';
+          
+          const owner = gameState.players.find(p => p.team === characterTeam)?.id;
+          
+          region.characters.push({
+            id: characterId,
+            owner: owner
+          });
+        });
+      }
+      
+      // Add region to map
+      gameState.board.regions.set(id, region);
     });
-    
-    // Set up Rivendell as the starting location for the Fellowship
-    const rivendell = gameState.board.regions.get("81"); // Assuming Rivendell is region 81
-    if (rivendell) {
-      rivendell.characters.push("frodo_sam");
-    }
     
   } catch (error) {
     console.error("Error setting up regions:", error);
     
-    // Fallback: Add a minimal set of regions if data files are not available
-    gameState.board.regions.set("53", {
-      name: "Minas Tirith",
-      control: "3", // Gondor
-      siegeStatus: "out",
-      nation: "3",
-      deployments: [{
-        group: "normal",
-        units: {
-          regular: 3,
-          elite: 0,
-          owner: gameState.players.find(p => p.team === "Free").id
-        },
-        leaders: 0
-      }],
-      characters: [],
-      structure: {
-        type: "stronghold",
-        category: "fortification",
-        canMuster: true,
-        vp: 2
-      }
-    });
-    
-    gameState.board.regions.set("81", {
-      name: "Rivendell",
-      control: "2", // Elves
-      siegeStatus: "out",
-      nation: "2",
-      deployments: [],
-      characters: ["frodo_sam"],
-      structure: {
-        type: "stronghold",
-        category: "fortification",
-        canMuster: true,
-        vp: 0
-      }
-    });
+    // Fallback: Create empty regions map if data files are not available
+    gameState.board.regions = new Map();
   }
-  
-  // Initialize combat dice area
-  gameState.board.combatDiceArea = {
-    free: [],
-    shadow: []
-  };
 }
 
 /**
- * Set up initial event decks
+ * Set up event decks
  * @param {Object} gameState - Game state to modify
  */
 function setupEventDecks(gameState) {
-  // Initialize event decks
-  gameState.board.eventDecks = {
-    freeCharacter: [],
-    freeStrategy: [],
-    shadowCharacter: [],
-    shadowStrategy: []
-  };
-  
   try {
-    // Load event cards data
-    const eventCardsData = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/eventcards.json'), 'utf8'));
+    // Initialize event decks
+    gameState.board.eventDecks = {
+      freeCharacter: [],
+      freeStrategy: [],
+      shadowCharacter: [],
+      shadowStrategy: []
+    };
     
-    // Separate cards into appropriate decks
+    // Try to load event cards data
+    const eventCardsPath = path.join(__dirname, '../data/eventcards.json');
+    const eventCardsData = JSON.parse(fs.readFileSync(eventCardsPath, 'utf8'));
+    
+    // Sort cards into appropriate decks
     eventCardsData.forEach(card => {
       if (card.faction === "Free") {
         if (card.type === "Character") {
@@ -488,7 +530,7 @@ function setupEventDecks(gameState) {
     };
   }
   
-  // Initialize offBoard card areas
+  // Initialize offBoard card areas with new structure
   gameState.offBoard = {
     free: {
       hand: [],
@@ -501,7 +543,8 @@ function setupEventDecks(gameState) {
       discards: [],
       reserves: new Map(),
       graveyard: []
-    }
+    },
+    playerAreas: new Map()
   };
 }
 
@@ -510,21 +553,32 @@ function setupEventDecks(gameState) {
  * @param {Object} gameState - Game state to modify
  */
 function setupHuntPool(gameState) {
-  // Initialize hunt box and pool
+  // Initialize hunt box with empty dice area
   gameState.board.huntBox = {
-    dice: 0,
+    diceArea: [],
     tile: null
   };
   
   // Standard hunt pool setup
   gameState.board.huntPool = {
-    tiles: [
-      "reveal_0", "reveal_0", "reveal_1", "reveal_1", "reveal_2", "reveal_2",
-      "damage_1", "damage_1", "damage_2", "damage_2",
-      "eye_0", "eye_0", "eye_0", "eye_0", "eye_0", "eye_0"
-    ],
-    count: 16
+    tiles: [],
+    regular: 6,
+    eye: 2
   };
+  
+  // Add hunt tiles with IDs
+  const huntTiles = [
+    "reveal_0", "reveal_0", "reveal_1", "reveal_1", "reveal_2", "reveal_2",
+    "damage_1", "damage_1", "damage_2", "damage_2",
+    "eye_0", "eye_0", "eye_0", "eye_0", "eye_0", "eye_0"
+  ];
+  
+  huntTiles.forEach(tileId => {
+    gameState.board.huntPool.tiles.push({ id: tileId });
+  });
+  
+  // Initialize reserved hunt tiles area
+  gameState.board.reservedHuntTilesArea = new Map();
   
   // Shuffle the hunt pool
   shuffleArray(gameState.board.huntPool.tiles);
@@ -535,11 +589,10 @@ function setupHuntPool(gameState) {
  * @param {Object} gameState - Game state to modify
  */
 function setupFellowship(gameState) {
-  // Initialize fellowship track
+  // Initialize fellowship track without hidden flag
   gameState.board.fellowshipTrack = {
     progress: {
-      value: 0,
-      hidden: true
+      value: 0
     },
     corruption: 0
   };
@@ -549,23 +602,72 @@ function setupFellowship(gameState) {
     companion: "gandalf_grey"
   };
   
-  // Initialize fellowship box with all companions
+  // Initialize fellowship box with all companions and their owners
+  const freePlayer = gameState.players.find(p => p.team === 'Free' && p.role === 'FreeAll');
+  const gondorElvesPlayer = gameState.players.find(p => p.team === 'Free' && p.role === 'GondorElves');
+  const rohanNorthDwarvesPlayer = gameState.players.find(p => p.team === 'Free' && p.role === 'RohanNorthDwarves');
+  
+  // Default to first Free player if specific roles not found
+  const defaultFreePlayer = freePlayer || gondorElvesPlayer || rohanNorthDwarvesPlayer || gameState.players.find(p => p.team === 'Free');
+  
+  // Assign companions based on player roles in 4-player game
   gameState.board.fellowshipBox = {
-    companions: [
-      "frodo_sam", "gandalf_grey", "aragorn", "legolas", 
-      "gimli", "boromir", "merry", "pippin"
-    ]
+    companions: []
   };
+  
+  // Frodo and Sam always belong to the Ring-bearer's controller
+  gameState.board.fellowshipBox.companions.push({
+    id: "frodo_sam",
+    owner: defaultFreePlayer.id
+  });
+  
+  // In 4-player game, assign companions based on nations
+  if (gameState.playerCount === 4 && gondorElvesPlayer && rohanNorthDwarvesPlayer) {
+    // Gondor/Elves player gets Gondor and Elven companions
+    gameState.board.fellowshipBox.companions.push(
+      { id: "boromir", owner: gondorElvesPlayer.id },
+      { id: "legolas", owner: gondorElvesPlayer.id }
+    );
+    
+    // Rohan/North/Dwarves player gets those companions
+    gameState.board.fellowshipBox.companions.push(
+      { id: "gimli", owner: rohanNorthDwarvesPlayer.id },
+      { id: "merry", owner: rohanNorthDwarvesPlayer.id },
+      { id: "pippin", owner: rohanNorthDwarvesPlayer.id }
+    );
+    
+    // Aragorn and Gandalf can be controlled by either player
+    // For simplicity, assign to Gondor/Elves player initially
+    gameState.board.fellowshipBox.companions.push(
+      { id: "aragorn", owner: gondorElvesPlayer.id },
+      { id: "gandalf_grey", owner: gondorElvesPlayer.id }
+    );
+  } else {
+    // In 1-3 player games, all companions belong to the Free player
+    gameState.board.fellowshipBox.companions.push(
+      { id: "gandalf_grey", owner: defaultFreePlayer.id },
+      { id: "aragorn", owner: defaultFreePlayer.id },
+      { id: "legolas", owner: defaultFreePlayer.id },
+      { id: "gimli", owner: defaultFreePlayer.id },
+      { id: "boromir", owner: defaultFreePlayer.id },
+      { id: "merry", owner: defaultFreePlayer.id },
+      { id: "pippin", owner: defaultFreePlayer.id }
+    );
+  }
   
   // Initialize Mordor track
   gameState.board.mordorTrack = {
     position: null
   };
   
-  // Initialize Gollum
+  // Initialize Gollum with owner field
   gameState.board.gollum = {
-    location: null
+    location: null,
+    owner: null
   };
+  
+  // Initialize table cards area
+  gameState.board.tableCardsArea = new Map();
 }
 
 /**
@@ -573,18 +675,18 @@ function setupFellowship(gameState) {
  * @param {Object} gameState - Game state to modify
  */
 function setupPoliticalTrack(gameState) {
-  // Initialize political track
+  // Initialize political track with face property instead of active
   gameState.board.politicalTrack = new Map();
   
   // Set up nations with their initial political status
-  gameState.board.politicalTrack.set("1", { position: "passive", active: false }); // Dwarves
-  gameState.board.politicalTrack.set("2", { position: "active", active: true });   // Elves (start active)
-  gameState.board.politicalTrack.set("3", { position: "passive", active: false }); // Gondor
-  gameState.board.politicalTrack.set("4", { position: "passive", active: false }); // North
-  gameState.board.politicalTrack.set("5", { position: "passive", active: false }); // Rohan
-  gameState.board.politicalTrack.set("6", { position: "active", active: true });   // Isengard (start active)
-  gameState.board.politicalTrack.set("7", { position: "active", active: true });   // Sauron (start active)
-  gameState.board.politicalTrack.set("8", { position: "active", active: true });   // Southrons (start active)
+  gameState.board.politicalTrack.set("1", { position: 0, face: "passive" }); // Dwarves
+  gameState.board.politicalTrack.set("2", { position: 3, face: "active" });  // Elves (start active)
+  gameState.board.politicalTrack.set("3", { position: 0, face: "passive" }); // Gondor
+  gameState.board.politicalTrack.set("4", { position: 0, face: "passive" }); // North
+  gameState.board.politicalTrack.set("5", { position: 0, face: "passive" }); // Rohan
+  gameState.board.politicalTrack.set("6", { position: 3, face: "active" });  // Isengard (start active)
+  gameState.board.politicalTrack.set("7", { position: 3, face: "active" });  // Sauron (start active)
+  gameState.board.politicalTrack.set("8", { position: 3, face: "active" });  // Southrons (start active)
   
   // Initialize victory points
   gameState.board.victoryPoints = {
@@ -611,5 +713,15 @@ function shuffleArray(array) {
 }
 
 module.exports = {
-  initializeGameState
+  initializeGameState,
+  setupPlayers,
+  setupActionDice,
+  getDieType,
+  setupTurnOrder,
+  setupRegions,
+  setupEventDecks,
+  setupHuntPool,
+  setupFellowship,
+  setupPoliticalTrack,
+  shuffleArray
 };

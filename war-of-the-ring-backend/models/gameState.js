@@ -78,10 +78,6 @@ const gameStateSchema = new mongoose.Schema({
       type: Boolean, 
       default: false 
     },
-    hand: { 
-      type: [String], 
-      default: [] 
-    },
     controlledNations: { 
       type: [String], 
       default: [] 
@@ -98,11 +94,6 @@ const gameStateSchema = new mongoose.Schema({
         control: { 
           type: String, 
           default: null 
-        },
-        siegeStatus: { 
-          type: String, 
-          enum: ["in", "out"], 
-          default: "out" 
         },
         nation: { 
           type: String, 
@@ -133,10 +124,10 @@ const gameStateSchema = new mongoose.Schema({
             default: 0 
           }
         }],
-        characters: { 
-          type: [String], 
-          default: [] 
-        },
+        characters: [{ 
+          id: { type: String, required: true },
+          owner: { type: String, required: true }
+        }],
         structure: {
           type: { 
             type: String, 
@@ -161,18 +152,28 @@ const gameStateSchema = new mongoose.Schema({
     },
     actionDiceArea: {
       free: [{ 
-        type: String, 
-        selected: { 
-          type: Boolean, 
-          default: false 
-        } 
+        type: { type: String, required: true }
       }],
       shadow: [{ 
-        type: String, 
-        selected: { 
-          type: Boolean, 
-          default: false 
-        } 
+        type: { type: String, required: true }
+      }]
+    },
+    selectedDiceArea: {
+      free: [{ 
+        type: { type: String, required: true },
+        index: { type: Number, required: true }
+      }],
+      shadow: [{ 
+        type: { type: String, required: true },
+        index: { type: Number, required: true }
+      }]
+    },
+    usedDiceArea: {
+      free: [{ 
+        type: { type: String, required: true }
+      }],
+      shadow: [{ 
+        type: { type: String, required: true }
       }]
     },
     combatDiceArea: { 
@@ -180,10 +181,10 @@ const gameStateSchema = new mongoose.Schema({
       shadow: [Number] 
     },
     huntBox: { 
-      dice: { 
-        type: Number, 
-        default: 0 
-      }, 
+      diceArea: [{ 
+        type: { type: String, required: true },
+        team: { type: String, required: true }
+      }],
       tile: { 
         type: String, 
         default: null 
@@ -218,55 +219,71 @@ const gameStateSchema = new mongoose.Schema({
       }
     },
     huntPool: { 
-      tiles: { 
-        type: [String], 
-        default: [] 
-      }, 
-      count: { 
-        type: Number, 
-        default: 16 
-      } 
+      tiles: [{ 
+        id: { type: String, required: true }
+      }],
+      regular: {
+        type: Number,
+        default: 6
+      },
+      eye: {
+        type: Number,
+        default: 2
+      }
+    },
+    reservedHuntTilesArea: {
+      type: Map,
+      of: [{ id: { type: String, required: true } }]
+    },
+    tableCardsArea: {
+      type: Map,
+      of: {
+        id: { type: String, required: true },
+        owner: { type: String, required: true },
+        type: { 
+          type: String, 
+          enum: ["combat", "event", "character"],
+          required: true
+        }
+      }
     },
     fellowshipTrack: {
       progress: { 
         value: { 
           type: Number, 
           default: 0 
-        }, 
-        hidden: { 
-          type: Boolean, 
-          default: true 
-        } 
+        }
       },
       corruption: { 
         type: Number, 
         default: 0 
       }
     },
-    politicalTrack: {
-      type: Map,
-      of: { 
-        position: { 
-          type: String, 
-          required: true 
-        }, 
-        active: { 
-          type: Boolean, 
-          default: false 
-        } 
-      }
+    fellowshipBox: { 
+      companions: [{ 
+        id: { type: String, required: true },
+        owner: { type: String, required: true }
+      }]
     },
     guideBox: { 
       companion: { 
         type: String, 
-        default: "gandalf_grey" 
+        default: null 
       } 
     },
-    fellowshipBox: { 
-      companions: { 
-        type: [String], 
-        default: [] 
-      } 
+    politicalTrack: {
+      type: Map,
+      of: {
+        position: { 
+          type: Number, 
+          default: 0 
+        },
+        face: {
+          type: String,
+          enum: ["active", "passive"],
+          default: "passive"
+        }
+      }
     },
     victoryPoints: { 
       free: { 
@@ -288,53 +305,58 @@ const gameStateSchema = new mongoose.Schema({
       location: { 
         type: String, 
         default: null 
-      } 
+      },
+      owner: {
+        type: String,
+        default: null
+      }
     }
   },
   offBoard: {
     free: { 
-      hand: { 
-        type: [String], 
-        default: [] 
-      }, 
-      discards: { 
-        type: [String], 
-        default: [] 
-      }, 
+      hand: [{ 
+        id: { type: String, required: true }
+      }], 
+      discards: [{ 
+        id: { type: String, required: true }
+      }], 
       reserves: { 
         type: Map, 
         of: { 
           regular: Number, 
           elite: Number 
-        }, 
-        default: {} 
+        }
       }, 
-      graveyard: { 
-        type: [String], 
-        default: [] 
-      } 
+      graveyard: [{ 
+        id: { type: String, required: true },
+        owner: { type: String, required: true }
+      }]
     },
     shadow: { 
-      hand: { 
-        type: [String], 
-        default: [] 
-      }, 
-      discards: { 
-        type: [String], 
-        default: [] 
-      }, 
+      hand: [{ 
+        id: { type: String, required: true }
+      }], 
+      discards: [{ 
+        id: { type: String, required: true }
+      }], 
       reserves: { 
         type: Map, 
         of: { 
           regular: Number, 
           elite: Number 
-        }, 
-        default: {} 
+        }
       }, 
-      graveyard: { 
-        type: [String], 
-        default: [] 
-      } 
+      graveyard: [{ 
+        id: { type: String, required: true },
+        owner: { type: String, required: true }
+      }]
+    },
+    playerAreas: {
+      type: Map,
+      of: {
+        hand: [{ id: { type: String, required: true } }],
+        reserved: [{ id: { type: String, required: true } }]
+      }
     }
   },
   turn: {
@@ -351,44 +373,6 @@ const gameStateSchema = new mongoose.Schema({
     turnOrder: { 
       type: [String], 
       default: [] 
-    }
-  },
-  combat: {
-    attacker: { 
-      type: String, 
-      default: null 
-    },
-    defender: { 
-      type: String, 
-      default: null 
-    },
-    region: { 
-      type: String, 
-      default: null 
-    },
-    round: { 
-      type: Number, 
-      default: 0 
-    },
-    leadershipForfeited: { 
-      free: { 
-        type: Boolean, 
-        default: false 
-      }, 
-      shadow: { 
-        type: Boolean, 
-        default: false 
-      } 
-    },
-    combatCards: { 
-      free: { 
-        type: String, 
-        default: null 
-      }, 
-      shadow: { 
-        type: String, 
-        default: null 
-      } 
     }
   },
   history: [historyItemSchema],
@@ -456,6 +440,33 @@ gameStateSchema.methods.getUncommittedHistory = function(phase) {
     !item.committed && 
     item.action.phase === phase
   );
+};
+
+// Helper methods for state inference
+
+// Check if a region is under siege based on deployment groups
+gameStateSchema.methods.hasSiege = function(regionId) {
+  const region = this.board.regions.get(regionId);
+  if (!region) return false;
+  
+  const besiegedDeployment = region.deployments.find(d => d.group === 'besieged');
+  const siegingDeployment = region.deployments.find(d => d.group === 'sieging');
+  
+  return besiegedDeployment && siegingDeployment;
+};
+
+// Check if the fellowship is hidden based on progress value and hunt tile
+gameStateSchema.methods.isFellowshipHidden = function() {
+  // Fellowship is hidden if no hunt tile is revealed
+  return !this.board.huntBox.tile;
+};
+
+// Check if a nation is at war based on political track face
+gameStateSchema.methods.isAtWar = function(nationId) {
+  const nationTrack = this.board.politicalTrack.get(nationId);
+  if (!nationTrack) return false;
+  
+  return nationTrack.face === 'active';
 };
 
 // Create and export the model

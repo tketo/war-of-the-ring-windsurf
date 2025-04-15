@@ -1,0 +1,966 @@
+{
+    "nations": [
+      { "id": 0, "name": "neutral" },
+      { "id": 1, "name": "Dwarves" },
+      { "id": 2, "name": "Elves" },
+      { "id": 3, "name": "Gondor" },
+      { "id": 4, "name": "The North" },
+      { "id": 5, "name": "Rohan" },
+      { "id": 6, "name": "Isengard" },
+      { "id": 7, "name": "Sauron" },
+      { "id": 8, "name": "Southrons & Easterlings" }
+    ],
+    "regions": [
+      { "id": "1", "name": "Andrast", "nation": "0" },
+      { "id": "2", "name": "Anfalas", "nation": "3" },
+      { "id": "3", "name": "Angmar", "nation": "7", "settlement": { "type": "city", "vp": 1, "can_muster": true } },
+      { "id": "4", "name": "Arnor", "nation": "0" },
+      { "id": "5", "name": "Ash Mountains", "nation": "0" },
+      { "id": "6", "name": "Barad Dur", "nation": "7", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "7", "name": "Bree", "nation": "4", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "8", "name": "Buckland", "nation": "4" },
+      { "id": "9", "name": "Cardolan", "nation": "0" },
+      { "id": "10", "name": "Carrock", "nation": "4", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "11", "name": "Dagorlad", "nation": "0" },
+      { "id": "12", "name": "Dale", "nation": "4", "settlement": { "type": "city", "vp": 1, "can_muster": true } },
+      { "id": "13", "name": "Dead Marshes", "nation": "0" },
+      { "id": "14", "name": "Dol Amroth", "nation": "3", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "15", "name": "Dol Guldur", "nation": "7", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "16", "name": "Drimill Dale", "nation": "0" },
+      { "id": "17", "name": "Druadan Forest", "nation": "3" },
+      { "id": "18", "name": "Druwaith Iaur", "nation": "0" },
+      { "id": "19", "name": "Eagles' Eyrie", "nation": "0" },
+      { "id": "20", "name": "Eastemnet", "nation": "5" },
+      { "id": "21", "name": "Eastern Brown Lands", "nation": "0" },
+      { "id": "22", "name": "Eastern Emyn Muil", "nation": "" },
+      { "id": "23", "name": "Eastern Mirkwood", "nation": "" },
+      { "id": "24", "name": "East Harondor", "nation": "" },
+      { "id": "25", "name": "East Rhun", "nation": "8" },
+      { "id": "26", "name": "Edoras", "nation": "5", "settlement": { "type": "city", "vp": 1, "can_muster": true } },
+      { "id": "27", "name": "Enedwaith", "nation": "" },
+      { "id": "28", "name": "Erebor", "nation": "1", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "29", "name": "Erech", "nation": "3" },
+      { "id": "30", "name": "Ered Luin", "nation": "1", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "31", "name": "Ettenmoors", "nation": "" },
+      { "id": "32", "name": "Evendim", "nation": "" },
+      { "id": "33", "name": "Fangorn", "nation": "" },
+      { "id": "34", "name": "Far Harad", "nation": "8", "settlement": { "type": "city", "vp": 1, "can_muster": true } },
+      { "id": "35", "name": "Folde", "nation": "5", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "36", "name": "Fords of Bruinen", "nation": "" },
+      { "id": "37", "name": "Fords of Isen", "nation": "5", "fortification": { "type": "fortification", "vp": 0, "can_muster": false } },
+      { "id": "38", "name": "Forlindon", "nation": "" },
+      { "id": "39", "name": "Gap of Rohan", "nation": "6" },
+      { "id": "40", "name": "Gladden Fields", "nation": "" },
+      { "id": "41", "name": "Goblin's Gate", "nation": "" },
+      { "id": "42", "name": "Gorgoroth", "nation": "7" },
+      { "id": "43", "name": "Harlindon", "nation": "" },
+      { "id": "44", "name": "Helm's Deep", "nation": "5", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "45", "name": "High Pass", "nation": "" },
+      { "id": "46", "name": "Hollin", "nation": "" },
+      { "id": "47", "name": "Iron Hills", "nation": "1", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "48", "name": "Khand", "nation": "8" },
+      { "id": "49", "name": "Lamedon", "nation": "3", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "50", "name": "Lossarnach", "nation": "3", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "51", "name": "Lorien", "nation": "2", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "52", "name": "Minas Morgul", "nation": "7", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "53", "name": "Minas Tirith", "nation": "3", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "54", "name": "Minhiriath", "nation": "" },
+      { "id": "55", "name": "Morannon", "nation": "7", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "56", "name": "Moria", "nation": "7", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "57", "name": "Mount Gram", "nation": "7" },
+      { "id": "58", "name": "Mount Gundabad", "nation": "7", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "59", "name": "Narrows of the Forest", "nation": "" },
+      { "id": "60", "name": "Near Harad", "nation": "8", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "61", "name": "Noman-Lands", "nation": "" },
+      { "id": "62", "name": "North Downs", "nation": "4" },
+      { "id": "63", "name": "North Dunland", "nation": "6", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "64", "name": "North Ered-Luin", "nation": "1" },
+      { "id": "65", "name": "Northern Anduin Vale", "nation": "0" },
+      { "id": "66", "name": "Northern Dorwinion", "nation": "" },
+      { "id": "67", "name": "Northern Mirkwood", "nation": "" },
+      { "id": "68", "name": "Northern Rhovanion", "nation": "" },
+      { "id": "70", "name": "North Ithilien", "nation": "" },
+      { "id": "71", "name": "North Rhun", "nation": "8", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "72", "name": "Nurn", "nation": "7", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "73", "name": "Old Ford", "nation": "" },
+      { "id": "74", "name": "Old Forest", "nation": "" },
+      { "id": "75", "name": "Old Forest Road", "nation": "4" },
+      { "id": "76", "name": "Orthanc", "nation": "6", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "77", "name": "Osgiliath", "nation": "", "fortification": { "type": "fortification", "vp": 0, "can_muster": false } },
+      { "id": "78", "name": "Parth Celebrant", "nation": "" },
+      { "id": "79", "name": "Pelargir", "nation": "3", "settlement": { "type": "city", "vp": 1, "can_muster": true } },
+      { "id": "80", "name": "Rhosgobel", "nation": "4" },
+      { "id": "81", "name": "Rivendell", "nation": "2", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "82", "name": "South Anduin Vale", "nation": "" },
+      { "id": "83", "name": "South Downs", "nation": "" },
+      { "id": "84", "name": "South Dunland", "nation": "6", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "85", "name": "South Ered-Luin", "nation": "" },
+      { "id": "86", "name": "Southern Dorwinion", "nation": "" },
+      { "id": "87", "name": "Southern Mirkwood", "nation": "7" },
+      { "id": "88", "name": "Southern Rhovanion", "nation": "" },
+      { "id": "89", "name": "South Ithilien", "nation": "" },
+      { "id": "90", "name": "South Rhun", "nation": "8", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "91", "name": "Tharbad", "nation": "" },
+      { "id": "92", "name": "Grey Havens", "nation": "2", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "93", "name": "The Shire", "nation": "4", "settlement": { "type": "city", "vp": 1, "can_muster": true } },
+      { "id": "94", "name": "Trollshaws", "nation": "" },
+      { "id": "95", "name": "Umbar", "nation": "8", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } },
+      { "id": "96", "name": "Vale of Carnen", "nation": "" },
+      { "id": "97", "name": "Vale of Celdium", "nation": "" },
+      { "id": "98", "name": "Weather Hills", "nation": "" },
+      { "id": "99", "name": "Westemnet", "nation": "5", "settlement": { "type": "town", "vp": 0, "can_muster": false } },
+      { "id": "100", "name": "Western Brown Lands", "nation": "" },
+      { "id": "101", "name": "Western Emyn Muil", "nation": "" },
+      { "id": "102", "name": "Western Mirkwood", "nation": "" },
+      { "id": "103", "name": "West Harondor", "nation": "" },
+      { "id": "104", "name": "Withered Heath", "nation": "" },
+      { "id": "105", "name": "Woodland Realms", "nation": "2", "settlement": { "type": "stronghold", "vp": 2, "can_muster": true } }
+    ],
+    "nazgul_pool": {
+      "name": "Nazgûl",
+      "total_leaders": 8,
+      "shared_by": [6, 7, 8]
+    },
+    "connections": [
+      [
+        { "id": 1, "name": "Andrast" },
+        { "id": 2, "name": "Anfalas" }
+      ],
+      [
+        { "id": 1, "name": "Andrast" },
+        { "id": 18, "name": "Druwaith Iaur" }
+      ],
+      [
+        { "id": 2, "name": "Anfalas" },
+        { "id": 14, "name": "Dol Amroth" }
+      ],
+      [
+        { "id": 2, "name": "Anfalas" },
+        { "id": 29, "name": "Erech" }
+      ],
+      [
+        { "id": 3, "name": "Angmar" },
+        { "id": 4, "name": "Arnor" }
+      ],
+      [
+        { "id": 3, "name": "Angmar" },
+        { "id": 31, "name": "Ettenmoors" }
+      ],
+      [
+        { "id": 3, "name": "Angmar" },
+        { "id": 57, "name": "Mount Gram" }
+      ],
+      [
+        { "id": 4, "name": "Arnor" },
+        { "id": 31, "name": "Ettenmoors" }
+      ],
+      [
+        { "id": 4, "name": "Arnor" },
+        { "id": 32, "name": "Evendim" }
+      ],
+      [
+        { "id": 4, "name": "Arnor" },
+        { "id": 62, "name": "North Downs" }
+      ],
+      [
+        { "id": 5, "name": "Ash Mountains" },
+        { "id": 11, "name": "Dagorlad" }
+      ],
+      [
+        { "id": 5, "name": "Ash Mountains" },
+        { "id": 61, "name": "Noman-Lands" }
+      ],
+      [
+        { "id": 5, "name": "Ash Mountains" },
+        { "id": 86, "name": "Southern Dorwinion" }
+      ],
+      [
+        { "id": 5, "name": "Ash Mountains" },
+        { "id": 90, "name": "South Rhun" }
+      ],
+      [
+        { "id": 6, "name": "Barad Dur" },
+        { "id": 42, "name": "Gorgoroth" }
+      ],
+      [
+        { "id": 7, "name": "Bree" },
+        { "id": 8, "name": "Buckland" }
+      ],
+      [
+        { "id": 7, "name": "Bree" },
+        { "id": 62, "name": "North Downs" }
+      ],
+      [
+        { "id": 7, "name": "Bree" },
+        { "id": 83, "name": "South Downs" }
+      ],
+      [
+        { "id": 7, "name": "Bree" },
+        { "id": 98, "name": "Weather Hills" }
+      ],
+      [
+        { "id": 8, "name": "Buckland" },
+        { "id": 9, "name": "Cardolan" }
+      ],
+      [
+        { "id": 8, "name": "Buckland" },
+        { "id": 32, "name": "Evendim" }
+      ],
+      [
+        { "id": 8, "name": "Buckland" },
+        { "id": 62, "name": "North Downs" }
+      ],
+      [
+        { "id": 8, "name": "Buckland" },
+        { "id": 74, "name": "Old Forest" }
+      ],
+      [
+        { "id": 8, "name": "Buckland" },
+        { "id": 83, "name": "South Downs" }
+      ],
+      [
+        { "id": 8, "name": "Buckland" },
+        { "id": 93, "name": "The Shire" }
+      ],
+      [
+        { "id": 9, "name": "Cardolan" },
+        { "id": 54, "name": "Minhiriath" }
+      ],
+      [
+        { "id": 9, "name": "Cardolan" },
+        { "id": 63, "name": "North Dunland" }
+      ],
+      [
+        { "id": 9, "name": "Cardolan" },
+        { "id": 74, "name": "Old Forest" }
+      ],
+      [
+        { "id": 9, "name": "Cardolan" },
+        { "id": 83, "name": "South Downs" }
+      ],
+      [
+        { "id": 9, "name": "Cardolan" },
+        { "id": 85, "name": "South Ered-Luin" }
+      ],
+      [
+        { "id": 9, "name": "Cardolan" },
+        { "id": 91, "name": "Tharbad" }
+      ],
+      [
+        { "id": 10, "name": "Carrock" },
+        { "id": 19, "name": "Eagles' Eyrie" }
+      ],
+      [
+        { "id": 10, "name": "Carrock" },
+        { "id": 67, "name": "Northern Mirkwood" }
+      ],
+      [
+        { "id": 10, "name": "Carrock" },
+        { "id": 73, "name": "Old Ford" }
+      ],
+      [
+        { "id": 10, "name": "Carrock" },
+        { "id": 75, "name": "Old Forest Road" }
+      ],
+      [
+        { "id": 10, "name": "Carrock" },
+        { "id": 80, "name": "Rhosgobel" }
+      ],
+      [
+        { "id": 10, "name": "Carrock" },
+        { "id": 102, "name": "Western Mirkwood" }
+      ],
+      [
+        { "id": 11, "name": "Dagorlad" },
+        { "id": 22, "name": "Eastern Emyn Muil" }
+      ],
+      [
+        { "id": 11, "name": "Dagorlad" },
+        { "id": 55, "name": "Morannon" }
+      ],
+      [
+        { "id": 11, "name": "Dagorlad" },
+        { "id": 61, "name": "Noman-Lands" }
+      ],
+      [
+        { "id": 11, "name": "Dagorlad" },
+        { "id": 70, "name": "North Ithilien" }
+      ],
+      [
+        { "id": 12, "name": "Dale" },
+        { "id": 28, "name": "Erebor" }
+      ],
+      [
+        { "id": 12, "name": "Dale" },
+        { "id": 47, "name": "Iron Hills" }
+      ],
+      [
+        { "id": 12, "name": "Dale" },
+        { "id": 68, "name": "Northern Rhovanion" }
+      ],
+      [
+        { "id": 12, "name": "Dale" },
+        { "id": 75, "name": "Old Forest Road" }
+      ],
+      [
+        { "id": 12, "name": "Dale" },
+        { "id": 96, "name": "Vale of Carnen" }
+      ],
+      [
+        { "id": 12, "name": "Dale" },
+        { "id": 104, "name": "Withered Heath" }
+      ],
+      [
+        { "id": 12, "name": "Dale" },
+        { "id": 105, "name": "Woodland Realms" }
+      ],
+      [
+        { "id": 13, "name": "Dead Marshes" },
+        { "id": 17, "name": "Druadan Forest" }
+      ],
+      [
+        { "id": 13, "name": "Dead Marshes" },
+        { "id": 22, "name": "Eastern Emyn Muil" }
+      ],
+      [
+        { "id": 13, "name": "Dead Marshes" },
+        { "id": 70, "name": "North Ithilien" }
+      ],
+      [
+        { "id": 13, "name": "Dead Marshes" },
+        { "id": 77, "name": "Osgiliath" }
+      ],
+      [
+        { "id": 13, "name": "Dead Marshes" },
+        { "id": 101, "name": "Western Emyn Muil" }
+      ],
+      [
+        { "id": 14, "name": "Dol Amroth" },
+        { "id": 29, "name": "Erech" }
+      ],
+      [
+        { "id": 14, "name": "Dol Amroth" },
+        { "id": 49, "name": "Lamedon" }
+      ],
+      [
+        { "id": 15, "name": "Dol Guldur" },
+        { "id": 21, "name": "Eastern Brown Lands" }
+      ],
+      [
+        { "id": 15, "name": "Dol Guldur" },
+        { "id": 23, "name": "Eastern Mirkwood" }
+      ],
+      [
+        { "id": 15, "name": "Dol Guldur" },
+        { "id": 59, "name": "Narrows of the Forest" }
+      ],
+      [
+        { "id": 15, "name": "Dol Guldur" },
+        { "id": 64, "name": "North Anduin Vale" }
+      ],
+      [
+        { "id": 15, "name": "Dol Guldur" },
+        { "id": 82, "name": "South Anduin Vale" }
+      ],
+      [
+        { "id": 15, "name": "Dol Guldur" },
+        { "id": 87, "name": "Southern Mirkwood" }
+      ],
+      [
+        { "id": 15, "name": "Dol Guldur" },
+        { "id": 100, "name": "Western Brown Lands" }
+      ],
+      [
+        { "id": 16, "name": "Drimill Dale" },
+        { "id": 40, "name": "Gladden Fields" }
+      ],
+      [
+        { "id": 16, "name": "Drimill Dale" },
+        { "id": 51, "name": "Lorien" }
+      ],
+      [
+        { "id": 16, "name": "Drimill Dale" },
+        { "id": 56, "name": "Moria" }
+      ],
+      [
+        { "id": 16, "name": "Drimill Dale" },
+        { "id": 64, "name": "North Anduin Vale" }
+      ],
+      [
+        { "id": 16, "name": "Drimill Dale" },
+        { "id": 78, "name": "Parth Celebrant" }
+      ],
+      [
+        { "id": 16, "name": "Drimill Dale" },
+        { "id": 82, "name": "South Anduin Vale" }
+      ],
+      [
+        { "id": 17, "name": "Druadan Forest" },
+        { "id": 20, "name": "Eastemnet" }
+      ],
+      [
+        { "id": 17, "name": "Druadan Forest" },
+        { "id": 35, "name": "Folde" }
+      ],
+      [
+        { "id": 17, "name": "Druadan Forest" },
+        { "id": 53, "name": "Minas Tirith" }
+      ],
+      [
+        { "id": 17, "name": "Druadan Forest" },
+        { "id": 77, "name": "Osgiliath" }
+      ],
+      [
+        { "id": 17, "name": "Druadan Forest" },
+        { "id": 101, "name": "Western Emyn Muil" }
+      ],
+      [
+        { "id": 18, "name": "Druwaith Iaur" },
+        { "id": 27, "name": "Enedwaith" }
+      ],
+      [
+        { "id": 18, "name": "Druwaith Iaur" },
+        { "id": 37, "name": "Fords of Isen" }
+      ],
+      [
+        { "id": 18, "name": "Druwaith Iaur" },
+        { "id": 39, "name": "Gap of Rohan" }
+      ],
+      [
+        { "id": 19, "name": "Eagles' Eyrie" },
+        { "id": 58, "name": "Mount Gundabad" }
+      ],
+      [
+        { "id": 19, "name": "Eagles' Eyrie" },
+        { "id": 73, "name": "Old Ford" }
+      ],
+      [
+        { "id": 20, "name": "Eastemnet" },
+        { "id": 33, "name": "Fangorn" }
+      ],
+      [
+        { "id": 20, "name": "Eastemnet" },
+        { "id": 35, "name": "Folde" }
+      ],
+      [
+        { "id": 20, "name": "Eastemnet" },
+        { "id": 78, "name": "Parth Celebrant" }
+      ],
+      [
+        { "id": 20, "name": "Eastemnet" },
+        { "id": 99, "name": "Westemnet" }
+      ],
+      [
+        { "id": 20, "name": "Eastemnet" },
+        { "id": 100, "name": "Western Brown Lands" }
+      ],
+      [
+        { "id": 20, "name": "Eastemnet" },
+        { "id": 101, "name": "Western Emyn Muil" }
+      ],
+      [
+        { "id": 21, "name": "Eastern Brown Lands" },
+        { "id": 22, "name": "Eastern Emyn Muil" }
+      ],
+      [
+        { "id": 21, "name": "Eastern Brown Lands" },
+        { "id": 61, "name": "Noman-Lands" }
+      ],
+      [
+        { "id": 21, "name": "Eastern Brown Lands" },
+        { "id": 87, "name": "Southern Mirkwood" }
+      ],
+      [
+        { "id": 21, "name": "Eastern Brown Lands" },
+         { "id": "88", "name": "Southern Rhovanion" }
+      ],
+      [
+        { "id": 21, "name": "Eastern Brown Lands" },
+        { "id": 100, "name": "Western Brown Lands" }
+      ],
+      [
+        { "id": 21, "name": "Eastern Brown Lands" },
+        { "id": 101, "name": "Western Emyn Muil" }
+      ],
+      [
+        { "id": 22, "name": "Eastern Emyn Muil" },
+        { "id": 61, "name": "Noman-Lands" }
+      ],
+      [
+        { "id": 22, "name": "Eastern Emyn Muil" },
+        { "id": 70, "name": "North Ithilien" }
+      ],
+      [
+        { "id": 22, "name": "Eastern Emyn Muil" },
+        { "id": 88, "name": "Southern Rhovanion" }
+      ],
+      [
+        { "id": 22, "name": "Eastern Emyn Muil" },
+        { "id": 101, "name": "Western Emyn Muil" }
+      ],
+      [
+        { "id": 23, "name": "Eastern Mirkwood" },
+        { "id": 59, "name": "Narrows of the Forest" }
+      ],
+      [
+        { "id": 23, "name": "Eastern Mirkwood" },
+        { "id": 87, "name": "Southern Mirkwood" }
+      ],
+      [
+        { "id": 23, "name": "Eastern Mirkwood" },
+        { "id": 105, "name": "Woodland Realms" }
+      ],
+      [
+        { "id": 25, "name": "East Rhun" },
+        { "id": 47, "name": "Iron Hills" }
+      ],
+      [
+        { "id": 25, "name": "East Rhun" },
+        { "id": 65, "name": "Northern Anduin Vale" }
+      ],
+      [
+        { "id": 25, "name": "East Rhun" },
+        { "id": 90, "name": "South Rhun" }
+      ],
+      [
+        { "id": 26, "name": "Edoras" },
+        { "id": 35, "name": "Folde" }
+      ],
+      [
+        { "id": 26, "name": "Edoras" },
+        { "id": 99, "name": "Westemnet" }
+      ],
+      [
+        { "id": 27, "name": "Enedwaith" },
+        { "id": 39, "name": "Gap of Rohan" }
+      ],
+      [
+        { "id": 27, "name": "Enedwaith" },
+        { "id": 54, "name": "Minhiriath" }
+      ],
+      [
+        { "id": 27, "name": "Enedwaith" },
+        { "id": 84, "name": "South Dunland" }
+      ],
+      [
+        { "id": 27, "name": "Enedwaith" },
+        { "id": 91, "name": "Tharbad" }
+      ],
+      [
+        { "id": 28, "name": "Erebor" },
+        { "id": 47, "name": "Iron Hills" }
+      ],
+      [
+        { "id": 28, "name": "Erebor" },
+        { "id": 104, "name": "Withered Heath" }
+      ],
+      [
+        { "id": 29, "name": "Erech" },
+        { "id": 49, "name": "Lamedon" }
+      ],
+      [
+        { "id": 30, "name": "Ered Luin" },
+        { "id": 32, "name": "Evendim" }
+      ],
+      [
+        { "id": 30, "name": "Ered Luin" },
+        { "id": 65, "name": "Northern Anduin Vale" }
+      ],
+      [
+        { "id": 30, "name": "Ered Luin" },
+        { "id": 92, "name": "Grey Havens" }
+      ],
+      [
+        { "id": 30, "name": "Ered Luin" },
+        { "id": 93, "name": "The Shire" }
+      ],
+      [
+        { "id": 31, "name": "Ettenmoors" },
+        { "id": 57, "name": "Mount Gram" }
+      ],
+      [
+        { "id": 31, "name": "Ettenmoors" },
+        { "id": 62, "name": "North Downs" }
+      ],
+      [
+        { "id": 31, "name": "Ettenmoors" },
+        { "id": 94, "name": "Trollshaws" }
+      ],
+      [
+        { "id": 31, "name": "Ettenmoors" },
+        { "id": 98, "name": "Weather Hills" }
+      ],
+      [
+        { "id": 32, "name": "Evendim" },
+        { "id": 65, "name": "Northern Anduin Vale" }
+      ],
+      [
+        { "id": 32, "name": "Evendim" },
+        { "id": 93, "name": "The Shire" }
+      ],
+      [
+        { "id": 32, "name": "Evendim" },
+        { "id": 94, "name": "Trollshaws" }
+      ],
+      [
+        { "id": 33, "name": "Fangorn" },
+        { "id": 37, "name": "Fords of Isen" }
+      ],
+      [
+        { "id": 33, "name": "Fangorn" },
+        { "id": 78, "name": "Parth Celebrant" }
+      ],
+      [
+        { "id": 33, "name": "Fangorn" },
+        { "id": 99, "name": "Westemnet" }
+      ],
+      [
+        { "id": 34, "name": "Far Harad" },
+        { "id": 48, "name": "Khand" }
+      ],
+      [
+        { "id": 34, "name": "Far Harad" },
+        { "id": 60, "name": "Near Harad" }
+      ],
+      [
+        { "id": 35, "name": "Folde" },
+        { "id": 99, "name": "Westemnet" }
+      ],
+      [
+        { "id": 36, "name": "Fords of Bruinen" },
+        { "id": 45, "name": "High Pass" }
+      ],
+      [
+        { "id": 36, "name": "Fords of Bruinen" },
+        { "id": 46, "name": "Hollin" }
+      ],
+      [
+        { "id": 36, "name": "Fords of Bruinen" },
+        { "id": 81, "name": "Rivendell" }
+      ],
+      [
+        { "id": 36, "name": "Fords of Bruinen" },
+        { "id": 94, "name": "Trollshaws" }
+      ],
+      [
+        { "id": 37, "name": "Fords of Isen" },
+        { "id": 39, "name": "Gap of Rohan" }
+      ],
+      [
+        { "id": 37, "name": "Fords of Isen" },
+        { "id": 44, "name": "Helm's Deep" }
+      ],
+      [
+        { "id": 37, "name": "Fords of Isen" },
+        { "id": 76, "name": "Orthanc" }
+      ],
+      [
+        { "id": 37, "name": "Fords of Isen" },
+        { "id": 99, "name": "Westemnet" }
+      ],
+      [
+        { "id": 38, "name": "Forlindon" },
+        { "id": 92, "name": "Grey Havens" }
+      ],
+      [
+        { "id": 39, "name": "Gap of Rohan" },
+        { "id": 44, "name": "Helm's Deep" }
+      ],
+      [
+        { "id": 39, "name": "Gap of Rohan" },
+        { "id": 76, "name": "Orthanc" }
+      ],
+      [
+        { "id": 39, "name": "Gap of Rohan" },
+        { "id": 84, "name": "South Dunland" }
+      ],
+      [
+        { "id": 40, "name": "Gladden Fields" },
+        { "id": 73, "name": "Old Ford" }
+      ],
+      [
+        { "id": 40, "name": "Gladden Fields" },
+        { "id": 80, "name": "Rhosgobel" }
+      ],
+      [
+        { "id": 41, "name": "Goblin's Gate" },
+        { "id": 45, "name": "High Pass" }
+      ],
+      [
+        { "id": 41, "name": "Goblin's Gate" },
+        { "id": 73, "name": "Old Ford" }
+      ],
+      [
+        { "id": 42, "name": "Gorgoroth" },
+        { "id": 52, "name": "Minas Morgul" }
+      ],
+      [
+        { "id": 42, "name": "Gorgoroth" },
+        { "id": 55, "name": "Morannon" }
+      ],
+      [
+        { "id": 42, "name": "Gorgoroth" },
+        { "id": 72, "name": "Nurn" }
+      ],
+      [
+        { "id": 43, "name": "Harlindon" },
+        { "id": 85, "name": "South Ered-Luin" }
+      ],
+      [
+        { "id": 43, "name": "Harlindon" },
+        { "id": 92, "name": "Grey Havens" }
+      ],
+      [
+        { "id": 44, "name": "Helm's Deep" },
+        { "id": 99, "name": "Westemnet" }
+      ],
+      [
+        { "id": 45, "name": "High Pass" },
+        { "id": 46, "name": "Hollin" }
+      ],
+      [
+        { "id": 46, "name": "Hollin" },
+        { "id": 56, "name": "Moria" }
+      ],
+      [
+        { "id": 46, "name": "Hollin" },
+        { "id": 62, "name": "North Downs" }
+      ],
+      [
+        { "id": 46, "name": "Hollin" },
+        { "id": 83, "name": "South Downs" }
+      ],
+      [
+        { "id": 47, "name": "Iron Hills" },
+        { "id": 65, "name": "Northern Anduin Vale" }
+      ],
+      [
+        { "id": 47, "name": "Iron Hills" },
+        { "id": 96, "name": "Vale of Carnen" }
+      ],
+      [
+        { "id": 48, "name": "Khand" },
+        { "id": 60, "name": "Near Harad" }
+      ],
+      [
+        { "id": 49, "name": "Lamedon" },
+        { "id": 79, "name": "Pelargir" }
+      ],
+      [
+        { "id": 50, "name": "Lossarnach" },
+        { "id": 53, "name": "Minas Tirith" }
+      ],
+      [
+        { "id": 50, "name": "Lossarnach" },
+        { "id", "name": "Osgiliath" }
+      ],
+      [
+        { "id": 50, "name": "Lossarnach" },
+        { "id": 79, "name": "Pelargir" }
+      ],
+      [
+        { "id": 51, "name": "Lorien" },
+        { "id": 78, "name": "Parth Celebrant" }
+      ],
+      [
+        { "id": 52, "name": "Minas Morgul" },
+        { "id": 70, "name": "North Ithilien" }
+      ],
+      [
+        { "id": 52, "name": "Minas Morgul" },
+        { "id": 89, "name": "South Ithilien" }
+      ],
+      [
+        { "id": 53, "name": "Minas Tirith" },
+        { "id": 77, "name": "Osgiliath" }
+      ],
+      [
+        { "id": 54, "name": "Minhiriath" },
+        { "id": 85, "name": "South Ered-Luin" }
+      ],
+      [
+        { "id": 54, "name": "Minhiriath" },
+        { "id": 91, "name": "Tharbad" }
+      ],
+      [
+        { "id": 56, "name": "Moria" },
+        { "id": 63, "name": "North Dunland" }
+      ],
+      [
+        { "id": 57, "name": "Mount Gram" },
+        { "id": 58, "name": "Mount Gundabad" }
+      ],
+      [
+        { "id": 59, "name": "Narrows of the Forest" },
+        { "id": 64, "name": "Northern Anduin Vale" }
+      ],
+      [
+        { "id": 59, "name": "Narrows of the Forest" },
+        { "id": 75, "name": "Old Forest Road" }
+      ],
+      [
+        { "id": 59, "name": "Narrows of the Forest" },
+        { "id": 80, "name": "Rhosgobel" }
+      ],
+      [
+        { "id": 60, "name": "Near Harad" },
+        { "id": 95, "name": "Umbar" }
+      ],
+      [
+        { "id": 60, "name": "Near Harad" },
+        { "id": 103, "name": "West Harondor" }
+      ],
+      [
+        { "id": 62, "name": "North Downs" },
+        { "id": 83, "name": "South Downs" }
+      ],
+      [
+        { "id": 65, "name": "Northern Anduin Vale" },
+        { "id": 66, "name": "Northern Dorwinion" }
+      ],
+      [
+        { "id": 66, "name": "Northern Dorwinion" },
+        { "id": 87, "name": "Southern Mirkwood" }
+      ],
+      [
+        { "id": 66, "name": "Northern Dorwinion" },
+        { "id": 88, "name": "Southern Rhovanion" }
+      ],
+      [
+        { "id": 66, "name": "Northern Dorwinion" },
+        { "id": 97, "name": "Vale of Celdium" }
+      ],
+      [
+        { "id": 67, "name": "Northern Mirkwood" },
+        { "id": 102, "name": "Western Mirkwood" }
+      ],
+      [
+        { "id": 67, "name": "Northern Mirkwood" },
+        { "id": 104, "name": "Withered Heath" }
+      ],
+      [
+        { "id": 67, "name": "Northern Mirkwood" },
+        { "id": 105, "name": "Woodland Realms" }
+      ],
+      [
+        { "id": 68, "name": "Northern Rhovanion" },
+        { "id": 75, "name": "Old Forest Road" }
+      ],
+      [
+        { "id": 68, "name": "Northern Rhovanion" },
+        { "id": 87, "name": "Southern Mirkwood" }
+      ],
+      [
+        { "id": 68, "name": "Northern Rhovanion" },
+        { "id": 96, "name": "Vale of Carnen" }
+      ],
+      [
+        { "id": 68, "name": "Northern Rhovanion" },
+        { "id": 97, "name": "Vale of Celdium" }
+      ],
+      [
+        { "id": 70, "name": "North Ithilien" },
+        { "id": 77, "name": "Osgiliath" }
+      ],
+      [
+        { "id": 73, "name": "Old Ford" },
+        { "id": 75, "name": "Old Forest Road" }
+      ],
+      [
+        { "id": 74, "name": "Old Forest" },
+        { "id": 85, "name": "South Ered-Luin" }
+      ],
+      [
+        { "id": 74, "name": "Old Forest" },
+        { "id": 93, "name": "The Shire" }
+      ],
+      [
+        { "id": 75, "name": "Old Forest Road" },
+        { "id": 80, "name": "Rhosgobel" }
+      ],
+      [
+        { "id": 75, "name": "Old Forest Road" },
+        { "id": 102, "name": "Western Mirkwood" }
+      ],
+      [
+        { "id": 75, "name": "Old Forest Road" },
+        { "id": 105, "name": "Woodland Realms" }
+      ],
+      [
+        { "id": 76, "name": "Orthanc" },
+        { "id": 84, "name": "South Dunland" }
+      ],
+      [
+        { "id": 77, "name": "Osgiliath" },
+        { "id": 79, "name": "Pelargir" }
+      ],
+      [
+        { "id": 77, "name": "Osgiliath" },
+        { "id": 89, "name": "South Ithilien" }
+      ],
+      [
+        { "id": 77, "name": "Osgiliath" },
+        { "id": 103, "name": "West Harondor" }
+      ],
+      [
+        { "id": 78, "name": "Parth Celebrant" },
+        { "id": 82, "name": "South Anduin Vale" }
+      ],
+      [
+        { "id": 78, "name": "Parth Celebrant" },
+        { "id": 100, "name": "Western Brown Lands" }
+      ],
+      [
+        { "id": 79, "name": "Pelargir" },
+        { "id": 103, "name": "West Harondor" }
+      ],
+      [
+        { "id": 80, "name": "Rhosgobel" },
+        { "id": 102, "name": "Western Mirkwood" }
+      ],
+      [
+        { "id": 81, "name": "Rivendell" },
+        { "id": 94, "name": "Trollshaws" }
+      ],
+      [
+        { "id": 82, "name": "South Anduin Vale" },
+        { "id": 100, "name": "Western Brown Lands" }
+      ],
+      [
+        { "id": 83, "name": "South Downs" },
+        { "id": 98, "name": "Weather Hills" }
+      ],
+      [
+        { "id": 85, "name": "South Ered-Luin" },
+        { "id": 91, "name": "Tharbad" }
+      ],
+      [
+        { "id": 86, "name": "Southern Dorwinion" },
+        { "id": 88, "name": "Southern Rhovanion" }
+      ],
+      [
+        { "id": 87, "name": "Southern Mirkwood" },
+        { "id": 88, "name": "Southern Rhovanion" }
+      ],
+      [
+        { "id": 88, "name": "Southern Rhovanion" },
+        { "id": 97, "name": "Vale of Celdium" }
+      ],
+      [
+        { "id": 89, "name": "South Ithilien" },
+        { "id": 103, "name": "West Harondor" }
+      ],
+      [
+        { "id": 92, "name": "Grey Havens" },
+        { "id": 93, "name": "The Shire" }
+      ],
+      [
+        { "id": 94, "name": "Trollshaws" },
+        { "id": 98, "name": "Weather Hills" }
+      ],
+      [
+        { "id": 96, "name": "Vale of Carnen" },
+        { "id": 97, "name": "Vale of Celdium" }
+      ]
+    ]
+  }

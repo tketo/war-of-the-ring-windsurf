@@ -1,0 +1,265 @@
+# War of the Ring - Project Guidelines
+
+## Documentation Paths
+
+### Official Rules Documentation
+
+- **Official Rules Documentation**: `C:\Users\tyrus\Desktop\Games\DEV\wotr-windsurf\docs`
+- **Rules Reference**: `C:\Users\tyrus\Desktop\Games\DEV\wotr-windsurf\docs\War of the Ring - Official Rules - Grok3 Guide.md`
+- **Comprehensive Rules Guide**: `C:\Users\tyrus\Desktop\Games\DEV\wotr-windsurf\docs\War of the Ring Rules Guide.md`
+- **Implementation Guide**: `C:\Users\tyrus\Desktop\Games\DEV\wotr-windsurf\docs\War of the Ring Implementation Guide.md`
+- **Front-End UI Implementation Guide**: `C:\Users\tyrus\Desktop\Games\DEV\wotr-windsurf\docs\War of the Ring Front-End UI Implementation Guide.md`
+- **Game State Schema**: `C:\Users\tyrus\Desktop\Games\DEV\wotr-windsurf\docs\GameStateSchema.md`
+
+## Technical Stack
+
+| Component | Technology | Version |
+|-----------|------------|---------|
+| Backend | Node.js with Express.js | v4.18.2 |
+| Database | MongoDB with Mongoose ODM | v7.5.0 |
+| Authentication | Clerk | v4.12.2 |
+| Real-time Communication | Socket.io | v4.7.2 |
+| Testing Framework | Jest with Chai | v29.7.0, v5.2.0 |
+| Security | Helmet, express-rate-limit | v7.0.0, v6.9.0 |
+| Logging | Winston | v3.17.0 |
+| Development Tools | Nodemon, ESLint | v3.0.1, v8.57.1 |
+| Version Control | Git | - |
+| Deployment | Docker (optional) | - |
+| Development Environment | Windows 11 | - |
+
+## Development Methodology
+
+### Requirements Handling
+- Strictly adhere to specified user flow and game rules
+- Always confirm understanding before implementation begins
+
+### Design First Approach
+- **Rule**: Begin each feature with detailed pseudocode
+- **Process**: 
+  1. Summarize the functionality (e.g., pick submission process)
+  2. Outline API endpoints with parameters, request/response formats
+  3. Document business logic in pseudocode before writing actual code
+  4. Review pseudocode for completeness before implementation
+
+### Code Quality Standards
+- Implement secure, efficient code following RESTful API best practices
+- Ensure thorough error handling and input validation
+- Focus on readability over performance optimization
+- Leave no TODOs, placeholders, or missing pieces
+- Fully implement all requested functionality
+
+## Coding Guidelines
+
+- Write correct, up-to-date, bug-free, and secure code
+- Follow the user's requirements carefully and to the letter
+- Confirm understanding before coding
+- Suggest solutions the user might not have considered
+- Be concise in comments and documentation
+- Consider innovative approaches, not just conventional wisdom
+- Acknowledge knowledge limitations rather than guessing
+
+## Communication Standards
+
+- Treat the user as an expert
+- When requested for code adjustments, provide focused changes without repeating unchanged code
+- Use the latest versions of HTML, Tailwind CSS, and vanilla JavaScript when applicable
+- Provide factual, thoughtful answers with excellent reasoning
+
+### State Structure
+
+- The state structure in the codebase uses objects rather than Maps for regions
+
+### Development Environment
+
+- The development environment is Windows 11 and powershell
+
+### Development Tools
+
+- Stay away from jest.mock when possible
+
+## Testing Guidelines
+
+### Test Organization
+
+- **Unit Tests**: Focus on testing individual components in isolation
+- **Integration Tests**: Test the interaction between multiple components
+- **Realistic Scenarios**: Create test cases that reflect real-world game situations
+- **Detailed Logging**: Include detailed logging in tests to help identify issues when tests fail
+- **Direct Integration**: Prefer testing actual component integration over excessive mocking
+
+### Condition Evaluator Tests
+
+- **Variable Substitution**: When testing variable substitution in the condition evaluator, use the format `$variableName` (e.g., `$playerId`, `$playerTeam`, `$fellowshipRegion`, `$character.level`) directly in the condition.
+- **Comparison Operations**: For comparison operations (`$eq`, `$ne`, `$gt`, `$gte`, `$lt`, `$lte`), use the structure with a `path` property and the comparison operator as a separate property:
+  ```javascript
+  {
+    path: 'turnState.round',
+    $eq: 3
+  }
+  ```
+- **Array Operations**: For array operations (`$contains`, `$containsAll`, `$containsAny`, `$size`), use the structure with the operation as the main property and an object with `path` and `value`/`values` properties:
+  ```javascript
+  {
+    $contains: {
+      path: 'fellowship.companions',
+      value: { id: 'frodo' }
+    }
+  }
+  ```
+- **Size Operation**: For the `$size` operation, use one of these two formats:
+  ```javascript
+  // For exact size matching
+  {
+    path: 'fellowship.companions',
+    $size: 3
+  }
+  
+  // For size comparisons
+  {
+    path: 'fellowship.companions',
+    $size: {
+      $gt: 2
+    }
+  }
+  ```
+- **Mathematical Expressions**: For mathematical expressions, use the following structure with `operator`, `operands`, `compareWith`, and `comparison` properties:
+  ```javascript
+  {
+    $calc: {
+      operator: 'add',  // or 'subtract', 'multiply', 'divide', 'min', 'max'
+      operands: [
+        { path: 'value1' },
+        { path: 'value2' }
+      ],
+      compareWith: expectedValue,
+      comparison: '$eq'  // or '$ne', '$gt', '$gte', '$lt', '$lte'
+    }
+  }
+  ```
+- **Logical Operations**: For logical operations (`$and`, `$or`, `$not`, `$xor`), use the following structure:
+  ```javascript
+  // AND operation
+  {
+    $and: [
+      { path: 'turnState.activeTeam', $eq: 'Free' },
+      { path: 'turnState.phase', $eq: 'Action' }
+    ]
+  }
+  
+  // OR operation
+  {
+    $or: [
+      { path: 'turnState.step', $eq: 'character' },
+      { path: 'turnState.step', $eq: 'army' }
+    ]
+  }
+  
+  // NOT operation
+  {
+    $not: { path: 'fellowship.revealed', $eq: true }
+  }
+  ```
+- **Dynamic Property Access**: For dynamic property access, use string template literals in the path rather than variable substitution in the path itself:
+  ```javascript
+  // CORRECT - Use string template literals
+  const regionId = 'gondor';
+  const path = `regions.${regionId}.control`;
+  const condition = { path, $eq: 'Free' };
+  
+  // INCORRECT - Don't use variable substitution in the path
+  const condition = { path: 'regions.$regionId.control', $eq: 'Free' };
+  ```
+- **Edge Cases**: When testing edge cases, consider:
+  - Null and undefined values
+  - Empty arrays and objects
+  - Non-existent paths
+  - Non-array values for array operations
+  - Complex nested conditions
+  - Variable substitution in different contexts
+- **Test Organization**: Organize tests by functionality (logical operations, array operations, comparison operations, variable substitution) for better maintainability.
+- **Test Configuration**: Use a custom Jest configuration file (e.g., `jest.rewritten.config.js`) to include only the tests you want to run and exclude failing tests during development.
+
+### Card System Integration Tests
+
+- **Realistic Game States**: Create realistic game states that reflect actual gameplay scenarios
+- **Card Playability Conditions**: Test card playability based on:
+  - Current game phase and step
+  - Player's team and available action dice
+  - Combat state (if applicable)
+  - Fellowship state (if applicable)
+  - Region control and armies (if applicable)
+- **Complex Nested Conditions**: Test complex nested conditions that combine multiple operations:
+  ```javascript
+  {
+    $and: [
+      { path: 'turnState.activeTeam', $eq: 'Free' },
+      { path: 'turnState.phase', $eq: 'Action' },
+      { 
+        $or: [
+          { path: 'turnState.step', $eq: 'character' },
+          { path: 'turnState.step', $eq: 'army' }
+        ]
+      },
+      {
+        $contains: {
+          path: 'fellowship.companions',
+          value: { id: 'frodo' }
+        }
+      }
+    ]
+  }
+  ```
+- **Combat Card Testing**: When testing combat cards, ensure:
+  - Combat state is properly initialized
+  - Card's combat types match the combat type
+  - Player's turn in combat is correctly checked
+  - Combat-specific conditions are properly evaluated
+- **Variable Context**: Provide appropriate context variables when evaluating conditions with variable substitution:
+  ```javascript
+  const context = {
+    playerId: 'player1',
+    playerTeam: 'Free',
+    combatType: 'field'
+  };
+  ```
+- **Detailed Logging**: Include detailed logging of conditions, game state, and evaluation results to help identify issues when tests fail
+- **Test Both Success and Failure**: Test both successful and failed condition evaluations to ensure the system correctly handles both cases
+
+### Game Flow
+
+#### Action Resolution Flow
+- **Action Dice Selection First**: In the War of the Ring game flow, players first select an action die before taking any action
+- **Selected Die Determines Available Actions**: Only actions matching the selected die type can be performed
+- **Selected Die Is Already Used**: When a die is selected, it is moved to the active die area and is no longer in the action dice pool
+- **Card Playability**: When checking if a card can be played, the system should verify that:
+  1. The selected die matches the card type (e.g., character die for character cards)
+  2. It's the player's team's turn
+  3. Any specific play conditions for the card are met
+  4. For combat cards, additional combat-specific conditions must be met
+
+#### Die Types and Card Types Mapping
+- **Character Die**: Required for character cards
+- **Army Die**: Required for army cards
+- **Muster Die**: Required for muster cards
+- **Event Die**: Required for event and combat cards
+- **Will Die**: Required for strategy cards (represents the willpower of characters and nations)
+
+#### Special Die Faces
+- **Will of the West (Free Peoples)**: 
+  - Can be converted to any other result before acting (except another Will of the West)
+  - In the implementation, when Will of the West is selected, it should first be converted to the desired die face
+  - After conversion, the die should be treated as the new type for card playability checks
+  - For bringing Gandalf the White or Aragorn – Heir to Isildur into play, the special ability can be used directly
+
+#### Testing Card Playability
+- Tests should simulate the correct game flow by setting a selected die in the game state
+- The `hasEnoughActionDice` function should check if the selected die matches the card type
+- Tests should verify both positive cases (matching die type) and negative cases (non-matching die type)
+
+### Test Organization
+
+- **Unit Tests**: Focus on testing individual components in isolation
+- **Integration Tests**: Test the interaction between multiple components
+- **Realistic Scenarios**: Create test cases that reflect real-world game situations
+- **Detailed Logging**: Include detailed logging in tests to help identify issues when tests fail
+- **Direct Integration**: Prefer testing actual component integration over excessive mocking
